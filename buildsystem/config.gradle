@@ -1,0 +1,12 @@
+ext {
+    android = [
+            buildToolsVersion: "26.0.2",
+            minSdkVersion    : 21,
+            targetSdkVersion : 26,
+            compileSdkVersion: 26
+    ]
+
+    api = [
+            back_end_url = "\"https://www.google.com.tw/\"",
+    ]
+}

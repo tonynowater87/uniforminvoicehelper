@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+Properties props = new Properties()
+props.load(new FileInputStream(rootProject.file('signing.properties')))
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.tonynowater.uniforminvoicehelper"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "APP_ID", props["APP_ID"]
+        buildConfigField "String", "API_KEY", props["API_KEY"]
+        buildConfigField "String", "TestAccount", props["TestAccount"]
+        buildConfigField "String", "TestPassword", props["TestPassword"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.deps.androidSupportLib
+    implementation rootProject.ext.deps.constraintLayout
+
+    //retrofit
+    implementation rootProject.ext.deps.retrofit2
+    implementation rootProject.ext.deps.retrofitGson
+    implementation rootProject.ext.deps.retrofitRxAdapter
+    implementation rootProject.ext.deps.okhttpLog
+
+    //dagger2
+    implementation rootProject.ext.dagger2Deps.dagger2
+    kapt rootProject.ext.dagger2Deps.dagger2Compiler
+    testAnnotationProcessor rootProject.ext.dagger2Deps.dagger2Compiler
+    compileOnly rootProject.ext.dagger2Deps.javaxAnnotation
+
+    //dagger.android
+    implementation rootProject.ext.dagger2Deps.daggerAndroidSup
+    kapt rootProject.ext.dagger2Deps.daggerAndroidCompilier
+
+    //kotlin
+    implementation rootProject.ext.kotlinDeps.kotlinStdLib
+    implementation rootProject.ext.kotlinDeps.kotlinReflect
+
+    //android arch component
+    implementation rootProject.ext.archDeps.archRuntime
+    implementation rootProject.ext.archDeps.archExtensions
+    implementation rootProject.ext.archDeps.room
+    kapt rootProject.ext.archDeps.archCompiler
+    kapt rootProject.ext.archDeps.roomCompiler
+
+    //rx
+    implementation rootProject.ext.rxDeps.rxJava
+    implementation rootProject.ext.rxDeps.rxAndroid
+
+    testImplementation rootProject.ext.testDeps.junit
+    androidTestImplementation rootProject.ext.testDeps.runner
+    androidTestImplementation rootProject.ext.testDeps.espresso
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+}

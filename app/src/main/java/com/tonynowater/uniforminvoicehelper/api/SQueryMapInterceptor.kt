@@ -22,7 +22,7 @@ class SQueryMapInterceptor:Interceptor {
                 .addQueryParameter("version", SURLDefinition.VERSION.toString())
                 .addQueryParameter("cardType", SURLDefinition.CARDTYPE)
                 .addQueryParameter("expTimeStamp", STimeUtil.expTimeStamp().toString())
-                .addQueryParameter("action", SURLDefinition.ACTION)
+                .addQueryParameter("action", SURLDefinition.ACTION_HEADER)
                 .addQueryParameter("timeStamp", STimeUtil.timeStamp().toString())
                 .addQueryParameter("uuid", OpenUDID_manager.getOpenUDID())
                 .addQueryParameter("appID", BuildConfig.APP_ID)

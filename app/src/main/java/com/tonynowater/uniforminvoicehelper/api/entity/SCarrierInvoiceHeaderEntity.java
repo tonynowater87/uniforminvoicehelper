@@ -7,7 +7,7 @@ import java.util.List;
  *
  * Created by tonyliao on 2018/3/14.
  */
-public class SRiderInvoiceHeaderEntity extends BaseEntity {
+public class SCarrierInvoiceHeaderEntity extends BaseEntity {
 
     /**
      * v : 0.3

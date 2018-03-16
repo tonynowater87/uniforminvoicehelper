@@ -17,7 +17,6 @@ class SBaseQueryMapInterceptor : Interceptor {
         val originalHttpUrl = original.url()
 
         val url = originalHttpUrl.newBuilder()
-                .addQueryParameter("version", SURLDefinition.VERSION.toString())
                 .addQueryParameter("uuid", OpenUDID_manager.getOpenUDID())
                 .addQueryParameter("appID", BuildConfig.APP_ID)
                 .build()

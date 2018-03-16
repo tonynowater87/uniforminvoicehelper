@@ -35,7 +35,7 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun apiClient(): ICarrierApi {
+    fun carrierClient(): ICarrierApi {
         val okHttpLogger = HttpLoggingInterceptor()
         okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
@@ -50,5 +50,23 @@ class SNetModule {
                 .client(okHttpClient)
                 .build()
         return retrofit.create(ICarrierApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun invAppClient(): IInvAppApi {
+        val okHttpLogger = HttpLoggingInterceptor()
+        okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
+        val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(SBaseQueryMapInterceptor())
+                .addInterceptor(okHttpLogger)
+                .build()
+        val retrofit = Retrofit.Builder()
+                .baseUrl(SURLDefinition.BaseNetURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build()
+        return retrofit.create(IInvAppApi::class.java)
     }
 }

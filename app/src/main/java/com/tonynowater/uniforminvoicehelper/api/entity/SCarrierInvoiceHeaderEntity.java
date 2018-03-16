@@ -18,9 +18,9 @@ public class SCarrierInvoiceHeaderEntity extends BaseEntity {
      */
 
     public String onlyWinningInv;
-    public List<SRiderInvoiceHeaderDetailsEntity> details;
+    public List<SCarrierInvoiceHeaderDetailsEntity> details;
 
-    public static class SRiderInvoiceHeaderDetailsEntity {
+    public static class SCarrierInvoiceHeaderDetailsEntity {
         /**
          * rowNum : 1
          * invNum : AB99147856

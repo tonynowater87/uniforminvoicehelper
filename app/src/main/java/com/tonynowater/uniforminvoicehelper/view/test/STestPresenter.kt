@@ -2,6 +2,7 @@ package com.tonynowater.uniforminvoicehelper.view.test
 
 import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceDetailDTO
 import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDTO
+import com.tonynowater.uniforminvoicehelper.api.dto.SInvAppPrizeNumListDTO
 import com.tonynowater.uniforminvoicehelper.base.*
 import javax.inject.Inject
 
@@ -12,16 +13,27 @@ class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITest
 
     fun login(cardNo: String, cardEncrypt: String) {
         mView?.showLoading()
-        mModule.getCarrierInvoiceHeader(cardNo, cardEncrypt, object : IOnQueryListener<MutableList<SCarrierInvoiceHeaderDTO>> {
-            override fun onSuccess(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
+//        mModule.getCarrierInvoiceHeader(cardNo, cardEncrypt, object : IOnQueryListener<MutableList<SCarrierInvoiceHeaderDTO>> {
+//            override fun onSuccess(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
+//                mView?.hideLoading()
+//                mView?.onSuccess()
+//                mView?.notifyData(entity)
+//            }
+//
+//            override fun onFailure(throwable: Throwable) {
+//                mView?.hideLoading()
+//                mView?.onError(throwable.message!!)
+//            }
+//        })
+
+        mModule.getPrizeNumberList(object : IOnQueryListener<SInvAppPrizeNumListDTO> {
+            override fun onSuccess(entity: SInvAppPrizeNumListDTO) {
                 mView?.hideLoading()
-                mView?.onSuccess()
-                mView?.notifyData(entity)
+                println(entity.superPrizeNo)
             }
 
             override fun onFailure(throwable: Throwable) {
                 mView?.hideLoading()
-                mView?.onError(throwable.message!!)
             }
         })
     }

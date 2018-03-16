@@ -3,10 +3,10 @@ package com.tonynowater.uniforminvoicehelper.api.dto
 /**
  * Created by tonyliao on 2018/3/15.
  */
-data class SCarrierInvoiceHeaderDTO(var date: String,
-                                    var formatDate: String,
-                                    var invoiceNo: String,
-                                    var sellerName: String,
-                                    var amount: String) {
+data class SCarrierInvoiceHeaderDTO(val date: String,
+                                    val formatDate: String,
+                                    val invoiceNo: String,
+                                    val sellerName: String,
+                                    val amount: String) {
     fun showedText(): String = "$date $invoiceNo $sellerName"
 }

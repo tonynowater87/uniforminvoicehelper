@@ -17,6 +17,7 @@ class SCarrierQueryMapInterceptor :Interceptor {
         val originalHttpUrl = original.url()
 
         val url = originalHttpUrl.newBuilder()
+                .addQueryParameter("version", SURLDefinition.CARRIER_VERSION)
                 .addQueryParameter("cardType", SURLDefinition.CARDTYPE)
                 .addQueryParameter("expTimeStamp", STimeUtil.expTimeStamp().toString())
                 .addQueryParameter("timeStamp", STimeUtil.timeStamp().toString())

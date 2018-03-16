@@ -1,9 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
-import com.tonynowater.uniforminvoicehelper.api.ICarrierApi
-import com.tonynowater.uniforminvoicehelper.api.ITestApi
-import com.tonynowater.uniforminvoicehelper.api.SCarrierQueryMapInterceptor
-import com.tonynowater.uniforminvoicehelper.api.SURLDefinition
+import com.tonynowater.uniforminvoicehelper.api.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -42,6 +39,7 @@ class SNetModule {
         val okHttpLogger = HttpLoggingInterceptor()
         okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(SBaseQueryMapInterceptor())
                 .addInterceptor(SCarrierQueryMapInterceptor())
                 .addInterceptor(okHttpLogger)
                 .build()

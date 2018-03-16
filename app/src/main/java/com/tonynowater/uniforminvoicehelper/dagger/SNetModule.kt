@@ -1,8 +1,8 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
-import com.tonynowater.uniforminvoicehelper.api.INetApi
+import com.tonynowater.uniforminvoicehelper.api.ICarrierApi
 import com.tonynowater.uniforminvoicehelper.api.ITestApi
-import com.tonynowater.uniforminvoicehelper.api.SQueryMapInterceptor
+import com.tonynowater.uniforminvoicehelper.api.SCarrierQueryMapInterceptor
 import com.tonynowater.uniforminvoicehelper.api.SURLDefinition
 import dagger.Module
 import dagger.Provides
@@ -38,11 +38,11 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun apiClient(): INetApi {
+    fun apiClient(): ICarrierApi {
         val okHttpLogger = HttpLoggingInterceptor()
         okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(SQueryMapInterceptor())
+                .addInterceptor(SCarrierQueryMapInterceptor())
                 .addInterceptor(okHttpLogger)
                 .build()
         val retrofit = Retrofit.Builder()
@@ -51,6 +51,6 @@ class SNetModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
-        return retrofit.create(INetApi::class.java)
+        return retrofit.create(ICarrierApi::class.java)
     }
 }

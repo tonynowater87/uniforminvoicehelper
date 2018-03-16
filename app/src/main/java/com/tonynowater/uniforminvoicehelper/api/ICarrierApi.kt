@@ -12,7 +12,7 @@ import retrofit2.http.Query
 /**
  * Created by tonyliao on 2018/3/14.
  */
-interface INetApi {
+interface ICarrierApi {
 
     /**
      * 載具發票表頭查詢

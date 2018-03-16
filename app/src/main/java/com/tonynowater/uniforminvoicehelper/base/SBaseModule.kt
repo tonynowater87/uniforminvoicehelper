@@ -1,6 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.base
 
-import com.tonynowater.uniforminvoicehelper.api.INetApi
+import com.tonynowater.uniforminvoicehelper.api.ICarrierApi
 import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceDetailDTO
 import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceDetailEntity
@@ -19,10 +19,10 @@ import javax.inject.Inject
 class SBaseModule @Inject constructor() {
 
     @Inject
-    lateinit var netClient: INetApi
+    lateinit var carrierClient: ICarrierApi
 
     fun getCarrierInvoiceDetail(invNum: String, invDate: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceDetailDTO>>) {
-        netClient.getCarrierInvoiceDetail(invNum = invNum, invDate = invDate)
+        carrierClient.getCarrierInvoiceDetail(invNum = invNum, invDate = invDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -37,7 +37,7 @@ class SBaseModule @Inject constructor() {
     }
 
     fun getCarrierInvoiceHeader(cardNo: String, cardEncrypt: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceHeaderDTO>>) {
-        netClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
+        carrierClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

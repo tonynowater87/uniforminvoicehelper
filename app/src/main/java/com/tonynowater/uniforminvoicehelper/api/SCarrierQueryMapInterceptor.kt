@@ -13,7 +13,7 @@ import okhttp3.Response
  *
  * Created by tonyliao on 2018/3/15.
  */
-class SQueryMapInterceptor:Interceptor {
+class SCarrierQueryMapInterceptor :Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val originalHttpUrl = original.url()

@@ -40,7 +40,7 @@ public class SCarrierInvoiceHeaderEntity extends BaseEntity {
 
         public int rowNum;
         public String invNum;
-        public InvDateBean invDate;
+        public InvDateEntity invDate;
         public String sellerName;
         public String invStatus;
         public boolean invDonatable;
@@ -53,10 +53,10 @@ public class SCarrierInvoiceHeaderEntity extends BaseEntity {
         public String sellerAddress;
         public int donateMark;
 
-        public static class InvDateBean {
+        public static class InvDateEntity {
             /**
-             * date : 3
-             * day : 6
+             * date : 3 日
+             * day : 6  星期幾
              * hours : 0
              * minutes : 0
              * month : 2

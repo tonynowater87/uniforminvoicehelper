@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.api
 
+import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceDetailEntity
 import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceHeaderEntity
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_PASSWORD
@@ -34,5 +35,5 @@ interface INetApi {
                                 @Query("invNum") invNum: String,
                                 @Query("invDate") invDate: String,
                                 @Query("sellerName") sellerName: String = "",
-                                @Query("amount") amount: String = ""): Observable<String>
+                                @Query("amount") amount: String = ""): Observable<SCarrierInvoiceDetailEntity>
 }

@@ -1,7 +1,9 @@
 package com.tonynowater.uniforminvoicehelper.base
 
 import com.tonynowater.uniforminvoicehelper.api.INetApi
-import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDetailDTO
+import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceDetailDTO
+import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDTO
+import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceDetailEntity
 import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceHeaderEntity
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
@@ -19,22 +21,13 @@ class SBaseModule @Inject constructor() {
     @Inject
     lateinit var netClient: INetApi
 
-    fun getCarrierInvoiceDetail(invNum: String, invDate: String, sellerName: String, amount: String) {
-        netClient.getCarrierInvoiceDetail(invNum = invNum, invDate = invDate, sellerName = sellerName, amount = amount)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ println("success") }, { println("onError") })
-    }
-
-    fun getCarrierInvoiceHeader(cardNo: String, cardEncrypt: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceHeaderDetailDTO>>) {
-        netClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
+    fun getCarrierInvoiceDetail(invNum: String, invDate: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceDetailDTO>>) {
+        netClient.getCarrierInvoiceDetail(invNum = invNum, invDate = invDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        SSharePrefUtil.putString(SP_KEY_ACCOUNT, cardNo)
-                        SSharePrefUtil.putString(SP_KEY_PASSWORD, cardEncrypt)
-                        listener.onSuccess(transferEntityToDTO(it))
+                        listener.onSuccess(transferCarrierDetailEntityToDTO(it))
                     } else {
                         listener.onFailure(Throwable(it.msgCode()))
                     }
@@ -43,17 +36,47 @@ class SBaseModule @Inject constructor() {
                 })
     }
 
-    private fun transferEntityToDTO(it: SCarrierInvoiceHeaderEntity): MutableList<SCarrierInvoiceHeaderDetailDTO> {
-        val list = mutableListOf<SCarrierInvoiceHeaderDetailDTO>()
-        it.details.forEachIndexed({ index, entity ->
+    fun getCarrierInvoiceHeader(cardNo: String, cardEncrypt: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceHeaderDTO>>) {
+        netClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.is200()) {
+                        SSharePrefUtil.putString(SP_KEY_ACCOUNT, cardNo)
+                        SSharePrefUtil.putString(SP_KEY_PASSWORD, cardEncrypt)
+                        listener.onSuccess(transferCarrierHeaderEntityToDTO(it))
+                    } else {
+                        listener.onFailure(Throwable(it.msgCode()))
+                    }
+                }, {
+                    listener.onFailure(it)
+                })
+    }
+
+    private fun transferCarrierHeaderEntityToDTO(entity: SCarrierInvoiceHeaderEntity): MutableList<SCarrierInvoiceHeaderDTO> {
+        val list = mutableListOf<SCarrierInvoiceHeaderDTO>()
+        entity.details.forEachIndexed({ index, entity ->
             val month = entity.invDate.month
             val date = entity.invDate.date
-            list.add(SCarrierInvoiceHeaderDetailDTO(
-                    "$month/$date(${STimeUtil.transferWeekDays(entity.invDate.day)})"
-                    , STimeUtil.fillDateZero(entity.invDate.year, month, date)
-                    , entity.invNum
-                    , entity.sellerName
-                    , entity.amount.toString()))
+            list.add(SCarrierInvoiceHeaderDTO(
+                    date = "$month/$date(${STimeUtil.transferWeekDays(entity.invDate.day)})"
+                    , formatDate = STimeUtil.transferTaiwanYearToCommonEra(entity.invDate.year, month, date)
+                    , invoiceNo = entity.invNum
+                    , sellerName = entity.sellerName
+                    , amount = entity.amount.toString()))
+        })
+        return list
+    }
+
+    private fun transferCarrierDetailEntityToDTO(entity: SCarrierInvoiceDetailEntity): MutableList<SCarrierInvoiceDetailDTO> {
+        val list = mutableListOf<SCarrierInvoiceDetailDTO>()
+        entity.details.forEachIndexed({ index, entity ->
+            list.add(SCarrierInvoiceDetailDTO(
+                    rowNum = entity.rowNum
+                    , description = entity.description
+                    , quantity = entity.quantity
+                    , unitPrice = entity.unitPrice
+                    , amount = entity.amount))
         })
         return list
     }

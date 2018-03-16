@@ -7,6 +7,7 @@ import java.util.*
  * Created by tonyliao on 2018/3/15.
  */
 object STimeUtil {
+    private const val TAIWAN_YEAR_BEGINNING = 1911
     private val calender = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)
     private val dateformat = SimpleDateFormat("yyyy/MM/dd")
 
@@ -33,11 +34,12 @@ object STimeUtil {
         return ""
     }
 
-    fun fillDateZero(year: Int, month: Int, date: Int): String {
-        calender.set(Calendar.YEAR, year)
-        calender.set(Calendar.MONTH, month)
+    /** 民國日期轉西元日期 */
+    fun transferTaiwanYearToCommonEra(year: Int, month: Int, date: Int): String {
+        calender.set(Calendar.YEAR, TAIWAN_YEAR_BEGINNING)
+        calender.add(Calendar.YEAR, year)
+        calender.set(Calendar.MONTH, month - 1)//1月是0，所以要減1
         calender.set(Calendar.DAY_OF_MONTH, date)
-        val date = dateformat.format(calender.time)
-        return date.substring(1, date.length)
+        return dateformat.format(calender.time)
     }
 }

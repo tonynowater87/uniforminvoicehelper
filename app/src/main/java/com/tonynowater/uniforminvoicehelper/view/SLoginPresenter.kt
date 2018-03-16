@@ -1,6 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.view
 
-import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDetailDTO
+import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.base.IBaseView
 import com.tonynowater.uniforminvoicehelper.base.IOnQueryListener
 import com.tonynowater.uniforminvoicehelper.base.SBaseModule
@@ -14,8 +14,8 @@ class SLoginPresenter @Inject constructor() : SBasePresenter<IBaseView, SBaseMod
 
     fun login(cardNo: String, cardEncrypt: String) {
         mView?.showLoading()
-        mModule.getCarrierInvoiceHeader(cardNo, cardEncrypt, object : IOnQueryListener<List<SCarrierInvoiceHeaderDetailDTO>> {
-            override fun onSuccess(entity: List<SCarrierInvoiceHeaderDetailDTO>) {
+        mModule.getCarrierInvoiceHeader(cardNo, cardEncrypt, object : IOnQueryListener<List<SCarrierInvoiceHeaderDTO>> {
+            override fun onSuccess(entity: List<SCarrierInvoiceHeaderDTO>) {
                 mView?.hideLoading()
                 mView?.onSuccess()
             }

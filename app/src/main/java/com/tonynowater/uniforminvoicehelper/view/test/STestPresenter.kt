@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SBaseMvpModule>(), SBaseRecyclerViewAdapter.OnClickItemListener<SCarrierInvoiceHeaderDetailDTO> {
+class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SBaseModule>(), SBaseRecyclerViewAdapter.OnClickItemListener<SCarrierInvoiceHeaderDetailDTO> {
 
     fun login(cardNo: String, cardEncrypt: String) {
         mView?.showLoading()
@@ -29,7 +29,7 @@ class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITest
         mModule.getCarrierInvoiceDetail(dto.invoiceNo, dto.formatDate, dto.sellerName, dto.amount)
     }
 
-    interface ITestView : IBaseMvpView {
+    interface ITestView : IBaseView {
         fun notifyData(entity: MutableList<SCarrierInvoiceHeaderDetailDTO>)
     }
 }

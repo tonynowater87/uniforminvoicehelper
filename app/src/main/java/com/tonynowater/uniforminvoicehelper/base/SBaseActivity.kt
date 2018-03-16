@@ -9,7 +9,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(), IBaseMvpView {
+abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(), IBaseView {
 
     @Inject
     lateinit var mPresenter: P

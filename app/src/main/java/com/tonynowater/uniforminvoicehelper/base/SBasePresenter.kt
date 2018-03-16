@@ -5,7 +5,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-open class SBasePresenter <V: IBaseMvpView, M: SBaseMvpModule> {
+open class SBasePresenter <V: IBaseView, M: SBaseModule> {
 
     var mView: V? = null
 

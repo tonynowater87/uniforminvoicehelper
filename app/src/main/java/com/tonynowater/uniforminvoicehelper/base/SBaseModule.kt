@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class SBaseMvpModule @Inject constructor() {
+class SBaseModule @Inject constructor() {
 
     @Inject
     lateinit var netClient: INetApi

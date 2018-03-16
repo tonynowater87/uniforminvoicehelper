@@ -3,7 +3,7 @@ package com.tonynowater.uniforminvoicehelper.base
 /**
  * Created by tonyliao on 2018/3/15.
  */
-interface IBaseMvpView {
+interface IBaseView {
     fun onNoData()
     fun onSuccess()
     fun onError(msg: String)

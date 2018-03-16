@@ -39,14 +39,16 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation rootProject.ext.deps.androidSupportLib
-    implementation rootProject.ext.deps.constraintLayout
+    implementation rootProject.ext.androidDeps.androidSupportLib
+    implementation rootProject.ext.androidDeps.androidDesignLib
+    implementation rootProject.ext.androidDeps.constraintLayout
 
     //retrofit
-    implementation rootProject.ext.deps.retrofit2
-    implementation rootProject.ext.deps.retrofitGson
-    implementation rootProject.ext.deps.retrofitRxAdapter
-    implementation rootProject.ext.deps.okhttpLog
+    implementation rootProject.ext.netDeps.retrofit2
+    implementation rootProject.ext.netDeps.retrofitGson
+    implementation rootProject.ext.netDeps.retrofitScalars
+    implementation rootProject.ext.netDeps.retrofitRxAdapter
+    implementation rootProject.ext.netDeps.okhttpLog
 
     //dagger2
     implementation rootProject.ext.dagger2Deps.dagger2
@@ -76,5 +78,4 @@ dependencies {
     testImplementation rootProject.ext.testDeps.junit
     androidTestImplementation rootProject.ext.testDeps.runner
     androidTestImplementation rootProject.ext.testDeps.espresso
-    implementation 'com.android.support:recyclerview-v7:27.1.0'
 }

@@ -9,4 +9,5 @@ interface IBaseView {
     fun onError(msg: String)
     fun showLoading()
     fun hideLoading()
+    fun showToast(msg: String?)
 }

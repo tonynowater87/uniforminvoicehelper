@@ -1,37 +1,42 @@
 ext {
     androidSupportLib = '27.0.2'
+    constraintLayout = '1.0.2'
+    androidDeps = [
+            androidSupportLib: "com.android.support:appcompat-v7:$androidSupportLib",
+            androidDesignLib : "com.android.support:design:$androidSupportLib",
+            constraintLayout : "com.android.support.constraint:constraint-layout:$constraintLayout",
+    ]
+
     okhttpVer = '2.4.0'
     retrofit2 = '2.3.0'
     okhttpLogVer = '3.8.0'
-    constraintLayout = '1.0.2'
-    deps = [
-            androidSupportLib: "com.android.support:appcompat-v7:${androidSupportLib}",
-            retrofit2        : "com.squareup.retrofit2:retrofit:${retrofit2}",
-            retrofitGson     : "com.squareup.retrofit2:converter-gson:${retrofit2}",
-            retrofitRxAdapter: "com.squareup.retrofit2:adapter-rxjava2:${retrofit2}",
-            constraintLayout : "com.android.support.constraint:constraint-layout:${constraintLayout}",
+    netDeps = [
+            retrofit2        : "com.squareup.retrofit2:retrofit:$retrofit2",
+            retrofitGson     : "com.squareup.retrofit2:converter-gson:$retrofit2",
+            retrofitScalars  : "com.squareup.retrofit2:converter-scalars:$retrofit2",
+            retrofitRxAdapter: "com.squareup.retrofit2:adapter-rxjava2:$retrofit2",
             okhttpLog        : "com.squareup.okhttp3:logging-interceptor:$okhttpLogVer"
     ]
 
     dagger2 = '2.13'
     javaxAnnotation = '10.0-b28'
     dagger2Deps = [
-            dagger2               : "com.google.dagger:dagger:${dagger2}",
-            dagger2Compiler       : "com.google.dagger:dagger-compiler:${dagger2}",
-            javaxAnnotation       : "org.glassfish:javax.annotation:${javaxAnnotation}",
+            dagger2               : "com.google.dagger:dagger:$dagger2",
+            dagger2Compiler       : "com.google.dagger:dagger-compiler:$dagger2",
+            javaxAnnotation       : "org.glassfish:javax.annotation:$javaxAnnotation",
             //dagger.android
-            daggerAndroid         : "com.google.dagger:dagger-android:${dagger2}",
-            daggerAndroidSup      : "com.google.dagger:dagger-android-support:${dagger2}",// if you use the support libraries
-            daggerAndroidCompilier: "com.google.dagger:dagger-android-processor:${dagger2}"
+            daggerAndroid         : "com.google.dagger:dagger-android:$dagger2",
+            daggerAndroidSup      : "com.google.dagger:dagger-android-support:$dagger2",// if you use the support libraries
+            daggerAndroidCompilier: "com.google.dagger:dagger-android-processor:$dagger2"
     ]
 
     junit = '4.12'
     runner = '1.0.1'
     espresso = '3.0.1'
     testDeps = [
-            junit   : "junit:junit:${junit}",
-            runner  : "com.android.support.test:runner:${runner}",
-            espresso: "com.android.support.test.espresso:espresso-core:${espresso}"
+            junit   : "junit:junit:$junit",
+            runner  : "com.android.support.test:runner:$runner",
+            espresso: "com.android.support.test.espresso:espresso-core:$espresso"
     ]
 
     kotlinVer = '1.2.21'

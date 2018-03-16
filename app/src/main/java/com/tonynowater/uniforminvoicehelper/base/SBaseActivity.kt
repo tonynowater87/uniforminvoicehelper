@@ -2,6 +2,7 @@ package com.tonynowater.uniforminvoicehelper.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.R
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -15,6 +16,7 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
     lateinit var mPresenter: P
 
     private lateinit var mProgressDialog:ProgressDialog
+    private var mToast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,5 +50,14 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
 
     override fun onNoData() {
 
+    }
+
+    override fun showToast(msg: String?) {
+        if (mToast != null) {
+            mToast!!.cancel()
+        }
+
+        mToast = Toast.makeText(this, msg, Toast.LENGTH_SHORT)
+        mToast!!.show()
     }
 }

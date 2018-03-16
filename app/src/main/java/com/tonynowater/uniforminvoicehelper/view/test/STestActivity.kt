@@ -6,7 +6,6 @@ import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.BuildConfig
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SApplication
-import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.base.SBaseActivity
 import kotlinx.android.synthetic.main.activity_test.*
 
@@ -32,10 +31,10 @@ class STestActivity : SBaseActivity<STestPresenter>(), View.OnClickListener, STe
     }
 
     override fun onClick(v: View?) {
-        mPresenter.login(et_user_account.text.toString(), et_password_account.text.toString())
+        mPresenter.clickTestButton()
     }
 
-    override fun notifyData(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
+    override fun notifyData(entity: List<String>) {
         adapter.addDatas(entity)
     }
 

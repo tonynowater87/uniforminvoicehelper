@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.util
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -7,6 +8,7 @@ import java.util.*
  */
 object STimeUtil {
     private val calender = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)
+    private val dateformat = SimpleDateFormat("yyyy/MM/dd")
 
     fun expTimeStamp():Long {
         calender.timeInMillis = System.currentTimeMillis()
@@ -29,5 +31,13 @@ object STimeUtil {
             7 -> return "日"
         }
         return ""
+    }
+
+    fun fillDateZero(year: Int, month: Int, date: Int): String {
+        calender.set(Calendar.YEAR, year)
+        calender.set(Calendar.MONTH, month)
+        calender.set(Calendar.DAY_OF_MONTH, date)
+        val date = dateformat.format(calender.time)
+        return date.substring(1, date.length)
     }
 }

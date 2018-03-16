@@ -43,7 +43,7 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
     }
 
     override fun hideLoading() {
-        mProgressDialog.hide()
+        mProgressDialog.dismiss()
     }
 
     override fun onNoData() {

@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class SNetRepositoy @Inject constructor() {
+class SNetRepository @Inject constructor() {
 
     @Inject
     lateinit var invAppClient: IInvAppApi

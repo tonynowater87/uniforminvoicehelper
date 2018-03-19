@@ -3,13 +3,13 @@ package com.tonynowater.uniforminvoicehelper.view.test
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
 import com.tonynowater.uniforminvoicehelper.base.*
 import com.tonynowater.uniforminvoicehelper.data.net.IOnNetQueryCallback
-import com.tonynowater.uniforminvoicehelper.data.net.SNetRepositoy
+import com.tonynowater.uniforminvoicehelper.data.net.SNetRepository
 import javax.inject.Inject
 
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SNetRepositoy>(), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
+class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SNetRepository>(), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
 
     fun clickTestButton() {
         mView?.showLoading()

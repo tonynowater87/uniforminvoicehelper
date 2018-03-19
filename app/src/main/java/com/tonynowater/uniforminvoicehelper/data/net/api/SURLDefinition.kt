@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.api
+package com.tonynowater.uniforminvoicehelper.data.net.api
 
 import com.tonynowater.uniforminvoicehelper.BuildConfig
 import com.tonynowater.uniforminvoicehelper.util.uuid.OpenUDID_manager

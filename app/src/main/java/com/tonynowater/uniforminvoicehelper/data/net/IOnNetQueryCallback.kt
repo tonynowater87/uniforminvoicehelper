@@ -1,9 +1,9 @@
-package com.tonynowater.uniforminvoicehelper.base
+package com.tonynowater.uniforminvoicehelper.data.net
 
 /**
  * Created by tonyliao on 2018/3/15.
  */
-interface IOnQueryListener<in T> {
+interface IOnNetQueryCallback<in T> {
     fun onSuccess(entity: T)
     fun onFailure(throwable: Throwable)
 }

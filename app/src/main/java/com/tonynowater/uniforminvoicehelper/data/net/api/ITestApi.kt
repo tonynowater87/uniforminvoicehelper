@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.api
+package com.tonynowater.uniforminvoicehelper.data.net.api
 
 import io.reactivex.Observable
 import retrofit2.http.GET

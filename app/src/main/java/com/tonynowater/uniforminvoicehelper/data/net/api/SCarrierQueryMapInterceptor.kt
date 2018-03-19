@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.api
+package com.tonynowater.uniforminvoicehelper.data.net.api
 
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import okhttp3.Interceptor

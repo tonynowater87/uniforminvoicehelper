@@ -1,13 +1,13 @@
-package com.tonynowater.uniforminvoicehelper.base
+package com.tonynowater.uniforminvoicehelper.data.net
 
-import com.tonynowater.uniforminvoicehelper.api.ICarrierApi
-import com.tonynowater.uniforminvoicehelper.api.IInvAppApi
-import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceDetailDTO
-import com.tonynowater.uniforminvoicehelper.api.dto.SCarrierInvoiceHeaderDTO
-import com.tonynowater.uniforminvoicehelper.api.dto.SInvAppPrizeNumListDTO
-import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceDetailEntity
-import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceHeaderEntity
-import com.tonynowater.uniforminvoicehelper.api.entity.SInvAppPrizeNumListEntity
+import com.tonynowater.uniforminvoicehelper.data.net.api.ICarrierApi
+import com.tonynowater.uniforminvoicehelper.data.net.api.IInvAppApi
+import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceDetailDTO
+import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
+import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
+import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceDetailEntity
+import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceHeaderEntity
+import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SInvAppPrizeNumListEntity
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_PASSWORD
@@ -19,7 +19,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class SBaseModule @Inject constructor() {
+class SNetRepositoy @Inject constructor() {
 
     @Inject
     lateinit var invAppClient: IInvAppApi
@@ -27,37 +27,37 @@ class SBaseModule @Inject constructor() {
     @Inject
     lateinit var carrierClient: ICarrierApi
 
-    fun getPrizeNumberList(listener: IOnQueryListener<SInvAppPrizeNumListDTO>) {
+    fun getPrizeNumberList(callbackNet: IOnNetQueryCallback<SInvAppPrizeNumListDTO>) {
         invAppClient.getPrizeNumberList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        listener.onSuccess(transferInvPrizeNumEntityToDTO(it))
+                        callbackNet.onSuccess(transferInvPrizeNumEntityToDTO(it))
                     } else {
-                        listener.onFailure(Throwable(it.msgCode()))
+                        callbackNet.onFailure(Throwable(it.msgCode()))
                     }
                 }, {
-                    listener.onFailure(it)
+                    callbackNet.onFailure(it)
                 })
     }
 
-    fun getCarrierInvoiceDetail(invNum: String, invDate: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceDetailDTO>>) {
+    fun getCarrierInvoiceDetail(invNum: String, invDate: String, callbackNet: IOnNetQueryCallback<MutableList<SCarrierInvoiceDetailDTO>>) {
         carrierClient.getCarrierInvoiceDetail(invNum = invNum, invDate = invDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        listener.onSuccess(transferCarrierDetailEntityToDTO(it))
+                        callbackNet.onSuccess(transferCarrierDetailEntityToDTO(it))
                     } else {
-                        listener.onFailure(Throwable(it.msgCode()))
+                        callbackNet.onFailure(Throwable(it.msgCode()))
                     }
                 }, {
-                    listener.onFailure(it)
+                    callbackNet.onFailure(it)
                 })
     }
 
-    fun getCarrierInvoiceHeader(cardNo: String, cardEncrypt: String, listener: IOnQueryListener<MutableList<SCarrierInvoiceHeaderDTO>>) {
+    fun getCarrierInvoiceHeader(cardNo: String, cardEncrypt: String, callbackNet: IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>>) {
         carrierClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -65,12 +65,12 @@ class SBaseModule @Inject constructor() {
                     if (it.is200()) {
                         SSharePrefUtil.putString(SP_KEY_ACCOUNT, cardNo)
                         SSharePrefUtil.putString(SP_KEY_PASSWORD, cardEncrypt)
-                        listener.onSuccess(transferCarrierHeaderEntityToDTO(it))
+                        callbackNet.onSuccess(transferCarrierHeaderEntityToDTO(it))
                     } else {
-                        listener.onFailure(Throwable(it.msgCode()))
+                        callbackNet.onFailure(Throwable(it.msgCode()))
                     }
                 }, {
-                    listener.onFailure(it)
+                    callbackNet.onFailure(it)
                 })
     }
 

@@ -1,6 +1,6 @@
-package com.tonynowater.uniforminvoicehelper.api
+package com.tonynowater.uniforminvoicehelper.data.net.api
 
-import com.tonynowater.uniforminvoicehelper.api.entity.SInvAppPrizeNumListEntity
+import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SInvAppPrizeNumListEntity
 import io.reactivex.Observable
 import retrofit2.http.POST
 import retrofit2.http.Query

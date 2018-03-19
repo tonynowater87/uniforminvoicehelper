@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.api.dto
+package com.tonynowater.uniforminvoicehelper.data.net.api.dto
 
 /**
  * Created by tonyliao on 2018/3/15.

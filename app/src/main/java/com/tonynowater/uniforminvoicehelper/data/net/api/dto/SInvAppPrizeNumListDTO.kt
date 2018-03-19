@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.api.dto
+package com.tonynowater.uniforminvoicehelper.data.net.api.dto
 
 import android.text.TextUtils
 

@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.api.entity;
+package com.tonynowater.uniforminvoicehelper.data.net.api.entity;
 
 /**
  * Created by tonyliao on 2018/3/16.

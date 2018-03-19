@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.data
+package com.tonynowater.uniforminvoicehelper.data.db
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

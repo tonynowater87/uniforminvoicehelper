@@ -1,7 +1,7 @@
-package com.tonynowater.uniforminvoicehelper.api
+package com.tonynowater.uniforminvoicehelper.data.net.api
 
-import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceDetailEntity
-import com.tonynowater.uniforminvoicehelper.api.entity.SCarrierInvoiceHeaderEntity
+import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceDetailEntity
+import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceHeaderEntity
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_PASSWORD
 import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil

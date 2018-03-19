@@ -1,17 +1,19 @@
 package com.tonynowater.uniforminvoicehelper.view.test
 
-import com.tonynowater.uniforminvoicehelper.api.dto.SInvAppPrizeNumListDTO
+import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
 import com.tonynowater.uniforminvoicehelper.base.*
+import com.tonynowater.uniforminvoicehelper.data.net.IOnNetQueryCallback
+import com.tonynowater.uniforminvoicehelper.data.net.SNetRepositoy
 import javax.inject.Inject
 
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SBaseModule>(), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
+class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SNetRepositoy>(), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
 
     fun clickTestButton() {
         mView?.showLoading()
-        mModule.getPrizeNumberList(object : IOnQueryListener<SInvAppPrizeNumListDTO> {
+        mModule.getPrizeNumberList(object : IOnNetQueryCallback<SInvAppPrizeNumListDTO> {
             override fun onSuccess(entity: SInvAppPrizeNumListDTO) {
                 mView?.hideLoading()
                 mView?.notifyData(entity.sixPrizeNo)

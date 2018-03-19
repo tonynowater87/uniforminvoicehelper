@@ -1,6 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
-import com.tonynowater.uniforminvoicehelper.api.*
+import com.tonynowater.uniforminvoicehelper.data.net.api.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

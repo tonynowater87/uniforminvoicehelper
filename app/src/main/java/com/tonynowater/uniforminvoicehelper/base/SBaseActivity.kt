@@ -36,8 +36,8 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         mPresenter.detach()
+        super.onDestroy()
     }
 
     override fun showLoading() {

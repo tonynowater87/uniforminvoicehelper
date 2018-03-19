@@ -11,6 +11,7 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = [SActivityModule::class
+                    , SFragmentModule::class
                     , SNetModule::class
                     , AndroidSupportInjectionModule::class])
 interface SAppComponent : AndroidInjector<SApplication> {

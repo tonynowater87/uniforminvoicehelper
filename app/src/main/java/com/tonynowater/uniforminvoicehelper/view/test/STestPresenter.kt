@@ -1,9 +1,11 @@
 package com.tonynowater.uniforminvoicehelper.view.test
 
-import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
-import com.tonynowater.uniforminvoicehelper.base.*
-import com.tonynowater.uniforminvoicehelper.data.net.IOnNetQueryCallback
+import com.tonynowater.uniforminvoicehelper.base.IBaseView
+import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
+import com.tonynowater.uniforminvoicehelper.base.SBaseRecyclerViewAdapter
 import com.tonynowater.uniforminvoicehelper.data.net.SNetRepository
+import com.tonynowater.uniforminvoicehelper.util.SBarCodeImageGenerator
+import com.tonynowater.uniforminvoicehelper.view.component.SBarCodeView
 import javax.inject.Inject
 
 /**
@@ -11,19 +13,8 @@ import javax.inject.Inject
  */
 class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SNetRepository>(), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
 
-    fun clickTestButton() {
-        mView?.showLoading()
-        mModule.getPrizeNumberList(object : IOnNetQueryCallback<SInvAppPrizeNumListDTO> {
-            override fun onSuccess(entity: SInvAppPrizeNumListDTO) {
-                mView?.hideLoading()
-                mView?.notifyData(entity.sixPrizeNo)
-            }
-
-            override fun onFailure(throwable: Throwable) {
-                mView?.hideLoading()
-                mView?.showToast(throwable.message!!)
-            }
-        })
+    fun clickTestButton(content: String) {
+        mView?.showBarCode(SBarCodeImageGenerator.generateBarCodeImage(content, mView?.getBarcodeView()!!.width, mView?.getBarcodeView()!!.height))
     }
 
     override fun onClickItem(position: Int, item: String) {
@@ -31,6 +22,7 @@ class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITest
     }
 
     interface ITestView : IBaseView {
-        fun notifyData(entity: List<String>)
+        fun showBarCode(barCodeItem: SBarCodeImageGenerator.BarCodeItem)
+        fun getBarcodeView():SBarCodeView
     }
 }

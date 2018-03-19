@@ -64,4 +64,10 @@ ext {
             rxJava   : "io.reactivex.rxjava2:rxjava:$rxJavaVer",
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVer"
     ]
+
+    zxingBarCode = '3.6.0'
+
+    barCodeDeps = [
+            barCode: "com.journeyapps:zxing-android-embedded:$zxingBarCode"
+    ]
 }

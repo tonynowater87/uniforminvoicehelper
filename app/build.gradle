@@ -75,6 +75,9 @@ dependencies {
     implementation rootProject.ext.rxDeps.rxJava
     implementation rootProject.ext.rxDeps.rxAndroid
 
+    //bar code
+    implementation rootProject.ext.barCodeDeps.barCode
+
     testImplementation rootProject.ext.testDeps.junit
     androidTestImplementation rootProject.ext.testDeps.runner
     androidTestImplementation rootProject.ext.testDeps.espresso

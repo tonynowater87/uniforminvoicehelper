@@ -8,10 +8,9 @@ import android.support.annotation.NonNull
  * Created by tonyliao on 2018/3/6.
  */
 @Entity
-data class UserItem(@PrimaryKey
-                    @NonNull
-                    var id:String,
-                    var account:String,
-                    var password:String) {
-
+data class SUserItem(@PrimaryKey
+                     @NonNull
+                     var id: String,
+                     var account: String,
+                     var password: String) {
 }

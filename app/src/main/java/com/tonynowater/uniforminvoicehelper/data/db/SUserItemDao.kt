@@ -11,13 +11,13 @@ import android.arch.persistence.room.Query
  * Created by tonyliao on 2018/3/6.
  */
 @Dao
-interface UserItemDao {
-    @Query("SELECT * FROM UserItem WHERE id = :id")
-    fun getUserItemById(id: String): LiveData<UserItem>
+interface SUserItemDao {
+    @Query("SELECT * FROM SUserItem WHERE id = :id")
+    fun getUserItemById(id: String): LiveData<SUserItem>
 
     @Insert(onConflict = REPLACE)
-    fun insertUserItem(item: UserItem): Long
+    fun insertUserItem(item: SUserItem): Long
 
     @Delete
-    fun deleteAll(userItem: UserItem)
+    fun deleteAll(userItem: SUserItem)
 }

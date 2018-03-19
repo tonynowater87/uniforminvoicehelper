@@ -1,10 +1,10 @@
 package com.tonynowater.uniforminvoicehelper.view
 
-import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.base.IBaseView
+import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
 import com.tonynowater.uniforminvoicehelper.data.net.IOnNetQueryCallback
 import com.tonynowater.uniforminvoicehelper.data.net.SNetRepositoy
-import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
+import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
 import javax.inject.Inject
 
 /**

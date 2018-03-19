@@ -17,5 +17,5 @@ object SSharePrefUtil {
         sharePref.edit().putString(key, value).apply()
     }
 
-    fun getString(key: String, defValue: String = "") = sharePref.getString(key, defValue)
+    fun getString(key: String, defValue: String = ""): String = sharePref.getString(key, defValue)
 }

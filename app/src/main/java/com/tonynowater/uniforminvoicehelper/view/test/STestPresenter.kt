@@ -21,7 +21,7 @@ class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITest
 
             override fun onFailure(throwable: Throwable) {
                 mView?.hideLoading()
-                mView?.showToast(throwable.message)
+                mView?.showToast(throwable.message!!)
             }
         })
     }

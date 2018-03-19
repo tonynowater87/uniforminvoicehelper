@@ -52,7 +52,7 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
 
     }
 
-    override fun showToast(msg: String?) {
+    override fun showToast(msg: String) {
         if (mToast != null) {
             mToast!!.cancel()
         }

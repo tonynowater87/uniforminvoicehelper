@@ -48,10 +48,6 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
         mProgressDialog.dismiss()
     }
 
-    override fun onNoData() {
-
-    }
-
     override fun showToast(msg: String) {
         if (mToast != null) {
             mToast!!.cancel()

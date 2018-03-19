@@ -19,9 +19,6 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
 
     private lateinit var adapter: STestAdapter
 
-    override fun onNoData() {
-    }
-
     override fun onSuccess() {
     }
 

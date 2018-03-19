@@ -1,10 +1,17 @@
 package com.tonynowater.uniforminvoicehelper.util;
 
 /**
+ *
+ * 做HmacSHA1加密
+ *
+ * example : hash_hmac("HmacSHA1", value, key);
+ *
+ * https://stackoverflow.com/questions/6026339/how-to-generate-hmac-sha1-signature-in-android
+ *
  * Created by tonyliao on 2018/3/15.
  */
+public class SCryptoUtil {
 
-public class CryptoUtil {
     static String hash_hmac(String type, String value, String key)
     {
         try {

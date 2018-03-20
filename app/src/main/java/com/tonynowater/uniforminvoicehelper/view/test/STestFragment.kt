@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.view.test
 
+import android.appwidget.AppWidgetManager
 import android.view.View
 import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.R

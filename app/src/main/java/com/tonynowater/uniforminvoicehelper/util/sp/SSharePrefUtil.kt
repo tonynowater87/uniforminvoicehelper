@@ -18,4 +18,10 @@ object SSharePrefUtil {
     }
 
     fun getString(key: String, defValue: String = ""): String = sharePref.getString(key, defValue)
+
+    fun putInt(key: String, value: Int) {
+        sharePref.edit().putInt(key, value).apply()
+    }
+
+    fun getInt(key: String, defValue: Int = 0): Int = sharePref.getInt(key, defValue)
 }

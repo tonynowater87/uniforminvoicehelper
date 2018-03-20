@@ -12,6 +12,7 @@ import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.util.SBarCodeImageGenerator
 import com.tonynowater.uniforminvoicehelper.util.SLog
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
+import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_WIDGET_ID
 import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
 import com.tonynowater.uniforminvoicehelper.view.test.STestActivity
 
@@ -20,10 +21,30 @@ import com.tonynowater.uniforminvoicehelper.view.test.STestActivity
  */
 class SBarCodeWidgetProvider : AppWidgetProvider() {
 
-    val ACTION_WIDGET_CLICK = "com.tonynowater.uniforminvoicehelper.widget.click"
-    val REQ_CODE = 100
+    companion object {
 
-    var appIwdgetIds: IntArray? = null
+        val ACTION_WIDGET_CLICK = "com.tonynowater.uniforminvoicehelper.widget.click"
+        val REQ_CODE = 100
+
+        fun getUpdateRemoteView(context: Context): RemoteViews {
+            val remoteViews = RemoteViews(context.packageName, R.layout.view_bar_code)
+
+            val account = SSharePrefUtil.getString(SP_KEY_ACCOUNT)
+            if (TextUtils.isEmpty(account)) {
+                remoteViews.setImageViewResource(R.id.image_view_bar_code, R.drawable.invoice_carrier_no_login)
+            } else {
+                val barCodeItem = SBarCodeImageGenerator.generateBarCodeImage(account)
+                remoteViews.setImageViewBitmap(R.id.image_view_bar_code, barCodeItem.bitmap)
+                remoteViews.setTextViewText(R.id.text_view_bar_code_content, barCodeItem.content)
+            }
+
+            val intentClick = Intent(ACTION_WIDGET_CLICK)
+            val pendingIntent = PendingIntent.getBroadcast(context, REQ_CODE, intentClick, PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteViews.setOnClickPendingIntent(R.id.linear_layout_root_bar_code_view, pendingIntent)
+
+            return remoteViews
+        }
+    }
 
     /**
      * 更新
@@ -32,27 +53,12 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
         SLog.d("onUpdate", this@SBarCodeWidgetProvider.javaClass.simpleName)
 
-        val remoteViews = RemoteViews(context.packageName, R.layout.view_bar_code)
-        setBarCodeAndContent(remoteViews)
-        val intentClick = Intent(ACTION_WIDGET_CLICK)
-        val pendingIntent = PendingIntent.getBroadcast(context, REQ_CODE, intentClick, PendingIntent.FLAG_UPDATE_CURRENT)
-        remoteViews.setOnClickPendingIntent(R.id.linear_layout_root_bar_code_view, pendingIntent)
-
-        appIwdgetIds = appWidgetIds
+        val remoteViews = getUpdateRemoteView(context)
 
         for (id in appWidgetIds) {
+            SLog.d("onUpdate id:$id", this@SBarCodeWidgetProvider.javaClass.simpleName)
+            SSharePrefUtil.putInt(SP_KEY_WIDGET_ID, id)
             appWidgetManager.updateAppWidget(id, remoteViews)
-        }
-    }
-
-    private fun setBarCodeAndContent(remoteViews: RemoteViews) {
-        val account = SSharePrefUtil.getString(SP_KEY_ACCOUNT)
-        if (TextUtils.isEmpty(account)) {
-            remoteViews.setImageViewResource(R.id.image_view_bar_code, R.drawable.invoice_carrier_no_login)
-        } else {
-            val barCodeItem = SBarCodeImageGenerator.generateBarCodeImage(account)
-            remoteViews.setImageViewBitmap(R.id.image_view_bar_code, barCodeItem.bitmap)
-            remoteViews.setTextViewText(R.id.text_view_bar_code_content, barCodeItem.content)
         }
     }
 
@@ -62,7 +68,6 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
     override fun onEnabled(context: Context?) {
         super.onEnabled(context)
         SLog.d("onEnabled", this@SBarCodeWidgetProvider.javaClass.simpleName)
-
     }
 
     /**
@@ -88,8 +93,9 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
         super.onReceive(context, intent)
         SLog.d("onReceive", this@SBarCodeWidgetProvider.javaClass.simpleName)
         if (intent?.action == ACTION_WIDGET_CLICK) {
+            val widgetId = SSharePrefUtil.getInt(SP_KEY_WIDGET_ID)
+            SLog.d("onClick:$widgetId", this@SBarCodeWidgetProvider.javaClass.simpleName)
             val intent = Intent(context, STestActivity::class.java)
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appIwdgetIds)
             context.startActivity(intent)
         }
     }

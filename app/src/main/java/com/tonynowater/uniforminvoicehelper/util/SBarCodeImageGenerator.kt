@@ -9,7 +9,9 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
  */
 object SBarCodeImageGenerator {
 
-    fun generateBarCodeImage(content: String, width: Int = 400, height: Int = 400):BarCodeItem = BarCodeItem(
+    fun generateBarCodeImage(content: String
+                             , width: Int = 400
+                             , height: Int = 400):BarCodeItem = BarCodeItem(
             content
             , BarcodeEncoder().encodeBitmap(content
                 , BarcodeFormat.CODE_39

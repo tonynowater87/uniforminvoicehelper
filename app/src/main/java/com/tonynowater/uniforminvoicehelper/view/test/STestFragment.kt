@@ -37,7 +37,7 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
     }
 
     override fun onClick(v: View?) {
-        mPresenter.clickTestButton(et_user_account.text.toString())
+        mPresenter.clickTestButton(et_user_account.text.toString(), et_password_account.text.toString())
     }
 
     override fun getBarcodeView(): SBarCodeView = image_view

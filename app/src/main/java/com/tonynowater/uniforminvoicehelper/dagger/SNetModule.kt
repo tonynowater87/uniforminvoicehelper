@@ -18,7 +18,7 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun testClient(okHttpLogger: HttpLoggingInterceptor): ITestApi {
+    fun provideTestApi(okHttpLogger: HttpLoggingInterceptor): ITestApi {
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(okHttpLogger)
                 .build()
@@ -33,7 +33,7 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun carrierClient(carrierInterceptor: SCarrierQueryMapInterceptor, baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): ICarrierApi {
+    fun provideCarrierApi(carrierInterceptor: SCarrierQueryMapInterceptor, baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): ICarrierApi {
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(baseInterceptor)
                 .addInterceptor(carrierInterceptor)
@@ -50,7 +50,7 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun invAppClient(baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): IInvAppApi {
+    fun provideInvAppApi(baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): IInvAppApi {
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(baseInterceptor)
                 .addInterceptor(okHttpLogger)

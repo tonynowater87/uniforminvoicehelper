@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class STestPresenter @Inject constructor() : SBasePresenter<STestPresenter.ITestView, SNetRepository>(), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
+class STestPresenter @Inject constructor(mModule:SNetRepository) : SBasePresenter<STestPresenter.ITestView, SNetRepository>(mModule), SBaseRecyclerViewAdapter.OnClickItemListener<String> {
 
     fun clickTestButton(account: String, password: String) {
         mView?.showLoading()

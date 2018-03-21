@@ -10,7 +10,7 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class SLoginPresenter @Inject constructor() : SBasePresenter<IBaseView, SNetRepository>() {
+class SLoginPresenter @Inject constructor(mModule: SNetRepository) : SBasePresenter<IBaseView, SNetRepository>(mModule) {
 
     fun login(cardNo: String, cardEncrypt: String) {
         mView?.showLoading()

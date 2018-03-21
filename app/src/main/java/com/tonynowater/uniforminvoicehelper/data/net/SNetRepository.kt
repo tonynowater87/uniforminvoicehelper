@@ -19,13 +19,9 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class SNetRepository @Inject constructor() {
+class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
+                                         , var carrierClient: ICarrierApi) {
 
-    @Inject
-    lateinit var invAppClient: IInvAppApi
-
-    @Inject
-    lateinit var carrierClient: ICarrierApi
 
     fun getPrizeNumberList(callbackNet: IOnNetQueryCallback<SInvAppPrizeNumListDTO>) {
         invAppClient.getPrizeNumberList()

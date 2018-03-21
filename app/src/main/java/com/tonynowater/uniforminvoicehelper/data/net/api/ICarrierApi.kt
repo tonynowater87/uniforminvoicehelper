@@ -19,8 +19,8 @@ interface ICarrierApi {
      */
     @POST("invServ/InvServ")
     fun getCarrierInvoiceHeader(@Query("cardNo") cardNo: String,
-                                @Query("startDate") startDate: String = "2018/02/1",
-                                @Query("endDate") endDate: String = "2018/02/28",
+                                @Query("startDate") startDate: String = "2018/03/1",
+                                @Query("endDate") endDate: String = "2018/03/21",
                                 @Query("onlyWinningInv") onlyWinningInv: String = "N",
                                 @Query("action") action: String = SURLDefinition.ACTION_HEADER,
                                 @Query("cardEncrypt") cardEncrypt: String): Observable<SCarrierInvoiceHeaderEntity>

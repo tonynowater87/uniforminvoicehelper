@@ -3,6 +3,7 @@ package com.tonynowater.uniforminvoicehelper.view.test
 import android.appwidget.AppWidgetManager
 import android.view.View
 import android.widget.Toast
+import com.tonynowater.uniforminvoicehelper.BuildConfig
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SApplication
 import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
@@ -42,4 +43,10 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
     }
 
     override fun getBarcodeView(): SBarCodeView = image_view
+
+    override fun onResume() {
+        super.onResume()
+        et_user_account.setText(BuildConfig.TestAccount)
+        et_password_account.setText(BuildConfig.TestPassword)
+    }
 }

@@ -18,9 +18,7 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun testClient(): ITestApi {
-        val okHttpLogger = HttpLoggingInterceptor()
-        okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
+    fun testClient(okHttpLogger: HttpLoggingInterceptor): ITestApi {
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(okHttpLogger)
                 .build()
@@ -35,12 +33,10 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun carrierClient(): ICarrierApi {
-        val okHttpLogger = HttpLoggingInterceptor()
-        okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
+    fun carrierClient(carrierInterceptor: SCarrierQueryMapInterceptor, baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): ICarrierApi {
         val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(SBaseQueryMapInterceptor())
-                .addInterceptor(SCarrierQueryMapInterceptor())
+                .addInterceptor(baseInterceptor)
+                .addInterceptor(carrierInterceptor)
                 .addInterceptor(okHttpLogger)
                 .build()
         val retrofit = Retrofit.Builder()
@@ -54,11 +50,9 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun invAppClient(): IInvAppApi {
-        val okHttpLogger = HttpLoggingInterceptor()
-        okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
+    fun invAppClient(baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): IInvAppApi {
         val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(SBaseQueryMapInterceptor())
+                .addInterceptor(baseInterceptor)
                 .addInterceptor(okHttpLogger)
                 .build()
         val retrofit = Retrofit.Builder()
@@ -68,5 +62,21 @@ class SNetModule {
                 .client(okHttpClient)
                 .build()
         return retrofit.create(IInvAppApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCarrierInterceptor(): SCarrierQueryMapInterceptor = SCarrierQueryMapInterceptor()
+
+    @Singleton
+    @Provides
+    fun provideBaseInterceptor(): SBaseQueryMapInterceptor = SBaseQueryMapInterceptor()
+
+    @Singleton
+    @Provides
+    fun provideLoggerInterceptor(): HttpLoggingInterceptor {
+        val okHttpLogger = HttpLoggingInterceptor()
+        okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
+        return okHttpLogger
     }
 }

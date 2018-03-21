@@ -81,7 +81,7 @@ class SNetRepository @Inject constructor() {
             val date = entity.invDate.date
             list.add(SCarrierInvoiceHeaderDTO(
                     date = "$month/$date(${STimeUtil.transferWeekDays(entity.invDate.day)})"
-                    , formatDate = STimeUtil.transferTaiwanYearToCommonEra(entity.invDate.year, month, date)
+                    , formatCEDate = STimeUtil.transferTaiwanYearToCommonEra(entity.invDate.year, month, date)
                     , invoiceNo = entity.invNum
                     , sellerName = entity.sellerName
                     , amount = entity.amount.toString()))

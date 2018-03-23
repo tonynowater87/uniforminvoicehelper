@@ -42,7 +42,8 @@ ext {
     kotlinVer = '1.2.21'
     kotlinDeps = [
             kotlinStdLib : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer",
-            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:$kotlinVer"
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:$kotlinVer",
+            kotlinTestJunit: "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVer"
     ]
 
 

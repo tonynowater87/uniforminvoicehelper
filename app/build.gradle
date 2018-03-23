@@ -63,6 +63,7 @@ dependencies {
     //kotlin
     implementation rootProject.ext.kotlinDeps.kotlinStdLib
     implementation rootProject.ext.kotlinDeps.kotlinReflect
+    testImplementation rootProject.ext.kotlinDeps.kotlinTestJunit
 
     //android arch component
     implementation rootProject.ext.archDeps.archRuntime
@@ -78,6 +79,7 @@ dependencies {
     //bar code
     implementation rootProject.ext.barCodeDeps.barCode
 
+    //test
     testImplementation rootProject.ext.testDeps.junit
     androidTestImplementation rootProject.ext.testDeps.runner
     androidTestImplementation rootProject.ext.testDeps.espresso

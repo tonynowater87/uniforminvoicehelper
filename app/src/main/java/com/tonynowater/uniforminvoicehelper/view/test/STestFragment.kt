@@ -28,7 +28,7 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
     }
 
     override fun onError(msg: String) {
-        Toast.makeText(SApplication.context, "onFailure:$msg", Toast.LENGTH_SHORT).show()
+        Toast.makeText(SApplication.mInstance, "onFailure:$msg", Toast.LENGTH_SHORT).show()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_test

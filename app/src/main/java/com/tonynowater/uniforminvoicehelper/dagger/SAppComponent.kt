@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
+import android.app.Application
 import com.tonynowater.uniforminvoicehelper.SApplication
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -13,9 +14,9 @@ import javax.inject.Singleton
 @Component(modules = [SActivityModule::class
                     , SFragmentModule::class
                     , SNetModule::class
+                    , SAppModule::class
+                    , SRoomModule::class
                     , AndroidSupportInjectionModule::class])
 interface SAppComponent : AndroidInjector<SApplication> {
-
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<SApplication>()
+    fun application():Application
 }

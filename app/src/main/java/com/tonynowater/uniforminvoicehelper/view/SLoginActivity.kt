@@ -34,10 +34,10 @@ class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
     }
 
     override fun onSuccess() {
-        Toast.makeText(SApplication.context, "onSuccess", Toast.LENGTH_SHORT).show()
+        Toast.makeText(SApplication.mInstance, "onSuccess", Toast.LENGTH_SHORT).show()
     }
 
     override fun onError(msg: String) {
-        Toast.makeText(SApplication.context, "onFailure:$msg", Toast.LENGTH_SHORT).show()
+        Toast.makeText(SApplication.mInstance, "onFailure:$msg", Toast.LENGTH_SHORT).show()
     }
 }

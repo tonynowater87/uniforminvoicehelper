@@ -11,7 +11,7 @@ object SSharePrefUtil {
 
     private const val SP_FILE_NAME = "SP_FILE_NAME"
 
-    private val sharePref: SharedPreferences = SApplication.context.getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE)
+    private val sharePref: SharedPreferences = SApplication.mInstance.getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE)
 
     fun putString(key: String, value: String) {
         sharePref.edit().putString(key, value).apply()

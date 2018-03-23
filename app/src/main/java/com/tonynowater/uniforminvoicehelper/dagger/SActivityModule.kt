@@ -11,7 +11,7 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class SActivityModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector()
     abstract fun contributeTestActivity(): STestActivity
 
     @ContributesAndroidInjector

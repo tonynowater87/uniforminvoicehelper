@@ -1,11 +1,17 @@
 package com.tonynowater.uniforminvoicehelper.data.db
 
-import android.arch.lifecycle.LiveData
-
 /**
  * Created by tonyliao on 2018/3/6.
  */
-class SUserItemRepository(var userItemDao: SUserItemDao) {
-    fun getUserItem(id: String): LiveData<SUserItem> = userItemDao.getUserItemById(id)
-    fun deleteUserItem(userItem: SUserItem) = userItemDao.deleteAll(userItem)
+class SUserItemRepository(var userItemDao: SUserItemDao):SUserItemDao {
+
+    override fun queryAllItems(): List<SUserItem> = userItemDao.queryAllItems()
+
+    override fun getUserItemById(id: Long): SUserItem = userItemDao.getUserItemById(id)
+
+    override fun insertUserItem(item: SUserItem): Long = userItemDao.insertUserItem(item)
+
+    override fun deleteAll(userItem: SUserItem) {
+        userItemDao.deleteAll(userItem)
+    }
 }

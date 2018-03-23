@@ -24,7 +24,7 @@ abstract class SBaseRecyclerViewAdapter<T> : RecyclerView.Adapter<SBaseRecyclerV
     private var m_onClickItemListener: OnClickItemListener<T>? = null
 
     constructor() {
-        m_data = ArrayList()
+        m_data = mutableListOf()
     }
 
     constructor(m_onClickItemListener: OnClickItemListener<T>) {

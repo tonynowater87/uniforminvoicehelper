@@ -1,14 +1,12 @@
 package com.tonynowater.uniforminvoicehelper.view.test
 
-import android.appwidget.AppWidgetManager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
-import com.tonynowater.uniforminvoicehelper.BuildConfig
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SApplication
 import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
-import com.tonynowater.uniforminvoicehelper.util.SBarCodeImageGenerator
-import com.tonynowater.uniforminvoicehelper.view.component.SBarCodeView
+import com.tonynowater.uniforminvoicehelper.data.db.SUserItem
 import kotlinx.android.synthetic.main.fragment_test.*
 
 /**
@@ -16,12 +14,10 @@ import kotlinx.android.synthetic.main.fragment_test.*
  */
 class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STestPresenter.ITestView {
 
+    lateinit var mAdapter:STestAdapter
+
     companion object {
         fun newInstance(): STestFragment = STestFragment()
-    }
-
-    override fun showBarCode(barCodeItem: SBarCodeImageGenerator.BarCodeItem) {
-        image_view.setBarCodeItem(barCodeItem)
     }
 
     override fun onSuccess() {
@@ -36,17 +32,30 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
     override fun initView() {
         mPresenter.attach(this)
         btn_login.setOnClickListener(this)
+        btn_get.setOnClickListener(this)
+        mAdapter = STestAdapter(mPresenter)
+        recycler_view.layoutManager = LinearLayoutManager(SApplication.mInstance)
+        recycler_view.adapter = mAdapter
     }
 
     override fun onClick(v: View?) {
-        mPresenter.clickTestButton(et_user_account.text.toString(), et_password_account.text.toString())
+        when(v?.id) {
+            R.id.btn_login -> {
+                mPresenter.clickTestButton(et_user_account.text.toString(), et_password_account.text.toString())
+            }
+            R.id.btn_get -> {
+                mPresenter.getItem()
+            }
+        }
     }
 
-    override fun getBarcodeView(): SBarCodeView = image_view
+    override fun notifyData(listItems: List<SUserItem>) {
+        mAdapter.removeAllData()
+        mAdapter.addDatas(listItems)
+    }
 
     override fun onResume() {
         super.onResume()
-        et_user_account.setText(BuildConfig.TestAccount)
-        et_password_account.setText(BuildConfig.TestPassword)
+        mPresenter.queryAllListItem()
     }
 }

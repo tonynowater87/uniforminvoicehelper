@@ -3,6 +3,7 @@ package com.tonynowater.uniforminvoicehelper
 import com.tonynowater.uniforminvoicehelper.dagger.DaggerSAppComponent
 import com.tonynowater.uniforminvoicehelper.dagger.SAppModule
 import com.tonynowater.uniforminvoicehelper.dagger.SNetModule
+import com.tonynowater.uniforminvoicehelper.dagger.SRoomModule
 import com.tonynowater.uniforminvoicehelper.util.uuid.OpenUDID_manager
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -23,6 +24,7 @@ class SApplication : DaggerApplication() {
         return DaggerSAppComponent.builder()
                 .sAppModule(SAppModule(this))
                 .sNetModule(SNetModule())
+                .sRoomModule(SRoomModule(this))
                 .build()
     }
 

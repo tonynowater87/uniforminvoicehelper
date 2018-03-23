@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.persistence.room.Room
 import com.tonynowater.uniforminvoicehelper.data.db.SCustomViewModuleFactory
+import com.tonynowater.uniforminvoicehelper.data.db.SUserItemDao
 import com.tonynowater.uniforminvoicehelper.data.db.SUserItemDatabase
 import com.tonynowater.uniforminvoicehelper.data.db.SUserItemRepository
 import dagger.Module
@@ -15,7 +16,7 @@ import javax.inject.Singleton
  */
 @Module
 class SRoomModule {
-    var database: SUserItemDatabase? = null
+    var database: SUserItemDatabase
 
     constructor(application: Application) {
         this.database = Room.databaseBuilder(application
@@ -25,12 +26,15 @@ class SRoomModule {
 
     @Provides
     @Singleton
-    fun provideUserItemDao(database: SUserItemDatabase) = database.userItemDao()
-
+    fun provideUserItemDao(database: SUserItemDatabase): SUserItemDao = database.userItemDao()
 
     @Provides
     @Singleton
-    fun provideUserItemDatabase(application: Application) = database
+    fun provideUserItemDatabase(application: Application):SUserItemDatabase = database
+
+    @Provides
+    @Singleton
+    fun provideUserItemRepository(userItemDao: SUserItemDao):SUserItemRepository = SUserItemRepository(userItemDao)
 
     @Provides
     @Singleton

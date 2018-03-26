@@ -33,19 +33,21 @@ ext {
     junit = '4.12'
     runner = '1.0.1'
     espresso = '3.0.1'
+    mockito = '2.13.0'
     testDeps = [
-            junit   : "junit:junit:$junit",
-            runner  : "com.android.support.test:runner:$runner",
-            espresso: "com.android.support.test.espresso:espresso-core:$espresso"
+            junit        : "junit:junit:$junit",
+            runner       : "com.android.support.test:runner:$runner",
+            espresso     : "com.android.support.test.espresso:espresso-core:$espresso",
+            mockito      : "org.mockito:mockito-core:$mockito",
+            mockitoInline: "org.mockito:mockito-inline:$mockito" // for mock final class and method
     ]
 
     kotlinVer = '1.2.21'
     kotlinDeps = [
-            kotlinStdLib : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer",
-            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:$kotlinVer",
-            kotlinTestJunit: "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVer"
+            kotlinStdLib   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer",
+            kotlinReflect  : "org.jetbrains.kotlin:kotlin-reflect:$kotlinVer",
+            kotlinTestJunit: "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVer",
     ]
-
 
     archLifecycleVersion = '1.0.3'
     archLifecycleCompilerVersion = '1.0.0'

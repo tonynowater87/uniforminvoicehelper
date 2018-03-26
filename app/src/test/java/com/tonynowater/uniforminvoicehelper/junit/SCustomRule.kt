@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper
+package com.tonynowater.uniforminvoicehelper.junit
 
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -7,7 +7,7 @@ import org.junit.runners.model.Statement
 /**
  * Created by tonyliao on 2018/3/26.
  */
-class CustomRule:TestRule {
+class SCustomRule:TestRule {
     override fun apply(base: Statement?, description: Description?): Statement {
         return object : Statement() {
 

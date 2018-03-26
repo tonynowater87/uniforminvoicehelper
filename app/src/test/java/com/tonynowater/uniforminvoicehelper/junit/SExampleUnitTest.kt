@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper
+package com.tonynowater.uniforminvoicehelper.junit
 
 import org.junit.*
 
@@ -8,15 +8,11 @@ import kotlin.test.expect
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
- * gradlew test Debug?UnitTest // debug版本
- * gradlew test Release?UnitTest // release版本
- *
- * 測試報告路徑
- * project_root/app/build/reports/tests/testDebug?UnitTest/index.html
+ * 基本的UnitTest (純測java)
  *
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
-class ExampleUnitTest {
+class SExampleUnitTest {
 
     // =+ @Before & @After
     //@Rule
@@ -28,7 +24,7 @@ class ExampleUnitTest {
         // =+ @BeforeClass & @AfterClass
         @ClassRule
         @JvmField
-        val customRule = CustomRule()
+        val customRule = SCustomRule()
 
         @BeforeClass
         @JvmStatic

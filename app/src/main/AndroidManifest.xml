@@ -28,12 +28,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".util.uuid.OpenUDID_service">
-            <intent-filter>
-                <action android:name="org.OpenUDID.GETUDID" />
-            </intent-filter>
-        </service>
-
         <receiver android:name=".view.component.widget.SBarCodeWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"

@@ -24,4 +24,6 @@ object SSharePrefUtil {
     }
 
     fun getInt(key: String, defValue: Int = 0): Int = sharePref.getInt(key, defValue)
+
+
 }

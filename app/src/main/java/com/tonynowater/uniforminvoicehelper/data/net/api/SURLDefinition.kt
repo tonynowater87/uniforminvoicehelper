@@ -1,7 +1,8 @@
 package com.tonynowater.uniforminvoicehelper.data.net.api
 
 import com.tonynowater.uniforminvoicehelper.BuildConfig
-import com.tonynowater.uniforminvoicehelper.util.uuid.OpenUDID_manager
+import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_UDID
+import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
 
 /**
  * Created by tonyliao on 2018/3/14.
@@ -21,5 +22,5 @@ object SURLDefinition {
     const val BaseNetURL = "https://api.einvoice.nat.gov.tw/PB2CAPIVAN/"
 
     //手機條碼載具註冊網址
-    fun getRegCarrierURL() = "$BaseNetURL/APIService/generalCarrierRegBlank?UUID=${OpenUDID_manager.getOpenUDID()}&appID=${BuildConfig.APP_ID}"
+    fun getRegCarrierURL() = "$BaseNetURL/APIService/generalCarrierRegBlank?UUID=${SSharePrefUtil.getString(SP_KEY_UDID)}&appID=${BuildConfig.APP_ID}"
 }

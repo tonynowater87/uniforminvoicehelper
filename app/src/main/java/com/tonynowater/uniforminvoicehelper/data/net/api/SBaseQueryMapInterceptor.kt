@@ -1,7 +1,8 @@
 package com.tonynowater.uniforminvoicehelper.data.net.api
 
 import com.tonynowater.uniforminvoicehelper.BuildConfig
-import com.tonynowater.uniforminvoicehelper.util.uuid.OpenUDID_manager
+import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_UDID
+import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -17,7 +18,7 @@ class SBaseQueryMapInterceptor : Interceptor {
         val originalHttpUrl = original.url()
 
         val url = originalHttpUrl.newBuilder()
-                .addQueryParameter("uuid", OpenUDID_manager.getOpenUDID())
+                .addQueryParameter("uuid", SSharePrefUtil.getString(SP_KEY_UDID))
                 .addQueryParameter("appID", BuildConfig.APP_ID)
                 .build()
 

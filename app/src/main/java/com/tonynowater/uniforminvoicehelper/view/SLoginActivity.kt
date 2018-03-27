@@ -1,6 +1,5 @@
 package com.tonynowater.uniforminvoicehelper.view
 
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.BuildConfig
@@ -17,7 +16,7 @@ class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
     private val TAG = this@SLoginActivity.javaClass.simpleName
 
     override fun onClick(v: View?) {
-        mPresenter.login(et_user_account.text.toString(), et_password_account.text.toString())
+        SMainActivity.start(this)
     }
 
     override fun initView() {

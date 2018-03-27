@@ -19,7 +19,14 @@ open class SApplication : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         mInstance = this
-        SSharePrefUtil.putString(SP_KEY_UDID, Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID))
+        initAndroidId()
+    }
+
+    private fun initAndroidId() {
+        val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        if (androidId != null) {
+            SSharePrefUtil.putString(SP_KEY_UDID, androidId)
+        }
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

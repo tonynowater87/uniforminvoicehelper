@@ -44,7 +44,7 @@ ext {
             robolectric  : "org.robolectric:robolectric:$robolectric"
     ]
 
-    kotlinVer = '1.2.21'
+    kotlinVer = '1.2.31'
     kotlinDeps = [
             kotlinStdLib   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVer",
             kotlinReflect  : "org.jetbrains.kotlin:kotlin-reflect:$kotlinVer",

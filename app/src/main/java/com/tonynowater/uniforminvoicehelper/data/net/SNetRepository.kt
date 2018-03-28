@@ -59,9 +59,24 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
+                        callbackNet.onSuccess(transferCarrierHeaderEntityToDTO(it))
+                    } else {
+                        callbackNet.onFailure(Throwable(it.msgCode()))
+                    }
+                }, {
+                    callbackNet.onFailure(it)
+                })
+    }
+
+    fun login(cardNo: String, cardEncrypt: String, callbackNet: IOnNetQueryCallback<Any>) {
+        carrierClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.is200()) {
                         SSharePrefUtil.putString(SP_KEY_ACCOUNT, cardNo)
                         SSharePrefUtil.putString(SP_KEY_PASSWORD, cardEncrypt)
-                        callbackNet.onSuccess(transferCarrierHeaderEntityToDTO(it))
+                        callbackNet.onSuccess(true)
                     } else {
                         callbackNet.onFailure(Throwable(it.msgCode()))
                     }

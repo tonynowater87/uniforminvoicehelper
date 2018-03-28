@@ -16,7 +16,7 @@ class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
     private val TAG = this@SLoginActivity.javaClass.simpleName
 
     override fun onClick(v: View?) {
-        SMainActivity.start(this)
+        mPresenter.login(et_user_account.text.toString(), et_password_account.text.toString())
     }
 
     override fun initView() {
@@ -34,6 +34,7 @@ class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
 
     override fun onSuccess() {
         Toast.makeText(SApplication.mInstance, "onSuccess", Toast.LENGTH_SHORT).show()
+        SMainActivity.start(this)
     }
 
     override fun onError(msg: String) {

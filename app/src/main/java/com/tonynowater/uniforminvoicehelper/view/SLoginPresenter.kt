@@ -4,7 +4,6 @@ import com.tonynowater.uniforminvoicehelper.base.IBaseView
 import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
 import com.tonynowater.uniforminvoicehelper.data.net.IOnNetQueryCallback
 import com.tonynowater.uniforminvoicehelper.data.net.SNetRepository
-import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
 import javax.inject.Inject
 
 /**
@@ -14,8 +13,8 @@ class SLoginPresenter @Inject constructor(mModule: SNetRepository) : SBasePresen
 
     fun login(cardNo: String, cardEncrypt: String) {
         mView?.showLoading()
-        mModule.getCarrierInvoiceHeader(cardNo, cardEncrypt, object : IOnNetQueryCallback<List<SCarrierInvoiceHeaderDTO>> {
-            override fun onSuccess(entity: List<SCarrierInvoiceHeaderDTO>) {
+        mModule.login(cardNo, cardEncrypt, object : IOnNetQueryCallback<Any> {
+            override fun onSuccess(entity: Any) {
                 mView?.hideLoading()
                 mView?.onSuccess()
             }

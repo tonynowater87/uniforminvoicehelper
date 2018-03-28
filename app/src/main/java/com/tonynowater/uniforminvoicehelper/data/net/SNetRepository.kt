@@ -5,10 +5,7 @@ import com.tonynowater.uniforminvoicehelper.data.net.api.IInvAppApi
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceDetailDTO
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
-import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceDetailEntity
-import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceHeaderEntity
-import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SInvAppPrizeNumListEntity
-import com.tonynowater.uniforminvoicehelper.util.STimeUtil
+import com.tonynowater.uniforminvoicehelper.data.net.api.util.STransferEntityToDtoUtil
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_PASSWORD
 import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
@@ -22,6 +19,8 @@ import javax.inject.Inject
 class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                                          , var carrierClient: ICarrierApi) {
 
+    @Inject
+    lateinit var mTransferEntityToDtoUtil: STransferEntityToDtoUtil
 
     fun getPrizeNumberList(callbackNet: IOnNetQueryCallback<SInvAppPrizeNumListDTO>) {
         invAppClient.getPrizeNumberList()
@@ -29,7 +28,7 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        callbackNet.onSuccess(transferInvPrizeNumEntityToDTO(it))
+                        callbackNet.onSuccess(mTransferEntityToDtoUtil.transferInvPrizeNumEntityToDTO(it))
                     } else {
                         callbackNet.onFailure(Throwable(it.msgCode()))
                     }
@@ -44,7 +43,7 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        callbackNet.onSuccess(transferCarrierDetailEntityToDTO(it))
+                        callbackNet.onSuccess(mTransferEntityToDtoUtil.transferCarrierDetailEntityToDTO(it))
                     } else {
                         callbackNet.onFailure(Throwable(it.msgCode()))
                     }
@@ -59,7 +58,7 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        callbackNet.onSuccess(transferCarrierHeaderEntityToDTO(it))
+                        callbackNet.onSuccess(mTransferEntityToDtoUtil.transferCarrierHeaderEntityToDTO(it))
                     } else {
                         callbackNet.onFailure(Throwable(it.msgCode()))
                     }
@@ -83,64 +82,5 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 }, {
                     callbackNet.onFailure(it)
                 })
-    }
-
-    private fun transferCarrierHeaderEntityToDTO(entity: SCarrierInvoiceHeaderEntity): MutableList<SCarrierInvoiceHeaderDTO> {
-        val list = mutableListOf<SCarrierInvoiceHeaderDTO>()
-        entity.details.forEachIndexed({ index, entity ->
-            val month = entity.invDate.month
-            val date = entity.invDate.date
-            list.add(SCarrierInvoiceHeaderDTO(
-                    date = "$month/$date(${STimeUtil.transferWeekDays(entity.invDate.day)})"
-                    , formatCEDate = STimeUtil.transferTaiwanYearToCommonEra(entity.invDate.year, month, date)
-                    , invoiceNo = entity.invNum
-                    , sellerName = entity.sellerName
-                    , amount = entity.amount.toString()))
-        })
-        return list
-    }
-
-    private fun transferCarrierDetailEntityToDTO(entity: SCarrierInvoiceDetailEntity): MutableList<SCarrierInvoiceDetailDTO> {
-        val list = mutableListOf<SCarrierInvoiceDetailDTO>()
-        entity.details.forEachIndexed({ index, entity ->
-            list.add(SCarrierInvoiceDetailDTO(
-                    rowNum = entity.rowNum
-                    , description = entity.description
-                    , quantity = entity.quantity
-                    , unitPrice = entity.unitPrice
-                    , amount = entity.amount))
-        })
-        return list
-    }
-
-    private fun transferInvPrizeNumEntityToDTO(entity: SInvAppPrizeNumListEntity): SInvAppPrizeNumListDTO {
-        return SInvAppPrizeNumListDTO(
-                prizeAmtList = listOf(entity.superPrizeAmt
-                        , entity.spcPrizeAmt
-                        , entity.firstPrizeAmt
-                        , entity.secondPrizeAmt
-                        , entity.thirdPrizeAmt
-                        , entity.fourthPrizeAmt
-                        , entity.fifthPrizeAmt
-                        , entity.sixthPrizeAmt)
-                , superPrizeNo = entity.superPrizeNo
-                , spcPrizeNo = listOf(entity.spcPrizeNo, entity.spcPrizeNo2, entity.spcPrizeNo3)
-                , firstPrizeNo = listOf(entity.firstPrizeNo1
-                    , entity.firstPrizeNo2
-                    , entity.firstPrizeNo3
-                    , entity.firstPrizeNo4
-                    , entity.firstPrizeNo5
-                    , entity.firstPrizeNo6
-                    , entity.firstPrizeNo7
-                    , entity.firstPrizeNo8
-                    , entity.firstPrizeNo9
-                    , entity.firstPrizeNo10)
-                , sixPrizeNo = listOf(entity.sixthPrizeNo1
-                    , entity.sixthPrizeNo2
-                    , entity.sixthPrizeNo3
-                    , entity.sixthPrizeNo4
-                    , entity.sixthPrizeNo5
-                    , entity.sixthPrizeNo6)
-        )
     }
 }

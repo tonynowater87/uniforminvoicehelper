@@ -1,6 +1,7 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
 import com.tonynowater.uniforminvoicehelper.data.net.api.*
+import com.tonynowater.uniforminvoicehelper.data.net.api.util.STransferEntityToDtoUtil
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -79,4 +80,8 @@ class SNetModule {
         okHttpLogger.level = HttpLoggingInterceptor.Level.BODY
         return okHttpLogger
     }
+
+    @Singleton
+    @Provides
+    fun provideTransferEntityToDtoUtil() = STransferEntityToDtoUtil()
 }

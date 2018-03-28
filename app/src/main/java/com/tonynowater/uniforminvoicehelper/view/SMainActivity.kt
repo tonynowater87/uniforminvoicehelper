@@ -2,15 +2,20 @@ package com.tonynowater.uniforminvoicehelper.view
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import com.tonynowater.uniforminvoicehelper.R
-import dagger.android.support.DaggerAppCompatActivity
+import com.tonynowater.uniforminvoicehelper.base.SBaseActivity
+import com.tonynowater.uniforminvoicehelper.base.SEmptyPresenter
+import com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberListFragment
 
-class SMainActivity : DaggerAppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class SMainActivity : SBaseActivity<SEmptyPresenter>() {
+    override fun initView() {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, SPrizeNumberListFragment.newInstance())
+                .commit()
     }
+
+    override fun getLayoutId(): Int = R.layout.activity_main
 
     companion object {
         fun start(context: Context) {

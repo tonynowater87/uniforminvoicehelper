@@ -19,4 +19,8 @@ class SAppModule(var mApplication: Application) {
     @Provides
     @Singleton
     fun provideApplication(): Application = mApplication
+
+    @Provides
+    @Singleton
+    fun provideAny():Any = Any()
 }

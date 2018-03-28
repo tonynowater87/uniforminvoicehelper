@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
+import com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberListFragment
 import com.tonynowater.uniforminvoicehelper.view.test.STestFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -11,4 +12,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class SFragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeTestFragment(): STestFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSPrizeNumberListFragment(): SPrizeNumberListFragment
 }

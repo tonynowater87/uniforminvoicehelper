@@ -40,6 +40,12 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
         super.onDestroy()
     }
 
+    override fun onSuccess() {
+    }
+
+    override fun onError(msg: String) {
+    }
+
     override fun showLoading() {
         mProgressDialog.show()
     }

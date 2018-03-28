@@ -11,18 +11,20 @@ import javax.inject.Inject
  */
 class SLoginPresenter @Inject constructor(mModule: SNetRepository) : SBasePresenter<IBaseView, SNetRepository>(mModule) {
 
+    val loginCallback = object : IOnNetQueryCallback<Any> {
+        override fun onSuccess(entity: Any) {
+            mView?.hideLoading()
+            mView?.onSuccess()
+        }
+
+        override fun onFailure(throwable: Throwable) {
+            mView?.hideLoading()
+            mView?.onError(throwable.message!!)
+        }
+    }
+
     fun login(cardNo: String, cardEncrypt: String) {
         mView?.showLoading()
-        mModule.login(cardNo, cardEncrypt, object : IOnNetQueryCallback<Any> {
-            override fun onSuccess(entity: Any) {
-                mView?.hideLoading()
-                mView?.onSuccess()
-            }
-
-            override fun onFailure(throwable: Throwable) {
-                mView?.hideLoading()
-                mView?.onError(throwable.message!!)
-            }
-        })
+        mModule.login(cardNo, cardEncrypt, loginCallback)
     }
 }

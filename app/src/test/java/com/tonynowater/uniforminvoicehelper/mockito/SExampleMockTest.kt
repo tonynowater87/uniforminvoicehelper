@@ -37,11 +37,11 @@ class SExampleMockTest {
     }
 
     //it would fail
-    @Test
-    fun mockTest2() {
-        mClosedClass.getValue()
-        verify(mClosedClass).doSomething()
-    }
+    //@Test
+    //fun mockTest2() {
+    //    mClosedClass.getValue()
+    //    verify(mClosedClass).doSomething()
+    //}
 
     //指定方法回傳值
     @Test

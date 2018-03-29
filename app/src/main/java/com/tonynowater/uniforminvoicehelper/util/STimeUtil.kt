@@ -11,13 +11,13 @@ object STimeUtil {
     private val calender = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)
     private val dateformat = SimpleDateFormat("yyyy/MM/dd")
 
-    fun expTimeStamp():Long {
+    fun expTimeStamp(): Long {
         calender.timeInMillis = System.currentTimeMillis()
         calender.add(Calendar.MINUTE, 1)
         return calender.timeInMillis
     }
 
-    fun timeStamp():Long {
+    fun timeStamp(): Long {
         return System.currentTimeMillis()
     }
 
@@ -34,7 +34,7 @@ object STimeUtil {
         return ""
     }
 
-    /** 民國日期轉西元日期 */
+    /** 民國日期轉西元日期 yyyy/MM/dd */
     fun transferTaiwanYearToCommonEra(year: Int, month: Int, date: Int): String {
         calender.set(Calendar.YEAR, TAIWAN_YEAR_BEGINNING)
         calender.add(Calendar.YEAR, year)

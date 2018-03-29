@@ -14,32 +14,32 @@ import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 class STransferEntityToDtoUtil {
     fun transferInvPrizeNumEntityToDTO(entity: SInvAppPrizeNumListEntity): SInvAppPrizeNumListDTO {
         return SInvAppPrizeNumListDTO(
-                prizeAmtList = listOf(entity.superPrizeAmt
+                prizeAmtList = transferToNonEmptyList(listOf(entity.superPrizeAmt
                         , entity.spcPrizeAmt
                         , entity.firstPrizeAmt
                         , entity.secondPrizeAmt
                         , entity.thirdPrizeAmt
                         , entity.fourthPrizeAmt
                         , entity.fifthPrizeAmt
-                        , entity.sixthPrizeAmt)
+                        , entity.sixthPrizeAmt))
                 , superPrizeNo = entity.superPrizeNo
-                , spcPrizeNo = listOf(entity.spcPrizeNo, entity.spcPrizeNo2, entity.spcPrizeNo3)
-                , firstPrizeNo = listOf(entity.firstPrizeNo1
-                , entity.firstPrizeNo2
-                , entity.firstPrizeNo3
-                , entity.firstPrizeNo4
-                , entity.firstPrizeNo5
-                , entity.firstPrizeNo6
-                , entity.firstPrizeNo7
-                , entity.firstPrizeNo8
-                , entity.firstPrizeNo9
-                , entity.firstPrizeNo10)
-                , sixPrizeNo = listOf(entity.sixthPrizeNo1
-                , entity.sixthPrizeNo2
-                , entity.sixthPrizeNo3
-                , entity.sixthPrizeNo4
-                , entity.sixthPrizeNo5
-                , entity.sixthPrizeNo6)
+                , spcPrizeNo = transferToNonEmptyList(listOf(entity.spcPrizeNo, entity.spcPrizeNo2, entity.spcPrizeNo3))
+                , firstPrizeNo = transferToNonEmptyList(listOf(entity.firstPrizeNo1
+                    , entity.firstPrizeNo2
+                    , entity.firstPrizeNo3
+                    , entity.firstPrizeNo4
+                    , entity.firstPrizeNo5
+                    , entity.firstPrizeNo6
+                    , entity.firstPrizeNo7
+                    , entity.firstPrizeNo8
+                    , entity.firstPrizeNo9
+                    , entity.firstPrizeNo10))
+                , sixPrizeNo = transferToNonEmptyList(listOf(entity.sixthPrizeNo1
+                    , entity.sixthPrizeNo2
+                    , entity.sixthPrizeNo3
+                    , entity.sixthPrizeNo4
+                    , entity.sixthPrizeNo5
+                    , entity.sixthPrizeNo6))
         )
     }
 
@@ -62,12 +62,25 @@ class STransferEntityToDtoUtil {
         val list = mutableListOf<SCarrierInvoiceDetailDTO>()
         entity.details.forEachIndexed({ index, entity ->
             list.add(SCarrierInvoiceDetailDTO(
-                    rowNum = entity.rowNum
+                    rowNum = entity.rowNum.toInt()
                     , description = entity.description
                     , quantity = entity.quantity
                     , unitPrice = entity.unitPrice
                     , amount = entity.amount))
         })
         return list
+    }
+
+    /**
+     * 去除空值的欄位
+     */
+    private fun transferToNonEmptyList(originList: List<String?>): List<String> {
+        val nonEmptyList = mutableListOf<String>()
+        originList.forEach {
+            if (it != null && it.isNotEmpty()) {
+                nonEmptyList.add(it!!)
+            }
+        }
+        return nonEmptyList
     }
 }

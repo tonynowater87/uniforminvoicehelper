@@ -10,12 +10,12 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/28.
  */
-class SPrizeNumberListPresenter @Inject constructor(module: SNetRepository) : SBasePresenter<IBaseView, SNetRepository>(module) {
+class SPrizeNumberListPresenter @Inject constructor(module: SNetRepository) : SBasePresenter<SPrizeNumberListPresenter.IPrizeNumberListView, SNetRepository>(module) {
 
     val callback: IOnNetQueryCallback<SInvAppPrizeNumListDTO> = object : IOnNetQueryCallback<SInvAppPrizeNumListDTO> {
         override fun onSuccess(entity: SInvAppPrizeNumListDTO) {
             mView?.hideLoading()
-            mView?.showToast(entity.superPrizeNo)
+            mView?.showData(entity)
         }
 
         override fun onFailure(throwable: Throwable) {
@@ -27,5 +27,9 @@ class SPrizeNumberListPresenter @Inject constructor(module: SNetRepository) : SB
     fun getPrizeNumberList() {
         mView?.showLoading()
         mModule.getPrizeNumberList(callback)
+    }
+
+    interface IPrizeNumberListView : IBaseView {
+        fun showData(dto: SInvAppPrizeNumListDTO)
     }
 }

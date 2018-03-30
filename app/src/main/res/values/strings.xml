@@ -3,4 +3,26 @@
     <string name="account_input_hint">請輸入手機條碼</string>
     <string name="password_input_hint">請輸入碼證碼</string>
     <string name="login">登入</string>
+    <string-array name="prize_name_array">
+        <item>特別獎</item>
+        <item>特獎</item>
+        <item>頭獎</item>
+        <item>二獎</item>
+        <item>三獎</item>
+        <item>四獎</item>
+        <item>五獎</item>
+        <item>六獎</item>
+        <item>增開六獎</item>
+    </string-array>
+    <string-array name="prize_description_array">
+        <item>與特別獎號碼相同者獎金1,000萬元</item>
+        <item>與特獎號碼相同者獎金200萬元</item>
+        <item>與頭獎號碼相同者獎金20萬元</item>
+        <item>與頭獎中獎號碼末7位相同者各得獎金4萬元</item>
+        <item>與頭獎中獎號碼末6位相同者各得獎金1萬元</item>
+        <item>與頭獎中獎號碼末5位相同者各得獎金4千元</item>
+        <item>與頭獎中獎號碼末4位相同者各得獎金1千元</item>
+        <item>與頭獎中獎號碼末3位相同者各得獎金2百元</item>
+        <item>與增開六獎號碼末3位相同者各得獎金2百元</item>
+    </string-array>
 </resources>

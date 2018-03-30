@@ -27,12 +27,8 @@ abstract class SBaseFragment<P : SBasePresenter<*, *>> : DaggerFragment(), IBase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         initProgressDialog()
+        initView()
     }
 
     override fun onDetach() {

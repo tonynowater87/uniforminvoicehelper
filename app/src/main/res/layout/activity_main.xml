@@ -6,17 +6,6 @@
     android:orientation="vertical"
     tools:context="com.tonynowater.uniforminvoicehelper.view.SMainActivity">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="MainActivity"
-        android:layout_gravity="center_horizontal"/>
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

@@ -19,8 +19,8 @@ import kotlin.test.assertEquals
  *
  * Created by tonyliao on 2018/3/26.
  */
-@RunWith(RobolectricTestRunner::class)
-@Config(application = TestSApplication::class)
+//@RunWith(RobolectricTestRunner::class)
+//@Config(application = TestSApplication::class)
 class SExampleRobolectricTest {
 
     /**

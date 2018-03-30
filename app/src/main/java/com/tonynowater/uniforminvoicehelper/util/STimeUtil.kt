@@ -10,6 +10,7 @@ object STimeUtil {
     private const val TAIWAN_YEAR_BEGINNING = 1911
     private val calender = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)
     private val dateformat = SimpleDateFormat("yyyy/MM/dd")
+    private val dateformat_invoice_term = SimpleDateFormat("yyyyMMdd")
 
     fun expTimeStamp(): Long {
         calender.timeInMillis = System.currentTimeMillis()
@@ -41,5 +42,65 @@ object STimeUtil {
         calender.set(Calendar.MONTH, month - 1)//1月是0，所以要減1
         calender.set(Calendar.DAY_OF_MONTH, date)
         return dateformat.format(calender.time)
+    }
+
+    /**
+     * 取得當期統一發票的民國日期
+     * 格式為民國年雙數月 例:10702
+     */
+    fun getCurrentInvoiceTerm(date: Date = Date()): String {
+        val nowDate = dateformat_invoice_term.format(date)
+        var year = nowDate.substring(0, 4)
+        var month = nowDate.substring(year.length, year.length + 2)
+        var iDay = nowDate.substring(year.length + month.length, year.length + month.length + 2).toInt()
+
+        var iYear = year.toInt()
+        var iMonth = month.toInt()
+
+        iYear -= TAIWAN_YEAR_BEGINNING
+
+        if (iMonth % 2 == 0) {
+            //雙數月
+            if (iMonth == 2) {
+                //二月還沒開獎，取去年最後一期
+                iYear -= 1
+                iMonth = 12
+            } else {
+                //其它月還沒開獎，取前一期
+                iMonth -= 2
+            }
+        } else {
+            //單數月
+            if (iDay < 25) {
+                //尚未開獎
+                when (iMonth) {
+                    1 -> {
+                        iYear -= 1
+                        iMonth = 10
+                    }
+                    3 -> {
+                        iYear -= 1
+                        iMonth = 12
+                    }
+                    else -> {
+                        iMonth -= 3
+                    }
+                }
+            } else {
+                //已開獎
+                if (iMonth == 1) {
+                    iYear -= 1
+                    iMonth = 12
+                } else {
+                    iMonth -= 1
+                }
+            }
+        }
+
+        return if (iMonth.toString().length <= 1) {
+            "${iYear}0$iMonth"
+        } else {
+            "$iYear$iMonth"
+        }
     }
 }

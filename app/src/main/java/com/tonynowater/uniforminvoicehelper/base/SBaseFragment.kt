@@ -50,10 +50,10 @@ abstract class SBaseFragment<P : SBasePresenter<*, *>> : DaggerFragment(), IBase
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
     }
 
-    override fun onSuccess() {
+    override fun showSuccess() {
     }
 
-    override fun onError(msg: String) {
+    override fun showError(msg: String) {
     }
 
     override fun showLoading() {

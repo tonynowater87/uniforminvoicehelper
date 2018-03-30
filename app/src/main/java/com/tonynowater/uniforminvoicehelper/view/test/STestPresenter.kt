@@ -64,7 +64,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    mView?.notifyData(it)
+                    mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
                 })
@@ -79,13 +79,13 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    mView?.notifyData(it)
+                    mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
                 })
     }
 
     interface ITestView : IBaseView {
-        fun notifyData(listItems: List<SUserItem>)
+        fun showData(listItems: List<SUserItem>)
     }
 }

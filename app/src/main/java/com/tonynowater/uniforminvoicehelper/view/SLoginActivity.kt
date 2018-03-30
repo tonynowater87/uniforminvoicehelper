@@ -32,12 +32,12 @@ class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
         et_password_account.setText(BuildConfig.TestPassword)
     }
 
-    override fun onSuccess() {
-        Toast.makeText(SApplication.mInstance, "onSuccess", Toast.LENGTH_SHORT).show()
+    override fun showSuccess() {
+        Toast.makeText(SApplication.mInstance, "showSuccess", Toast.LENGTH_SHORT).show()
         SMainActivity.start(this)
     }
 
-    override fun onError(msg: String) {
+    override fun showError(msg: String) {
         Toast.makeText(SApplication.mInstance, "onFailure:$msg", Toast.LENGTH_SHORT).show()
     }
 }

@@ -48,7 +48,7 @@ class SLoginPresenterTest {
         Mockito.verify(sNetRepository).login(account, password, presenter.loginCallback)
         presenter.loginCallback.onSuccess(true)
         Mockito.verify(view).hideLoading()
-        Mockito.verify(view).onSuccess()
+        Mockito.verify(view).showSuccess()
     }
 
     /**
@@ -64,6 +64,6 @@ class SLoginPresenterTest {
         Mockito.verify(sNetRepository).login(account, password, presenter.loginCallback)
         presenter.loginCallback.onFailure(Throwable(failMsg))
         Mockito.verify(view).hideLoading()
-        Mockito.verify(view).onError(failMsg)
+        Mockito.verify(view).showError(failMsg)
     }
 }

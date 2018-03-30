@@ -14,12 +14,12 @@ class SLoginPresenter @Inject constructor(mModule: SNetRepository) : SBasePresen
     val loginCallback = object : IOnNetQueryCallback<Any> {
         override fun onSuccess(entity: Any) {
             mView?.hideLoading()
-            mView?.onSuccess()
+            mView?.showSuccess()
         }
 
         override fun onFailure(throwable: Throwable) {
             mView?.hideLoading()
-            mView?.onError(throwable.message!!)
+            mView?.showError(throwable.message!!)
         }
     }
 

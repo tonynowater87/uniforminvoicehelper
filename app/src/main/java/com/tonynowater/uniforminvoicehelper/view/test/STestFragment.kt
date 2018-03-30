@@ -20,10 +20,10 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
         fun newInstance(): STestFragment = STestFragment()
     }
 
-    override fun onSuccess() {
+    override fun showSuccess() {
     }
 
-    override fun onError(msg: String) {
+    override fun showError(msg: String) {
         Toast.makeText(SApplication.mInstance, "onFailure:$msg", Toast.LENGTH_SHORT).show()
     }
 
@@ -49,7 +49,7 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
         }
     }
 
-    override fun notifyData(listItems: List<SUserItem>) {
+    override fun showData(listItems: List<SUserItem>) {
         mAdapter.removeAllData()
         mAdapter.addDatas(listItems)
     }

@@ -40,10 +40,10 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
         super.onDestroy()
     }
 
-    override fun onSuccess() {
+    override fun showSuccess() {
     }
 
-    override fun onError(msg: String) {
+    override fun showError(msg: String) {
     }
 
     override fun showLoading() {

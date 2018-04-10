@@ -39,5 +39,6 @@ open class SApplication : DaggerApplication() {
 
     companion object {
         var mInstance : SApplication by Delegates.notNull()
+        fun getString(id: Int) = mInstance.getString(id)!!
     }
 }

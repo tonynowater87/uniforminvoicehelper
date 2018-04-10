@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.util
 
+import com.tonynowater.uniforminvoicehelper.view.query.ECarrierQueryType
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -103,4 +104,35 @@ object STimeUtil {
             "$iYear$iMonth"
         }
     }
+
+    fun getDateItemByType(carrierQueryType: ECarrierQueryType,
+                          thisMonthCalendar: Calendar = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)): DateItem? {
+
+        when (carrierQueryType) {
+            ECarrierQueryType.THIS_MONTH -> {
+                thisMonthCalendar.set(Calendar.DAY_OF_MONTH, 1)
+                val startDate = dateformat.format(thisMonthCalendar.time)
+                thisMonthCalendar.set(Calendar.DAY_OF_MONTH, thisMonthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH))
+                val endDate = dateformat.format(thisMonthCalendar.time)
+                return DateItem(startDate, endDate)
+            }
+            ECarrierQueryType.LAST_MONTH -> {
+                thisMonthCalendar.add(Calendar.MONTH, -1)
+                thisMonthCalendar.set(Calendar.DAY_OF_MONTH, 1)
+                val startDate = dateformat.format(thisMonthCalendar.time)
+                thisMonthCalendar.set(Calendar.DAY_OF_MONTH, thisMonthCalendar.getActualMaximum(Calendar.DAY_OF_MONTH))
+                val endDate = dateformat.format(thisMonthCalendar.time)
+                return DateItem(startDate, endDate)
+            }
+            ECarrierQueryType.CUSTOM_MONTH -> {
+                return null
+            }
+
+            ECarrierQueryType.PRIZE_RECORD -> {
+                return null
+            }
+        }
+    }
+
+    data class DateItem(val startDate: String, val endDate: String)
 }

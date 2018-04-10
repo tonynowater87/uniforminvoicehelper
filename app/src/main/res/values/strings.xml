@@ -3,6 +3,10 @@
     <string name="account_input_hint">請輸入手機條碼</string>
     <string name="password_input_hint">請輸入碼證碼</string>
     <string name="login">登入</string>
+    <string name="this_month">本月發票</string>
+    <string name="last_month">上月發票</string>
+    <string name="custom_month">自選月份</string>
+    <string name="prize_record">中獎記錄</string>
     <string-array name="prize_name_array">
         <item>特別獎</item>
         <item>特獎</item>

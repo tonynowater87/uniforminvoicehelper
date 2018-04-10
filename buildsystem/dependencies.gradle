@@ -75,4 +75,9 @@ ext {
     barCodeDeps = [
             barCode: "com.journeyapps:zxing-android-embedded:$zxingBarCode"
     ]
+
+    materialDialogVer = '0.9.6.0'
+    meterialDesignDialogDeps = [
+            materialDialog: "com.afollestad.material-dialogs:core:$materialDialogVer"
+    ]
 }

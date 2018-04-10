@@ -86,6 +86,9 @@ dependencies {
     //bar code
     implementation rootProject.ext.barCodeDeps.barCode
 
+    //material dialog
+    implementation rootProject.ext.meterialDesignDialogDeps.materialDialog
+
     //test
     testImplementation rootProject.ext.testDeps.junit
     testImplementation rootProject.ext.testDeps.mockito

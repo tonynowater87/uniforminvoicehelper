@@ -7,4 +7,8 @@ data class SCarrierInvoiceDetailDTO(val rowNum: Int
                                     , val description: String
                                     , val quantity: String
                                     , val unitPrice: String
-                                    , val amount: Int)
+                                    , val amount: Int) {
+    override fun toString(): String {
+        return "${quantity}筆 ${amount}元 $description"
+    }
+}

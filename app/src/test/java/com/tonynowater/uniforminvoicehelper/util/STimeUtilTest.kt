@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.util
 
+import com.tonynowater.uniforminvoicehelper.view.query.ECarrierQueryType
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
@@ -126,5 +127,33 @@ class STimeUtilTest {
 
         assertEquals(5, date.length)
         assertEquals("10610", date)
+    }
+
+    /**
+     * 測試案例：2018/01/24 THIS_MONTH 要取得本月 起始日期 2018/01/01；結束日期 2018/01/31
+     */
+    @Test
+    fun getThisMonthDateItem() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, 2018)
+        calendar.set(Calendar.MONTH, 0)
+        calendar.set(Calendar.DAY_OF_MONTH, 24)
+        val dateItem = STimeUtil.getDateItemByType(ECarrierQueryType.THIS_MONTH, calendar)
+        assertEquals("2018/01/01", dateItem!!.startDate)
+        assertEquals("2018/01/31", dateItem!!.endDate)
+    }
+
+    /**
+     * 測試案例：2018/01/24 LAST_MONTH 要取得上月 起始日期 2017/12/01；結束日期 2017/12/31
+     */
+    @Test
+    fun getLastMonthDateItem() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, 2018)
+        calendar.set(Calendar.MONTH, 0)
+        calendar.set(Calendar.DAY_OF_MONTH, 24)
+        val dateItem = STimeUtil.getDateItemByType(ECarrierQueryType.LAST_MONTH, calendar)
+        assertEquals("2017/12/01", dateItem!!.startDate)
+        assertEquals("2017/12/31", dateItem!!.endDate)
     }
 }

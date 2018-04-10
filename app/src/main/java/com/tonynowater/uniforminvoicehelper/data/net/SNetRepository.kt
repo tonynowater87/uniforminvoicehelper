@@ -52,8 +52,8 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 })
     }
 
-    fun getCarrierInvoiceHeader(cardNo: String, cardEncrypt: String, callbackNet: IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>>) {
-        carrierClient.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
+    fun getCarrierInvoiceHeader(startDate: String, endDate: String, callbackNet: IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>>) {
+        carrierClient.getCarrierInvoiceHeader(startDate = startDate, endDate = endDate)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

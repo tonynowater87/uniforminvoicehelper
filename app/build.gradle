@@ -96,4 +96,6 @@ dependencies {
     testImplementation rootProject.ext.testDeps.robolectric
     androidTestImplementation rootProject.ext.testDeps.runner
     androidTestImplementation rootProject.ext.testDeps.espresso
+
+    compile project(path: ':datelimitpickerdialog')
 }

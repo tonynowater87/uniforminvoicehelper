@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DatePickerDialogTheme" parent="android:Theme.Material.Dialog">
+        <item name="android:datePickerStyle">@style/DatePickerStyle</item>
+    </style>
+
+    <style name="DatePickerStyle" parent="@android:style/Widget.Material.DatePicker">
+        <item name="android:headerBackground">@color/middle_darker_blue</item>
+    </style>
+
+    <!-- 對話框確定取消文字的Style -->
+    <style name="text_view_dialog_confirm_cancel_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginEnd">24px</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textColor">@color/water_blue</item>
+        <item name="android:textSize">17px</item>
+    </style>
+</resources>

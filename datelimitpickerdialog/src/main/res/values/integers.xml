@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 定義全畫面長寬比為「360x640」 -->
+    <integer name="activity_weight_sum_horizontal">360</integer>
+    <integer name="activity_weight_sum_vertical">640</integer>
+</resources>

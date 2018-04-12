@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/more_darker_blue">
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="328px"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_dialog_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/middle_darker_blue">
+
+            <TextView
+                android:id="@+id/tv_dialog_date_picker_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="16px"
+                android:lineSpacingExtra="6px"
+                android:text="@string/date_picker_title_start_date"
+                android:textColor="@color/white"
+                android:textSize="14px"
+                tools:text="@string/date_picker_title_start_date" />
+
+            <DatePicker
+                android:id="@+id/date_picker_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_dialog_date_picker_title"
+                android:background="@color/more_darker_blue"
+                android:theme="@style/DatePickerDialogTheme" />
+
+            <DatePicker
+                android:id="@+id/date_picker_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_dialog_date_picker_title"
+                android:background="@color/more_darker_blue"
+                android:theme="@style/DatePickerDialogTheme"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="52px">
+
+            <TextView
+                android:id="@+id/tv_dialog_confirm"
+                style="@style/text_view_dialog_confirm_cancel_text_style"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24px"
+                android:text="@string/dialog_next_step_txt"
+                android:textSize="14px"
+                tools:text="@string/dialog_next_step_txt" />
+
+            <TextView
+                android:id="@+id/tv_dialog_cancel"
+                style="@style/text_view_dialog_confirm_cancel_text_style"
+                android:layout_marginEnd="47.5px"
+                android:layout_toStartOf="@+id/tv_dialog_confirm"
+                android:text="@string/dialog_cancel_txt"
+                android:textSize="14px"
+                tools:text="@string/dialog_cancel_txt" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

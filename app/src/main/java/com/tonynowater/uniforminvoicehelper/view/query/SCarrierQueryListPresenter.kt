@@ -14,10 +14,25 @@ import javax.inject.Inject
  */
 class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : SBasePresenter<SCarrierQueryListPresenter.ICarrierQueryListView, SNetRepository>(module) {
 
+    private var mQuantity: Int = 0
+    private var mSum: Int = 0
+    private lateinit var mDateItem:STimeUtil.DateItem
+
     private val callbackHeader = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>> {
         override fun onSuccess(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
             mView?.hideLoading()
+            calculateQuantity(entity)
+            mView?.showDate(mDateItem)
+            mView?.showQuantity(mQuantity, mSum)
             mView?.showHeader(entity)
+        }
+
+        private fun calculateQuantity(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
+            entity.forEach {
+                mSum += it.amount.toInt()
+            }
+
+            mQuantity = entity.size
         }
 
         override fun onFailure(throwable: Throwable) {
@@ -26,28 +41,14 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
         }
     }
 
-    fun queryHeader(eCarrierQueryType: ECarrierQueryType) {
-
-        when (eCarrierQueryType) {
-            ECarrierQueryType.THIS_MONTH -> {
-                query(eCarrierQueryType.getDateItem())
-            }
-            ECarrierQueryType.LAST_MONTH -> {
-                query(eCarrierQueryType.getDateItem())
-            }
-            ECarrierQueryType.CUSTOM_MONTH -> {
-
-            }
-            ECarrierQueryType.PRIZE_RECORD -> {
-
-            }
-        }
-    }
-
-    private fun query(dateItem: STimeUtil.DateItem?) {
-        dateItem?.let {
+    fun queryHeader(dateItem: STimeUtil.DateItem?) {
+        if (dateItem != null) {
+            mDateItem = dateItem
+            mSum = 0
             mView?.showLoading()
             mModule.getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, callbackHeader)
+        } else {
+            mView?.showDateLimitPickerDialog()
         }
     }
 
@@ -69,6 +70,9 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
     }
 
     interface ICarrierQueryListView : IBaseView {
+        fun showDate(dateItem: STimeUtil.DateItem?)
+        fun showQuantity(quantity: Int, sum: Int)
+        fun showDateLimitPickerDialog()
         fun showHeader(dto: List<SCarrierInvoiceHeaderDTO>)
         fun showDetail(dto: List<SCarrierInvoiceDetailDTO>)
     }

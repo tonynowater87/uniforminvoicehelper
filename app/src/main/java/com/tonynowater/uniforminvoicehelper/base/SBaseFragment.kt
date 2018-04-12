@@ -21,13 +21,17 @@ abstract class SBaseFragment<P : SBasePresenter<*, *>> : DaggerFragment(), IBase
     private lateinit var mProgressDialog: ProgressDialog
     private var mToast: Toast? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initProgressDialog()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return LayoutInflater.from(context).inflate(getLayoutId(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initProgressDialog()
         initView()
     }
 

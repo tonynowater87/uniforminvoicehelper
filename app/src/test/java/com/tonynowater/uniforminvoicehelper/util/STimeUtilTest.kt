@@ -156,4 +156,18 @@ class STimeUtilTest {
         assertEquals("2017/12/01", dateItem!!.startDate)
         assertEquals("2017/12/31", dateItem!!.endDate)
     }
+
+    /**
+     * 測試案例：2018/04/12 PRIZE_RECORD 要取得半年前 起始日期 2017/10/11；結束日期 2018/04/12
+     */
+    @Test
+    fun getPrizeRecordDateItem() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, 2018)
+        calendar.set(Calendar.MONTH, 3)
+        calendar.set(Calendar.DAY_OF_MONTH, 12)
+        val dateItem = STimeUtil.getDateItemByType(ECarrierQueryType.PRIZE_RECORD, calendar)
+        assertEquals("2017/10/12", dateItem!!.startDate)
+        assertEquals("2018/04/12", dateItem!!.endDate)
+    }
 }

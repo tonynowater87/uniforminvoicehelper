@@ -40,5 +40,4 @@ class SDateLimitPickerDialogSharePreference {
     }
 
     fun getEndDate(defValue: String = ""): String = sharePref.getString(SP_END_DATE_KEY, defValue)
-
 }

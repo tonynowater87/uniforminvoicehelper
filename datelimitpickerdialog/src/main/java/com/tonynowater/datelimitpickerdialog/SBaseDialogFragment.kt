@@ -32,7 +32,7 @@ abstract class SBaseDialogFragment: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView(UiScaleUtil.getInstance(view.context))
+        initView(SUiScaleUtil.getInstance(view.context))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -42,5 +42,5 @@ abstract class SBaseDialogFragment: DialogFragment() {
 
     abstract fun getLayoutId(): Int
 
-    abstract fun initView(uiScaleUtil: UiScaleUtil)
+    abstract fun initView(uiScaleUtil: SUiScaleUtil)
 }

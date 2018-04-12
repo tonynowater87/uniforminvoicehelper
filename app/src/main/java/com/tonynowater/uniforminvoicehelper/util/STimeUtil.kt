@@ -129,7 +129,12 @@ object STimeUtil {
             }
 
             ECarrierQueryType.PRIZE_RECORD -> {
-                return null
+                val tempCalendar = thisMonthCalendar.clone()
+                thisMonthCalendar.add(Calendar.MONTH, -6)
+                val startDate = dateformat.format(thisMonthCalendar.time)
+                thisMonthCalendar.time = (tempCalendar as Calendar).time
+                val endDate = dateformat.format(thisMonthCalendar.time)
+                return DateItem(startDate, endDate)
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.tonynowater.datelimitpickerdialog
 
+import android.support.v4.app.FragmentManager
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -24,7 +25,7 @@ class SDateLimitPickerDialog : SBaseDialogFragment(), View.OnClickListener, Date
 
     override fun getLayoutId(): Int = R.layout.dialog_date_picker
 
-    override fun initView(uiScaleUtil: UiScaleUtil) {
+    override fun initView(uiScaleUtil: SUiScaleUtil) {
         uiScaleUtil.selfAdjustAllView(root)
         initStartDatePicker()
         setOnParameterAndListener()
@@ -145,4 +146,28 @@ class SDateLimitPickerDialog : SBaseDialogFragment(), View.OnClickListener, Date
     }
 
     data class DateItem(val startDate: String, val endDate: String)
+
+    class SDateLimitPickerDialogBuilder {
+
+        private var mDialog: SDateLimitPickerDialog
+        private var mFragmentManager: FragmentManager
+
+        constructor(fragmentManager: FragmentManager) {
+            mFragmentManager = fragmentManager
+            mDialog = SDateLimitPickerDialog()
+        }
+
+        fun addListener(listener: SDateLimitPickerDialog.OnDatePickerSelectListener): SDateLimitPickerDialogBuilder {
+            mDialog.setListener(listener)
+            return this
+        }
+
+        fun build(): SDateLimitPickerDialog {
+            return mDialog
+        }
+
+        fun show() {
+            mDialog.show(mFragmentManager, mDialog.javaClass.simpleName)
+        }
+    }
 }

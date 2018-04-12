@@ -13,10 +13,10 @@ import android.widget.*
 /**
  * Created by tonyliao on 2018/4/10.
  */
-class UiScaleUtil {
+class SUiScaleUtil {
 
     companion object {
-        private var mInstance: UiScaleUtil? = null
+        private var mInstance: SUiScaleUtil? = null
 
         private var m_iMaxLayoutHeightWeight = 0   //長度單位最大值
         private var m_iMaxLayoutWidthWeight = 0    //寬度單位最大值
@@ -27,9 +27,9 @@ class UiScaleUtil {
 
         private lateinit var m_Dm: DisplayMetrics  //取的螢幕解析度
 
-        fun getInstance(context: Context): UiScaleUtil {
+        fun getInstance(context: Context): SUiScaleUtil {
             if (mInstance == null) {
-                mInstance = UiScaleUtil()
+                mInstance = SUiScaleUtil()
                 initial(context)
             }
 

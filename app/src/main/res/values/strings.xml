@@ -5,7 +5,7 @@
     <string name="login">登入</string>
     <string name="this_month">本月發票</string>
     <string name="last_month">上月發票</string>
-    <string name="custom_month">自選月份</string>
+    <string name="custom_month">自選區間</string>
     <string name="prize_record">中獎記錄</string>
     <string-array name="prize_name_array">
         <item>特別獎</item>

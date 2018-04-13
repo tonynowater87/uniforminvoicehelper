@@ -2,9 +2,6 @@ package com.tonynowater.uniforminvoicehelper.view.query
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.afollestad.materialdialogs.MaterialDialog
 import com.tonynowater.datelimitpickerdialog.SDateLimitPickerDialog
 import com.tonynowater.uniforminvoicehelper.R
@@ -78,20 +75,25 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
     }
 
     override fun showDate(dateItem: STimeUtil.DateItem?) {
-        tv_date_term.text = "${dateItem?.startDate} ~ ${dateItem?.endDate}"
+        tv_date_term?.text = "${dateItem?.startDate} ~ ${dateItem?.endDate}"
     }
 
     override fun showQuantity(quantity: Int, sum: Int) {
-        tv_quantity.text = "$quantity 筆 共 $sum 元"
+        tv_quantity?.text = "$quantity 筆 共 $sum 元"
     }
 
     override fun showDateLimitPickerDialog() {
         SDateLimitPickerDialog.SDateLimitPickerDialogBuilder(fragmentManager!!)
+                .setCancelable(false)
                 .addListener(object : SDateLimitPickerDialog.OnDatePickerSelectListener {
                     override fun onDatePicked(dateItem: SDateLimitPickerDialog.DateItem) {
                         mPresenter.queryHeader(STimeUtil.DateItem(dateItem.startDate, dateItem.endDate))
                     }
                 })
                 .show()
+    }
+
+    override fun clearHeaderData() {
+        mAdapter.removeAllData()
     }
 }

@@ -28,7 +28,11 @@ class SDateLimitPickerDialog : SBaseDialogFragment(), View.OnClickListener, Date
     override fun initView(uiScaleUtil: SUiScaleUtil) {
         uiScaleUtil.selfAdjustAllView(root)
         initStartDatePicker()
-        setOnParameterAndListener()
+        tv_dialog_confirm.setOnClickListener(this)
+        tv_dialog_cancel.setOnClickListener(this)
+        if (!isCancelable) {
+            tv_dialog_cancel.visibility = View.GONE
+        }
     }
 
     /**
@@ -43,11 +47,6 @@ class SDateLimitPickerDialog : SBaseDialogFragment(), View.OnClickListener, Date
 
     fun setListener(listener: OnDatePickerSelectListener) {
         mListener = listener
-    }
-
-    private fun setOnParameterAndListener() {
-        tv_dialog_confirm.setOnClickListener(this)
-        tv_dialog_cancel.setOnClickListener(this)
     }
 
     private fun initStartDatePicker() {
@@ -88,8 +87,8 @@ class SDateLimitPickerDialog : SBaseDialogFragment(), View.OnClickListener, Date
                 }
             }
             R.id.tv_dialog_cancel -> when (mStep) {
-                STEP_START_DATE -> dismiss()
-                STEP_END_DATE -> dismiss()
+                STEP_START_DATE -> if (isCancelable) dismiss()
+                STEP_END_DATE -> if (isCancelable) dismiss()
             }
         }
     }
@@ -155,6 +154,14 @@ class SDateLimitPickerDialog : SBaseDialogFragment(), View.OnClickListener, Date
         constructor(fragmentManager: FragmentManager) {
             mFragmentManager = fragmentManager
             mDialog = SDateLimitPickerDialog()
+        }
+
+        /**
+         * 預設為true:可按返回鍵關閉
+         */
+        fun setCancelable(cancelable: Boolean): SDateLimitPickerDialogBuilder {
+            mDialog.isCancelable = cancelable
+            return this
         }
 
         fun addListener(listener: SDateLimitPickerDialog.OnDatePickerSelectListener): SDateLimitPickerDialogBuilder {

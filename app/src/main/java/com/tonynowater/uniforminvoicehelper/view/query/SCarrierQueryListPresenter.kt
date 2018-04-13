@@ -16,36 +16,38 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
 
     private var mQuantity: Int = 0
     private var mSum: Int = 0
-    private lateinit var mDateItem:STimeUtil.DateItem
+    private lateinit var mDateItem: STimeUtil.DateItem
 
     private val callbackHeader = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>> {
         override fun onSuccess(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
             mView?.hideLoading()
-            calculateQuantity(entity)
             mView?.showDate(mDateItem)
+            calculateQuantity(entity)
             mView?.showQuantity(mQuantity, mSum)
             mView?.showHeader(entity)
-        }
-
-        private fun calculateQuantity(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
-            entity.forEach {
-                mSum += it.amount.toInt()
-            }
-
-            mQuantity = entity.size
         }
 
         override fun onFailure(throwable: Throwable) {
             mView?.hideLoading()
             mView?.showError(throwable.message!!)
         }
+
+        private fun calculateQuantity(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
+            entity.forEach {
+                mSum += it.amount.toInt()
+            }
+            mQuantity = entity.size
+        }
     }
 
     fun queryHeader(dateItem: STimeUtil.DateItem?) {
         if (dateItem != null) {
-            mDateItem = dateItem
             mSum = 0
+            mDateItem = dateItem
             mView?.showLoading()
+            mView?.clearHeaderData()
+            mView?.showDate(dateItem)
+            mView?.showQuantity(0, 0)
             mModule.getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, callbackHeader)
         } else {
             mView?.showDateLimitPickerDialog()
@@ -75,5 +77,6 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
         fun showDateLimitPickerDialog()
         fun showHeader(dto: List<SCarrierInvoiceHeaderDTO>)
         fun showDetail(dto: List<SCarrierInvoiceDetailDTO>)
+        fun clearHeaderData()
     }
 }

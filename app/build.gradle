@@ -97,5 +97,5 @@ dependencies {
     androidTestImplementation rootProject.ext.testDeps.runner
     androidTestImplementation rootProject.ext.testDeps.espresso
 
-    compile project(path: ':datelimitpickerdialog')
+    implementation project(path: ':datelimitpickerdialog')
 }

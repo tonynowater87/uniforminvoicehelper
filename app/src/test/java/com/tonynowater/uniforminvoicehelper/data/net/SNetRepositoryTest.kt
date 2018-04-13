@@ -110,10 +110,10 @@ class SNetRepositoryTest {
 
     @Test
     fun getCarrierInvoiceHeader() {
-        val cardNo = "Abc"
-        val cardEncrypt = "123"
+        val startDate = "2018/04/13"
+        val endDate = "2018/04/14"
 
-        Mockito.`when`(iCarrierAPi.getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt))
+        Mockito.`when`(iCarrierAPi.getCarrierInvoiceHeader(startDate = startDate, endDate = endDate))
                 .thenReturn(iCarrierInvoiceHeaderObservable)
 
         Mockito.`when`(iCarrierInvoiceHeaderObservable.subscribeOn(Schedulers.io()))
@@ -122,10 +122,10 @@ class SNetRepositoryTest {
         Mockito.`when`(iCarrierInvoiceHeaderObservable.observeOn(AndroidSchedulers.mainThread()))
                 .thenReturn(iCarrierInvoiceHeaderObservable)
 
-        repository.getCarrierInvoiceHeader(cardNo, cardEncrypt, iCarrierInvoiceHeaderCallback)
+        repository.getCarrierInvoiceHeader(startDate, endDate, iCarrierInvoiceHeaderCallback)
 
         val inOrder = inOrder(iCarrierAPi, iCarrierInvoiceHeaderObservable)
-        inOrder.verify(iCarrierAPi).getCarrierInvoiceHeader(cardNo = cardNo, cardEncrypt = cardEncrypt)
+        inOrder.verify(iCarrierAPi).getCarrierInvoiceHeader(startDate = startDate, endDate = endDate)
         inOrder.verify(iCarrierInvoiceHeaderObservable).subscribeOn(Schedulers.io())
         inOrder.verify(iCarrierInvoiceHeaderObservable).observeOn(AndroidSchedulers.mainThread())
         inOrder.verify(iCarrierInvoiceHeaderObservable).subscribe(Mockito.any(), Mockito.any())

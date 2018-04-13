@@ -18,7 +18,7 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
     private var mSum: Int = 0
     private lateinit var mDateItem: STimeUtil.DateItem
 
-    private val callbackHeader = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>> {
+    val callbackHeader = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceHeaderDTO>> {
         override fun onSuccess(entity: MutableList<SCarrierInvoiceHeaderDTO>) {
             mView?.hideLoading()
             mView?.showDate(mDateItem)
@@ -54,7 +54,7 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
         }
     }
 
-    private val callbackDetail = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceDetailDTO>> {
+    val callbackDetail = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceDetailDTO>> {
         override fun onSuccess(entity: MutableList<SCarrierInvoiceDetailDTO>) {
             mView?.hideLoading()
             mView?.showDetail(entity)

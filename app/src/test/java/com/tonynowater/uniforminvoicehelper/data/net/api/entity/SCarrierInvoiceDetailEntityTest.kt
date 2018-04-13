@@ -1,13 +1,13 @@
 package com.tonynowater.uniforminvoicehelper.data.net.api.entity
 
-import com.tonynowater.uniforminvoicehelper.data.net.api.SBaseTestJsonData
+import com.tonynowater.uniforminvoicehelper.data.net.api.SBaseMockJsonData
 import org.junit.Assert.*
 import org.junit.Test
 
 /**
  * Created by tonyliao on 2018/3/29.
  */
-class SCarrierInvoiceDetailEntityTest:SBaseTestJsonData() {
+class SCarrierInvoiceDetailEntityTest:SBaseMockJsonData() {
 
     lateinit var entity: SCarrierInvoiceDetailEntity
 

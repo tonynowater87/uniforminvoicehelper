@@ -1,6 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.data.net.api.dto
 
-import com.tonynowater.uniforminvoicehelper.data.net.api.SBaseTestJsonData
+import com.tonynowater.uniforminvoicehelper.data.net.api.SBaseMockJsonData
 import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SInvAppPrizeNumListEntity
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -9,7 +9,7 @@ import org.junit.Test
 /**
  * Created by tonyliao on 2018/3/30.
  */
-class SInvAppPrizeNumListDTOTest : SBaseTestJsonData() {
+class SInvAppPrizeNumListDTOTest : SBaseMockJsonData() {
 
     lateinit var dto: SInvAppPrizeNumListDTO
 

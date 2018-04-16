@@ -38,6 +38,11 @@ android {
             returnDefaultValues = true
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 kapt {
@@ -94,6 +99,8 @@ dependencies {
     testImplementation rootProject.ext.testDeps.mockito
     testImplementation rootProject.ext.testDeps.mockitoInline
     testImplementation rootProject.ext.testDeps.robolectric
+    testImplementation rootProject.ext.testDeps.runner
+
     androidTestImplementation rootProject.ext.testDeps.runner
     androidTestImplementation rootProject.ext.testDeps.espresso
 

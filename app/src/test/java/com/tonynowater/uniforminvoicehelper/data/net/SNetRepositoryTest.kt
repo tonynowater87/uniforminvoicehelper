@@ -109,7 +109,30 @@ class SNetRepositoryTest {
     }
 
     @Test
-    fun getCarrierInvoiceHeader() {
+    fun getCarrierInvoiceHeader_1() {
+        val startDate = "2018/04/13"
+        val endDate = "2018/04/14"
+
+        Mockito.`when`(iCarrierAPi.getCarrierInvoiceHeader(startDate = startDate, endDate = endDate, onlyWinningInv = "Y"))
+                .thenReturn(iCarrierInvoiceHeaderObservable)
+
+        Mockito.`when`(iCarrierInvoiceHeaderObservable.subscribeOn(Schedulers.io()))
+                .thenReturn(iCarrierInvoiceHeaderObservable)
+
+        Mockito.`when`(iCarrierInvoiceHeaderObservable.observeOn(AndroidSchedulers.mainThread()))
+                .thenReturn(iCarrierInvoiceHeaderObservable)
+
+        repository.getCarrierInvoiceHeader(startDate, endDate, true, iCarrierInvoiceHeaderCallback)
+
+        val inOrder = inOrder(iCarrierAPi, iCarrierInvoiceHeaderObservable)
+        inOrder.verify(iCarrierAPi).getCarrierInvoiceHeader(startDate = startDate, endDate = endDate, onlyWinningInv = "Y")
+        inOrder.verify(iCarrierInvoiceHeaderObservable).subscribeOn(Schedulers.io())
+        inOrder.verify(iCarrierInvoiceHeaderObservable).observeOn(AndroidSchedulers.mainThread())
+        inOrder.verify(iCarrierInvoiceHeaderObservable).subscribe(Mockito.any(), Mockito.any())
+    }
+
+    @Test
+    fun getCarrierInvoiceHeader_2() {
         val startDate = "2018/04/13"
         val endDate = "2018/04/14"
 
@@ -122,7 +145,7 @@ class SNetRepositoryTest {
         Mockito.`when`(iCarrierInvoiceHeaderObservable.observeOn(AndroidSchedulers.mainThread()))
                 .thenReturn(iCarrierInvoiceHeaderObservable)
 
-        repository.getCarrierInvoiceHeader(startDate, endDate, true, iCarrierInvoiceHeaderCallback)
+        repository.getCarrierInvoiceHeader(startDate, endDate, false, iCarrierInvoiceHeaderCallback)
 
         val inOrder = inOrder(iCarrierAPi, iCarrierInvoiceHeaderObservable)
         inOrder.verify(iCarrierAPi).getCarrierInvoiceHeader(startDate = startDate, endDate = endDate, onlyWinningInv = "N")

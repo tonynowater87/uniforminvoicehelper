@@ -40,18 +40,33 @@ class SCarrierQueryListPresenter @Inject constructor(module: SNetRepository) : S
         }
     }
 
-    fun queryHeader(dateItem: STimeUtil.DateItem?) {
-        if (dateItem != null) {
-            mSum = 0
-            mDateItem = dateItem
-            mView?.showLoading()
-            mView?.clearHeaderData()
-            mView?.showDate(dateItem)
-            mView?.showQuantity(0, 0)
-            mModule.getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, callbackHeader)
-        } else {
+    fun queryHeader(dateData: SCarrierQueryDateData) {
+        if (dateData.type == ECarrierQueryType.CUSTOM_MONTH) {
             mView?.showDateLimitPickerDialog()
+            return
         }
+
+        val dateItem = dateData.dateItem
+        reset(dateItem)
+        if (dateData.type == ECarrierQueryType.PRIZE_RECORD) {
+            mModule.getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, true, callbackHeader)
+        } else {
+            mModule.getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, false, callbackHeader)
+        }
+    }
+
+    fun changeDate(dateItem: STimeUtil.DateItem) {
+        reset(dateItem)
+        mModule.getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, false, callbackHeader)
+    }
+
+    private fun reset(dateItem: STimeUtil.DateItem) {
+        mSum = 0
+        mDateItem = dateItem
+        mView?.showLoading()
+        mView?.clearHeaderData()
+        mView?.showDate(dateItem)
+        mView?.showQuantity(0, 0)
     }
 
     val callbackDetail = object : IOnNetQueryCallback<MutableList<SCarrierInvoiceDetailDTO>> {

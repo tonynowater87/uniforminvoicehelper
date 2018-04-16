@@ -1,18 +1,20 @@
 package com.tonynowater.uniforminvoicehelper.view.query
 
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import com.tonynowater.uniforminvoicehelper.R
-import com.tonynowater.uniforminvoicehelper.SApplication
-import com.tonynowater.uniforminvoicehelper.base.SBasePagerAdapter
+import android.support.v4.app.FragmentPagerAdapter
+import javax.inject.Inject
 
 /**
  * Created by tonyliao on 2018/4/10.
  */
-class SCarrierQueryAdapter constructor(fm: FragmentManager) : SBasePagerAdapter(fm) {
-    override fun initViewPagerItems(): List<BaseViewPagerItem> {
-        return listOf(BaseViewPagerItem(SCarrierQueryListFragment.newInstance(ECarrierQueryType.THIS_MONTH), SApplication.getString(R.string.this_month))
-                    , BaseViewPagerItem(SCarrierQueryListFragment.newInstance(ECarrierQueryType.LAST_MONTH), SApplication.getString(R.string.last_month))
-                    , BaseViewPagerItem(SCarrierQueryListFragment.newInstance(ECarrierQueryType.PRIZE_RECORD), SApplication.getString(R.string.prize_record))
-                    , BaseViewPagerItem(SCarrierQueryListFragment.newInstance(ECarrierQueryType.CUSTOM_MONTH), SApplication.getString(R.string.custom_month)))
-    }
+class SCarrierQueryAdapter @Inject constructor(var mBaseViewPagerItems: List<BaseViewPagerItem>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+    override fun getItem(position: Int): Fragment = mBaseViewPagerItems[position].m_fragment
+
+    override fun getCount(): Int = mBaseViewPagerItems.size
+
+    override fun getPageTitle(position: Int): CharSequence = mBaseViewPagerItems[position].m_title
+
+    data class BaseViewPagerItem(var m_fragment: Fragment, var m_title: String)
 }

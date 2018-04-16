@@ -23,10 +23,10 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
     companion object {
         private const val BUNDLE_KEY_TYPE = "BUNDLE_KEY_TYPE"
 
-        fun newInstance(carrierQueryType: ECarrierQueryType): SCarrierQueryListFragment {
+        fun newInstance(carrierQueryDateData: SCarrierQueryDateData?): SCarrierQueryListFragment {
             val fragment = SCarrierQueryListFragment()
             val bundle = Bundle()
-            bundle.putSerializable(BUNDLE_KEY_TYPE, carrierQueryType)
+            bundle.putSerializable(BUNDLE_KEY_TYPE, carrierQueryDateData)
             fragment.arguments = bundle
             return fragment
         }
@@ -45,17 +45,19 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
         recycler_view.layoutManager = LinearLayoutManager(SApplication.mInstance)
         recycler_view.adapter = mAdapter
         if (mIsVisibleToUser && !mInit) {
-            mPresenter.queryHeader((arguments!![BUNDLE_KEY_TYPE] as ECarrierQueryType).getDateItem())
+            mPresenter.queryHeader(getArgumentDateData())
         }
         mInit = true
     }
+
+    private fun getArgumentDateData() = arguments!![BUNDLE_KEY_TYPE] as SCarrierQueryDateData
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         mIsVisibleToUser = isVisibleToUser
         SLog.d("${arguments!![BUNDLE_KEY_TYPE]} setUserVisibleHint:$mIsVisibleToUser", "test")
         if (mInit && mIsVisibleToUser) {
-            mPresenter.queryHeader((arguments!![BUNDLE_KEY_TYPE] as ECarrierQueryType).getDateItem())
+            mPresenter.queryHeader(getArgumentDateData())
         }
     }
 
@@ -87,7 +89,7 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
                 .setCancelable(false)
                 .addListener(object : SDateLimitPickerDialog.OnDatePickerSelectListener {
                     override fun onDatePicked(dateItem: SDateLimitPickerDialog.DateItem) {
-                        mPresenter.queryHeader(STimeUtil.DateItem(dateItem.startDate, dateItem.endDate))
+                        mPresenter.changeDate(STimeUtil.DateItem(dateItem.startDate, dateItem.endDate))
                     }
                 })
                 .show()

@@ -106,7 +106,7 @@ object STimeUtil {
     }
 
     fun getDateItemByType(carrierQueryType: ECarrierQueryType,
-                          thisMonthCalendar: Calendar = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)): DateItem? {
+                          thisMonthCalendar: Calendar = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)): DateItem {
 
         when (carrierQueryType) {
             ECarrierQueryType.THIS_MONTH -> {
@@ -125,7 +125,12 @@ object STimeUtil {
                 return DateItem(startDate, endDate)
             }
             ECarrierQueryType.CUSTOM_MONTH -> {
-                return null
+                val tempCalendar = thisMonthCalendar.clone()
+                thisMonthCalendar.add(Calendar.MONTH, -6)
+                val startDate = dateformat.format(thisMonthCalendar.time)
+                thisMonthCalendar.time = (tempCalendar as Calendar).time
+                val endDate = dateformat.format(thisMonthCalendar.time)
+                return DateItem(startDate, endDate)
             }
 
             ECarrierQueryType.PRIZE_RECORD -> {

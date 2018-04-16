@@ -40,19 +40,45 @@ class SCarrierQueryListPresenterTest:SBaseMockJsonData() {
 
     @Test
     fun queryHeader_1() {
-        val dateItem = STimeUtil.DateItem("2018/04/13", "2018/04/14")
-        presenter.queryHeader(dateItem)
+        val type = ECarrierQueryType.THIS_MONTH
+        val dateData = SCarrierQueryDateData(type, STimeUtil.getDateItemByType(type))
+        presenter.queryHeader(dateData)
         Mockito.verify(view).showLoading()
         Mockito.verify(view).clearHeaderData()
-        Mockito.verify(view).showDate(dateItem)
+        Mockito.verify(view).showDate(dateData.dateItem)
         Mockito.verify(view).showQuantity(0, 0)
-        Mockito.verify(sNetRepository).getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, presenter.callbackHeader)
+        Mockito.verify(sNetRepository).getCarrierInvoiceHeader(dateData.dateItem.startDate, dateData.dateItem.endDate, false, presenter.callbackHeader)
     }
 
     @Test
     fun queryHeader_2() {
-        presenter.queryHeader(null)
+        val type = ECarrierQueryType.CUSTOM_MONTH
+        val dateData = SCarrierQueryDateData(type, STimeUtil.getDateItemByType(type))
+        presenter.queryHeader(dateData)
         Mockito.verify(view).showDateLimitPickerDialog()
+    }
+
+    @Test
+    fun queryHeader_3() {
+        val type = ECarrierQueryType.PRIZE_RECORD
+        val dateData = SCarrierQueryDateData(type, STimeUtil.getDateItemByType(type))
+        presenter.queryHeader(dateData)
+        Mockito.verify(view).showLoading()
+        Mockito.verify(view).clearHeaderData()
+        Mockito.verify(view).showDate(dateData.dateItem)
+        Mockito.verify(view).showQuantity(0, 0)
+        Mockito.verify(sNetRepository).getCarrierInvoiceHeader(dateData.dateItem.startDate, dateData.dateItem.endDate, true, presenter.callbackHeader)
+    }
+
+    @Test
+    fun changeDate() {
+        val dateItem = STimeUtil.DateItem("2018/04/16", "2018/04/17")
+        presenter.changeDate(dateItem)
+        Mockito.verify(view).showLoading()
+        Mockito.verify(view).clearHeaderData()
+        Mockito.verify(view).showDate(dateItem)
+        Mockito.verify(view).showQuantity(0, 0)
+        Mockito.verify(sNetRepository).getCarrierInvoiceHeader(dateItem.startDate, dateItem.endDate, false, presenter.callbackHeader)
     }
 
     @Test

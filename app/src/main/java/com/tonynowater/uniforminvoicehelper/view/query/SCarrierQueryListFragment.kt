@@ -39,7 +39,7 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
     override fun getLayoutId(): Int = R.layout.fragment_carrier_query_list
 
     override fun initView() {
-        SLog.d("${arguments!![BUNDLE_KEY_TYPE]} initView", "test")
+        SLog.d("${getArgumentDateData().type} initView", "test")
         mPresenter.attach(this)
         mAdapter = SCarrierQueryListAdapter(this)
         recycler_view.layoutManager = LinearLayoutManager(SApplication.mInstance)
@@ -54,8 +54,8 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
+        SLog.d("${getArgumentDateData().type} setUserVisibleHint:$mIsVisibleToUser", "test")
         mIsVisibleToUser = isVisibleToUser
-        SLog.d("${arguments!![BUNDLE_KEY_TYPE]} setUserVisibleHint:$mIsVisibleToUser", "test")
         if (mInit && mIsVisibleToUser) {
             mPresenter.queryHeader(getArgumentDateData())
         }

@@ -1,6 +1,7 @@
 package com.tonynowater.uniforminvoicehelper.util
 
 import com.tonynowater.uniforminvoicehelper.view.query.ECarrierQueryType
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -144,5 +145,5 @@ object STimeUtil {
         }
     }
 
-    data class DateItem(val startDate: String, val endDate: String)
+    data class DateItem(val startDate: String, val endDate: String) : Serializable
 }

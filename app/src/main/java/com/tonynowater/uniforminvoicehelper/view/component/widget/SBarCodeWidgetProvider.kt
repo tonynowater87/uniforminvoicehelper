@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.RemoteViews
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.util.SBarCodeImageGenerator
@@ -14,7 +15,7 @@ import com.tonynowater.uniforminvoicehelper.util.SLog
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_WIDGET_ID
 import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
-import com.tonynowater.uniforminvoicehelper.view.test.STestActivity
+import com.tonynowater.uniforminvoicehelper.view.SLoginActivity
 
 /**
  * Created by tonyliao on 2018/3/20.
@@ -23,24 +24,24 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
 
     companion object {
 
-        val ACTION_WIDGET_CLICK = "com.tonynowater.uniforminvoicehelper.widget.click"
-        val REQ_CODE = 100
-
+        /** 更新桌面小工具的顯示狀態 */
         fun getUpdateRemoteView(context: Context): RemoteViews {
             val remoteViews = RemoteViews(context.packageName, R.layout.view_bar_code)
 
             val account = SSharePrefUtil.getString(SP_KEY_ACCOUNT)
             if (TextUtils.isEmpty(account)) {
                 remoteViews.setImageViewResource(R.id.image_view_bar_code, R.drawable.invoice_carrier_no_login)
+                remoteViews.setTextViewText(R.id.text_view_bar_code_hint, context.getString(R.string.barcode_hint_no_login))
             } else {
                 val barCodeItem = SBarCodeImageGenerator.generateBarCodeImage(account)
                 remoteViews.setImageViewBitmap(R.id.image_view_bar_code, barCodeItem.bitmap)
                 remoteViews.setTextViewText(R.id.text_view_bar_code_content, barCodeItem.content)
+                remoteViews.setTextViewText(R.id.text_view_bar_code_hint, context.getString(R.string.barcode_hint))
             }
 
-            val intentClick = Intent(ACTION_WIDGET_CLICK)
-            val pendingIntent = PendingIntent.getBroadcast(context, REQ_CODE, intentClick, PendingIntent.FLAG_UPDATE_CURRENT)
-            remoteViews.setOnClickPendingIntent(R.id.linear_layout_root_bar_code_view, pendingIntent)
+            val intentClick = Intent(context, SLoginActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(context, 0, intentClick, PendingIntent.FLAG_UPDATE_CURRENT)
+            remoteViews.setOnClickPendingIntent(R.id.image_view_bar_code, pendingIntent)
 
             return remoteViews
         }
@@ -51,14 +52,10 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
      */
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
-        SLog.d("onUpdate", this@SBarCodeWidgetProvider.javaClass.simpleName)
-
-        val remoteViews = getUpdateRemoteView(context)
-
         for (id in appWidgetIds) {
             SLog.d("onUpdate id:$id", this@SBarCodeWidgetProvider.javaClass.simpleName)
             SSharePrefUtil.putInt(SP_KEY_WIDGET_ID, id)
-            appWidgetManager.updateAppWidget(id, remoteViews)
+            appWidgetManager.updateAppWidget(id, getUpdateRemoteView(context))
         }
     }
 
@@ -87,17 +84,11 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
     }
 
     /**
-     * 點擊事件
+     * Receive Action
      */
     override fun onReceive(context: Context, intent: Intent?) {
         super.onReceive(context, intent)
-        SLog.d("onReceive", this@SBarCodeWidgetProvider.javaClass.simpleName)
-        if (intent?.action == ACTION_WIDGET_CLICK) {
-            val widgetId = SSharePrefUtil.getInt(SP_KEY_WIDGET_ID)
-            SLog.d("onClick:$widgetId", this@SBarCodeWidgetProvider.javaClass.simpleName)
-            val intent = Intent(context, STestActivity::class.java)
-            context.startActivity(intent)
-        }
+        SLog.d("onReceive:${intent?.action}", this@SBarCodeWidgetProvider.javaClass.simpleName)
     }
 
     override fun onAppWidgetOptionsChanged(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetId: Int, newOptions: Bundle?) {
@@ -108,6 +99,5 @@ class SBarCodeWidgetProvider : AppWidgetProvider() {
     override fun onRestored(context: Context?, oldWidgetIds: IntArray?, newWidgetIds: IntArray?) {
         super.onRestored(context, oldWidgetIds, newWidgetIds)
         SLog.d("onRestored", this@SBarCodeWidgetProvider.javaClass.simpleName)
-
     }
 }

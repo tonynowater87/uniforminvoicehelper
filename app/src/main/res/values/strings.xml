@@ -7,6 +7,8 @@
     <string name="last_month">上月發票</string>
     <string name="custom_month">自選區間</string>
     <string name="prize_record">中獎記錄</string>
+    <string name="barcode_hint">若掃不到條碼可將螢幕調到最亮試看看</string>
+    <string name="barcode_hint_no_login">請先點擊前往App登入載具</string>
     <string-array name="prize_name_array">
         <item>特別獎</item>
         <item>特獎</item>

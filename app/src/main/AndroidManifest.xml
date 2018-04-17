@@ -36,10 +36,6 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
 
-            <intent-filter>
-                <action android:name="com.tonynowater.uniforminvoicehelper.widget.click"/>
-            </intent-filter>
-
         </receiver>
 
     </application>

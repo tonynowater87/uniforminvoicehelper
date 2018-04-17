@@ -12,7 +12,6 @@ android {
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.tonynowater.uniforminvoicehelper"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
@@ -29,6 +28,21 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        uat {
+            applicationId "com.tonynowater.uniforminvoicehelper.uat"
+            dimension "default"
+            manifestPlaceholders = [gradle_app_name: "統一發票小幫手(UAT)"]
+        }
+
+        prod {
+            applicationId "com.tonynowater.uniforminvoicehelper.prod"
+            dimension "default"
+            manifestPlaceholders = [gradle_app_name: "統一發票小幫手"]
         }
     }
 

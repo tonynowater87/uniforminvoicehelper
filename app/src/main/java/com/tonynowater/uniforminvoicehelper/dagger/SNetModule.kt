@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -17,10 +18,12 @@ import javax.inject.Singleton
 @Module
 class SNetModule {
 
+    private val TIMEOUT = 5L
+
     @Singleton
     @Provides
-    fun provideTestApi(okHttpLogger: HttpLoggingInterceptor): ITestApi {
-        val okHttpClient = OkHttpClient.Builder()
+    fun provideTestApi(okHttpClientBuilder: OkHttpClient.Builder, okHttpLogger: HttpLoggingInterceptor): ITestApi {
+        val okHttpClient = okHttpClientBuilder
                 .addInterceptor(okHttpLogger)
                 .build()
         val retrofit = Retrofit.Builder()
@@ -34,8 +37,8 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun provideCarrierApi(carrierInterceptor: SCarrierQueryMapInterceptor, baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): ICarrierApi {
-        val okHttpClient = OkHttpClient.Builder()
+    fun provideCarrierApi(okHttpClientBuilder: OkHttpClient.Builder, carrierInterceptor: SCarrierQueryMapInterceptor, baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): ICarrierApi {
+        val okHttpClient = okHttpClientBuilder
                 .addInterceptor(baseInterceptor)
                 .addInterceptor(carrierInterceptor)
                 .addInterceptor(okHttpLogger)
@@ -51,8 +54,8 @@ class SNetModule {
 
     @Singleton
     @Provides
-    fun provideInvAppApi(baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): IInvAppApi {
-        val okHttpClient = OkHttpClient.Builder()
+    fun provideInvAppApi(okHttpClientBuilder: OkHttpClient.Builder, baseInterceptor: SBaseQueryMapInterceptor, okHttpLogger: HttpLoggingInterceptor): IInvAppApi {
+        val okHttpClient = okHttpClientBuilder
                 .addInterceptor(baseInterceptor)
                 .addInterceptor(okHttpLogger)
                 .build()
@@ -64,6 +67,13 @@ class SNetModule {
                 .build()
         return retrofit.create(IInvAppApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideHttpClientBuilder(): OkHttpClient.Builder = OkHttpClient.Builder()
+            .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
 
     @Singleton
     @Provides

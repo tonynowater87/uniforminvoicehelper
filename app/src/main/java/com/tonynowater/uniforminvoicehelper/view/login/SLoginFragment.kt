@@ -25,7 +25,7 @@ class SLoginFragment: SBaseFragment<SLoginPresenter>(), View.OnClickListener {
 
     override fun initView() {
         mPresenter.attach(this)
-        button.setOnClickListener(this)
+        button_login.setOnClickListener(this)
     }
 
     override fun onResume() {

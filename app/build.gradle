@@ -113,6 +113,7 @@ dependencies {
     testImplementation rootProject.ext.testDeps.mockito
     testImplementation rootProject.ext.testDeps.mockitoInline
     testImplementation rootProject.ext.testDeps.robolectric
+    testImplementation rootProject.ext.testDeps.robolectricV4
     testImplementation rootProject.ext.testDeps.runner
 
     androidTestImplementation rootProject.ext.testDeps.runner

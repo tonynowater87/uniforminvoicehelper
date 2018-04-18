@@ -35,13 +35,15 @@ ext {
     espresso = '3.0.1'
     mockito = '2.13.0'
     robolectric = '3.8'
+    robolectricV4 = '3.+'
     testDeps = [
             junit        : "junit:junit:$junit",
             runner       : "com.android.support.test:runner:$runner",
             espresso     : "com.android.support.test.espresso:espresso-core:$espresso",
             mockito      : "org.mockito:mockito-core:$mockito",
             mockitoInline: "org.mockito:mockito-inline:$mockito", // for mock final class and method
-            robolectric  : "org.robolectric:robolectric:$robolectric"
+            robolectric  : "org.robolectric:robolectric:$robolectric",
+            robolectricV4: "org.robolectric:shadows-support-v4:$robolectricV4"
     ]
 
     kotlinVer = '1.2.31'

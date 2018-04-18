@@ -2,7 +2,7 @@ package com.tonynowater.uniforminvoicehelper.view
 
 import android.support.design.widget.BottomNavigationView
 import com.tonynowater.uniforminvoicehelper.R
-import com.tonynowater.uniforminvoicehelper.TestSApplication
+import com.tonynowater.uniforminvoicehelper.SBaseRobolectricTestCase
 import com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberListFragment
 import com.tonynowater.uniforminvoicehelper.view.query.SCarrierQueryFragment
 import org.junit.Assert.assertNotNull
@@ -18,16 +18,16 @@ import org.robolectric.shadows.ShadowLog
  * Created by tonyliao on 2018/4/18.
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(application = TestSApplication::class, minSdk = 21, maxSdk = 27)
-class SMainActivityTest {
+@Config(sdk = [25])
+class SMainActivityTest : SBaseRobolectricTestCase() {
 
     val tag = SMainActivityTest::class.java.simpleName
 
     private lateinit var mainActivity: SMainActivity
 
     @Before
-    fun setUp() {
-        ShadowLog.stream = System.out
+    override fun setUp() {
+        super.setUp()
         mainActivity = Robolectric.setupActivity(SMainActivity::class.java)
     }
 

@@ -38,7 +38,7 @@ class SMainActivity : SBaseActivity<SEmptyPresenter>() {
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, fragment, fragment::class.java.simpleName)
                 .commit()
     }
 

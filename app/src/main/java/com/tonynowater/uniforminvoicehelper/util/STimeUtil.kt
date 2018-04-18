@@ -11,8 +11,8 @@ import java.util.*
 object STimeUtil {
     private const val TAIWAN_YEAR_BEGINNING = 1911
     private val calender = Calendar.getInstance(TimeZone.getDefault(), Locale.TAIWAN)
-    private val dateformat = SimpleDateFormat("yyyy/MM/dd")
-    private val dateformat_invoice_term = SimpleDateFormat("yyyyMMdd")
+    private val dateformat = SimpleDateFormat("yyyy/MM/dd", Locale.TAIWAN)
+    private val dateformat_invoice_term = SimpleDateFormat("yyyyMMdd", Locale.TAIWAN)
 
     fun expTimeStamp(): Long {
         calender.timeInMillis = System.currentTimeMillis()

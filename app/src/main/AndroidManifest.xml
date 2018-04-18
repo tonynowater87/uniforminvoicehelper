@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.SMainActivity"></activity>
+        <activity android:name=".view.SMainActivity" />
 
         <activity android:name=".view.test.STestActivity">
             <intent-filter>

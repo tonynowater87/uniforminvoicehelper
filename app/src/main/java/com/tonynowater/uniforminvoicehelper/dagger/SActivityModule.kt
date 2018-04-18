@@ -1,6 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.dagger
 
-import com.tonynowater.uniforminvoicehelper.view.SLoginActivity
+import com.tonynowater.uniforminvoicehelper.view.login.SLoginActivity
 import com.tonynowater.uniforminvoicehelper.view.SMainActivity
 import com.tonynowater.uniforminvoicehelper.view.test.STestActivity
 import dagger.Module

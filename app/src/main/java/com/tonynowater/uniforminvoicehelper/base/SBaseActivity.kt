@@ -2,6 +2,7 @@ package com.tonynowater.uniforminvoicehelper.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.R
 import dagger.android.support.DaggerAppCompatActivity
@@ -61,5 +62,12 @@ abstract class SBaseActivity<P : SBasePresenter<*, *>> :DaggerAppCompatActivity(
 
         mToast = Toast.makeText(this, msg, Toast.LENGTH_SHORT)
         mToast!!.show()
+    }
+
+    protected fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment, fragment::class.java.simpleName)
+                .commit()
     }
 }

@@ -14,7 +14,7 @@ import com.tonynowater.uniforminvoicehelper.util.SLog
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_WIDGET_ID
 import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
-import com.tonynowater.uniforminvoicehelper.view.SLoginActivity
+import com.tonynowater.uniforminvoicehelper.view.login.SLoginActivity
 
 /**
  * Created by tonyliao on 2018/3/20.

@@ -1,4 +1,4 @@
-package com.tonynowater.uniforminvoicehelper.view
+package com.tonynowater.uniforminvoicehelper.view.login
 
 import com.tonynowater.uniforminvoicehelper.base.IBaseView
 import com.tonynowater.uniforminvoicehelper.base.SBasePresenter

@@ -1,30 +1,32 @@
-package com.tonynowater.uniforminvoicehelper.view
+package com.tonynowater.uniforminvoicehelper.view.login
 
 import android.view.View
-import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.BuildConfig
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SApplication
-import com.tonynowater.uniforminvoicehelper.base.SBaseActivity
-import kotlinx.android.synthetic.main.activity_login.*
+import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
+import com.tonynowater.uniforminvoicehelper.view.SMainActivity
+import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
- * Created by tonyliao on 2018/2/27.
+ * Created by tonyliao on 2018/4/18.
  */
-class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
+class SLoginFragment: SBaseFragment<SLoginPresenter>(), View.OnClickListener {
 
-    private val TAG = this@SLoginActivity.javaClass.simpleName
+    companion object {
+        fun newInstance() = SLoginFragment()
+    }
 
     override fun onClick(v: View?) {
         mPresenter.login(et_user_account.text.toString(), et_password_account.text.toString())
     }
 
+    override fun getLayoutId(): Int = R.layout.fragment_login
+
     override fun initView() {
         mPresenter.attach(this)
         button.setOnClickListener(this)
     }
-
-    override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun onResume() {
         super.onResume()
@@ -33,11 +35,10 @@ class SLoginActivity : SBaseActivity<SLoginPresenter>(), View.OnClickListener {
     }
 
     override fun showSuccess() {
-        Toast.makeText(SApplication.mInstance, "showSuccess", Toast.LENGTH_SHORT).show()
-        SMainActivity.start(this)
+        SMainActivity.start(SApplication.mInstance)
     }
 
     override fun showError(msg: String) {
-        Toast.makeText(SApplication.mInstance, "onFailure:$msg", Toast.LENGTH_SHORT).show()
+        showToast(msg)
     }
 }

@@ -3,6 +3,7 @@ package com.tonynowater.uniforminvoicehelper.dagger
 import android.app.Application
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
+import com.tonynowater.uniforminvoicehelper.view.login.SLoginFragment
 import com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberListFragment
 import com.tonynowater.uniforminvoicehelper.view.query.*
 import com.tonynowater.uniforminvoicehelper.view.test.STestFragment
@@ -17,6 +18,9 @@ import dagger.android.ContributesAndroidInjector
 abstract class SFragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeTestFragment(): STestFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeLoginFragment(): SLoginFragment
 
     @ContributesAndroidInjector
     abstract fun contributeSPrizeNumberListFragment(): SPrizeNumberListFragment

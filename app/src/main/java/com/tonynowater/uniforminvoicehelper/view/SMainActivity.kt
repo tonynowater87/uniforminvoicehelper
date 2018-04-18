@@ -2,7 +2,6 @@ package com.tonynowater.uniforminvoicehelper.view
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.Fragment
 import android.view.MenuItem
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.base.SBaseActivity
@@ -33,13 +32,6 @@ class SMainActivity : SBaseActivity<SEmptyPresenter>() {
             }
         }
         bottom_navigation_view.selectedItemId = R.id.menu_item_invoice_prize_numbers
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment, fragment::class.java.simpleName)
-                .commit()
     }
 
     override fun getLayoutId(): Int = R.layout.activity_main

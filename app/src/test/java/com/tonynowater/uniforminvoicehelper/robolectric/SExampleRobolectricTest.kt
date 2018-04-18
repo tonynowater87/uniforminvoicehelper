@@ -1,19 +1,5 @@
 package com.tonynowater.uniforminvoicehelper.robolectric
 
-import android.content.Intent
-import android.widget.Button
-import com.tonynowater.uniforminvoicehelper.R
-import com.tonynowater.uniforminvoicehelper.TestSApplication
-import com.tonynowater.uniforminvoicehelper.view.SLoginActivity
-import com.tonynowater.uniforminvoicehelper.view.SMainActivity
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import org.robolectric.shadows.ShadowApplication
-import kotlin.test.assertEquals
-
 /**
  * 使用Robolectric框架，可以在JVM中測試Android的Code
  *

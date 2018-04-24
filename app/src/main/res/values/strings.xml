@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">統一發票小幫手</string>
     <string name="account_input_hint">請輸入手機條碼</string>
     <string name="password_input_hint">請輸入碼證碼</string>
     <string name="login">登入</string>

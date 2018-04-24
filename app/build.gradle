@@ -37,12 +37,14 @@ android {
             applicationId "com.tonynowater.uniforminvoicehelper.uat"
             dimension "default"
             manifestPlaceholders = [gradle_app_name: "統一發票小幫手(UAT)"]
+            resValue "string", "app_name", "統一發票小幫手(測試)"
         }
 
         prod {
             applicationId "com.tonynowater.uniforminvoicehelper.prod"
             dimension "default"
             manifestPlaceholders = [gradle_app_name: "統一發票小幫手"]
+            resValue "string", "app_name", "統一發票小幫手"
         }
     }
 

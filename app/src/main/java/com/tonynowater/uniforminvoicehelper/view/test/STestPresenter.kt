@@ -18,17 +18,17 @@ import javax.inject.Inject
  */
 class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePresenter<STestPresenter.ITestView, SUserItemRepository>(mModule), SBaseRecyclerViewAdapter.OnClickItemListener<SUserEntity> {
 
-    private var mInsertId:Long? = null
+    private var mInsertId: Long? = null
 
     private val TAG = "TEST"
 
     fun clickTestButton(account: String, password: String) {
         Observable.create(ObservableOnSubscribe<Long> {
-                    val id = mModule.insertUserItem(SUserEntity(account = account, password = password))
-                    println("insert id:$id")
-                    it.onNext(id)
-                    it.onComplete()
-                })
+            val id = mModule.insertUserItem(SUserEntity(account = account, password = password))
+            println("insert id:$id")
+            it.onNext(id)
+            it.onComplete()
+        })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
@@ -43,14 +43,14 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     fun getItem() {
         Observable.create(ObservableOnSubscribe<SUserEntity> {
-                    if (mInsertId == null) {
-                        it.onError(Throwable("mInsertId is null"))
-                    } else {
-                        val userItem = mModule.getUserItemById(mInsertId!!)
-                        it.onNext(userItem)
-                        it.onComplete()
-                    }
-                })
+            if (mInsertId == null) {
+                it.onError(Throwable("mInsertId is null"))
+            } else {
+                val userItem = mModule.getUserItemById(mInsertId!!)
+                it.onNext(userItem)
+                it.onComplete()
+            }
+        })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
@@ -63,9 +63,9 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     fun queryAllListItem() {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
-                    it.onNext(mModule.queryAllItems())
-                    it.onComplete()
-                })
+            it.onNext(mModule.queryAllItems())
+            it.onComplete()
+        })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
@@ -78,10 +78,26 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     override fun onClickItem(position: Int, entity: SUserEntity) {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
-                    mModule.deleteUserItem(entity)
-                    it.onNext(mModule.queryAllItems())
-                    it.onComplete()
+            mModule.deleteUserItem(entity)
+            it.onNext(mModule.queryAllItems())
+            it.onComplete()
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    mView?.showData(it)
+                }, {
+                    mView?.showToast(it.message!!)
+                    Log.d(TAG, it.message!!)
                 })
+    }
+
+    fun deleteAll() {
+        Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
+            mModule.deleteAll()
+            it.onNext(mModule.queryAllItems())
+            it.onComplete()
+        })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({

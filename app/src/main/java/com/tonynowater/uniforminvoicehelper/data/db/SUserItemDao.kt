@@ -19,4 +19,7 @@ interface SUserItemDao {
 
     @Delete
     fun deleteUserItem(userEntity: SUserEntity)
+
+    @Query("DELETE FROM User")
+    fun deleteAll()
 }

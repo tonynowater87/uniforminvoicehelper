@@ -33,6 +33,7 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
         mPresenter.attach(this)
         btn_login.setOnClickListener(this)
         btn_get.setOnClickListener(this)
+        btn_delete_all.setOnClickListener(this)
         mAdapter = STestAdapter(mPresenter)
         recycler_view.layoutManager = LinearLayoutManager(SApplication.mInstance)
         recycler_view.adapter = mAdapter
@@ -45,6 +46,9 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
             }
             R.id.btn_get -> {
                 mPresenter.getItem()
+            }
+            R.id.btn_delete_all -> {
+                mPresenter.deleteAll()
             }
         }
     }

@@ -14,4 +14,8 @@ class SUserItemRepository(var userItemDao: SUserItemDao):SUserItemDao {
     override fun deleteUserItem(userEntity: SUserEntity) {
         userItemDao.deleteUserItem(userEntity)
     }
+
+    override fun deleteAll() {
+        userItemDao.deleteAll()
+    }
 }

@@ -19,9 +19,16 @@ class SRoomModule {
     private var database: SUserItemDatabase
 
     constructor(application: Application) {
-        this.database = Room.databaseBuilder(application
-                , SUserItemDatabase::class.java
-                , SUserItemDatabase::javaClass.name)
+//        this.database = Room.databaseBuilder(application
+//                , SUserItemDatabase::class.java
+//                , SUserItemDatabase::javaClass.name)
+//                //.allowMainThreadQueries()//Disables the main thread query check for Room.
+//                .build()
+
+        //db's data is only in memory
+        this.database = Room.inMemoryDatabaseBuilder(application
+                , SUserItemDatabase::class.java)
+                //.allowMainThreadQueries()//Disables the main thread query check for Room.
                 .build()
     }
 

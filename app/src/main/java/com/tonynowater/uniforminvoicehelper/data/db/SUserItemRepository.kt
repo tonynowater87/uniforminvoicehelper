@@ -18,4 +18,8 @@ class SUserItemRepository(var userItemDao: SUserItemDao):SUserItemDao {
     override fun deleteAll() {
         userItemDao.deleteAll()
     }
+
+    override fun updateItem(id: Long, account: String) {
+        userItemDao.updateItem(id, account)
+    }
 }

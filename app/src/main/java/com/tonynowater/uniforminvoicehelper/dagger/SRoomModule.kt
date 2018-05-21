@@ -16,7 +16,7 @@ import javax.inject.Singleton
  */
 @Module
 class SRoomModule {
-    var database: SUserItemDatabase
+    private var database: SUserItemDatabase
 
     constructor(application: Application) {
         this.database = Room.databaseBuilder(application

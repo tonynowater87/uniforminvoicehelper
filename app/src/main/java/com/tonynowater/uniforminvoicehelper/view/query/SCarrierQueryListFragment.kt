@@ -98,4 +98,7 @@ class SCarrierQueryListFragment : SBaseFragment<SCarrierQueryListPresenter>(), S
     override fun clearHeaderData() {
         mAdapter.removeAllData()
     }
+
+    override fun onLongClickItem(position: Int, t: SCarrierInvoiceHeaderDTO) {
+    }
 }

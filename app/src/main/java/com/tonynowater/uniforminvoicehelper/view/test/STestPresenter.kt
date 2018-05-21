@@ -92,6 +92,22 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                 })
     }
 
+    override fun onLongClickItem(position: Int, t: SUserEntity) {
+        Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
+            mModule.updateItem(t.id, "update_${t.account}")
+            it.onNext(mModule.queryAllItems())
+            it.onComplete()
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    mView?.showData(it)
+                }, {
+                    mView?.showToast(it.message!!)
+                    Log.d(TAG, it.message!!)
+                })
+    }
+
     fun deleteAll() {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
             mModule.deleteAll()

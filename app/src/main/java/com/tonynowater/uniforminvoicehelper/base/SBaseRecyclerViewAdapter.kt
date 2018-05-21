@@ -16,6 +16,7 @@ abstract class SBaseRecyclerViewAdapter<T> : RecyclerView.Adapter<SBaseRecyclerV
 
     interface OnClickItemListener<in T> {
         fun onClickItem(position: Int, t: T)
+        fun onLongClickItem(position: Int, t: T)
     }
 
     protected var m_data: MutableList<T>
@@ -48,12 +49,22 @@ abstract class SBaseRecyclerViewAdapter<T> : RecyclerView.Adapter<SBaseRecyclerV
                 val normalView = LayoutInflater.from(m_context).inflate(layoutResource, parent, false)
                 val baseViewHolder = BaseViewHolder(normalView)
                 normalView.setOnClickListener {
-                    if (m_onClickItemListener != null) {
+                    m_onClickItemListener?.let {
                         val pos = baseViewHolder.adapterPosition
                         if (pos != -1) {
-                            m_onClickItemListener!!.onClickItem(pos, m_data[pos])
+                            it.onClickItem(pos, m_data[pos])
                         }
                     }
+                }
+                normalView.setOnLongClickListener {
+                    m_onClickItemListener?.let {
+                        val pos = baseViewHolder.adapterPosition
+                        if (pos != -1) {
+                            it.onLongClickItem(pos, m_data[pos])
+                            true
+                        }
+                    }
+                    false
                 }
                 return baseViewHolder
             }

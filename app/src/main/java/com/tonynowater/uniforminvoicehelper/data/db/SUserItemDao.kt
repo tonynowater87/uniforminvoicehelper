@@ -12,7 +12,7 @@ interface SUserItemDao {
     fun getUserItemById(id: Long): SUserEntity
 
     @Query("SELECT * FROM User")
-    fun queryAllItems():List<SUserEntity>
+    fun queryAllItems(): List<SUserEntity>
 
     @Insert(onConflict = REPLACE)
     fun insertUserItem(entity: SUserEntity): Long
@@ -22,4 +22,7 @@ interface SUserItemDao {
 
     @Query("DELETE FROM User")
     fun deleteAll()
+
+    @Query("UPDATE User SET account = :account WHERE id = :id")
+    fun updateItem(id: Long, account: String)
 }

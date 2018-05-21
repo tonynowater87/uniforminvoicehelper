@@ -21,7 +21,8 @@ class SRoomModule {
     constructor(application: Application) {
         this.database = Room.databaseBuilder(application
                 , SUserItemDatabase::class.java
-                , SUserItemDatabase::javaClass.name).build()
+                , SUserItemDatabase::javaClass.name)
+                .build()
     }
 
     @Provides

@@ -1,5 +1,6 @@
 package com.tonynowater.uniforminvoicehelper.view.test
 
+import android.util.Log
 import com.tonynowater.uniforminvoicehelper.base.IBaseView
 import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
 import com.tonynowater.uniforminvoicehelper.base.SBaseRecyclerViewAdapter
@@ -19,6 +20,8 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     private var mInsertId:Long? = null
 
+    private val TAG = "TEST"
+
     fun clickTestButton(account: String, password: String) {
         Observable.create(ObservableOnSubscribe<Long> {
                     val id = mModule.insertUserItem(SUserEntity(account = account, password = password))
@@ -34,6 +37,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showToast("$it 加入成功!")
                 }, {
                     mView?.showToast(it.message!!)
+                    Log.d(TAG, it.message!!)
                 })
     }
 
@@ -53,6 +57,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showToast("$it 取得成功!")
                 }, {
                     mView?.showToast(it.message!!)
+                    Log.d(TAG, it.message!!)
                 })
     }
 
@@ -67,6 +72,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
+                    Log.d(TAG, it.message!!)
                 })
     }
 
@@ -82,6 +88,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
+                    Log.d(TAG, it.message!!)
                 })
     }
 

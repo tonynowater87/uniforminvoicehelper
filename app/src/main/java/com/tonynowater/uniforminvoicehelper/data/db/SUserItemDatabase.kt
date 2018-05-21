@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 /**
  * Created by tonyliao on 2018/3/6.
  */
-@Database(entities = [SUserEntity::class], version = 1)
+@Database(entities = [SUserEntity::class], version = 2)
 abstract class SUserItemDatabase : RoomDatabase() {
     abstract fun userItemDao(): SUserItemDao
 }

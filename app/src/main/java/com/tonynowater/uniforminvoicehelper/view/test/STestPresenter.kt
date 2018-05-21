@@ -6,6 +6,7 @@ import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
 import com.tonynowater.uniforminvoicehelper.base.SBaseRecyclerViewAdapter
 import com.tonynowater.uniforminvoicehelper.data.db.SUserEntity
 import com.tonynowater.uniforminvoicehelper.data.db.SUserItemRepository
+import com.tonynowater.uniforminvoicehelper.util.sp.LOG_TAG
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,8 +20,6 @@ import javax.inject.Inject
 class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePresenter<STestPresenter.ITestView, SUserItemRepository>(mModule), SBaseRecyclerViewAdapter.OnClickItemListener<SUserEntity> {
 
     private var mInsertId: Long? = null
-
-    private val TAG = "TEST"
 
     fun clickTestButton(account: String, password: String) {
         Observable.create(ObservableOnSubscribe<Long> {
@@ -37,7 +36,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showToast("$it 加入成功!")
                 }, {
                     mView?.showToast(it.message!!)
-                    Log.d(TAG, it.message!!)
+                    Log.d(LOG_TAG, it.message!!)
                 })
     }
 
@@ -57,7 +56,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showToast("$it 取得成功!")
                 }, {
                     mView?.showToast(it.message!!)
-                    Log.d(TAG, it.message!!)
+                    Log.d(LOG_TAG, it.message!!)
                 })
     }
 
@@ -72,7 +71,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
-                    Log.d(TAG, it.message!!)
+                    Log.d(LOG_TAG, it.message!!)
                 })
     }
 
@@ -88,7 +87,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
-                    Log.d(TAG, it.message!!)
+                    Log.d(LOG_TAG, it.message!!)
                 })
     }
 
@@ -104,7 +103,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
-                    Log.d(TAG, it.message!!)
+                    Log.d(LOG_TAG, it.message!!)
                 })
     }
 
@@ -120,7 +119,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                     mView?.showData(it)
                 }, {
                     mView?.showToast(it.message!!)
-                    Log.d(TAG, it.message!!)
+                    Log.d(LOG_TAG, it.message!!)
                 })
     }
 

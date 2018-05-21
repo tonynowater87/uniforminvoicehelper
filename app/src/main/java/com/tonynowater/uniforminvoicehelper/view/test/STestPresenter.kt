@@ -3,7 +3,7 @@ package com.tonynowater.uniforminvoicehelper.view.test
 import com.tonynowater.uniforminvoicehelper.base.IBaseView
 import com.tonynowater.uniforminvoicehelper.base.SBasePresenter
 import com.tonynowater.uniforminvoicehelper.base.SBaseRecyclerViewAdapter
-import com.tonynowater.uniforminvoicehelper.data.db.SUserItem
+import com.tonynowater.uniforminvoicehelper.data.db.SUserEntity
 import com.tonynowater.uniforminvoicehelper.data.db.SUserItemRepository
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
@@ -15,13 +15,13 @@ import javax.inject.Inject
 /**
  * Created by tonyliao on 2018/3/15.
  */
-class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePresenter<STestPresenter.ITestView, SUserItemRepository>(mModule), SBaseRecyclerViewAdapter.OnClickItemListener<SUserItem> {
+class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePresenter<STestPresenter.ITestView, SUserItemRepository>(mModule), SBaseRecyclerViewAdapter.OnClickItemListener<SUserEntity> {
 
     private var mInsertId:Long? = null
 
     fun clickTestButton(account: String, password: String) {
         Observable.create(ObservableOnSubscribe<Long> {
-                    val id = mModule.insertUserItem(SUserItem(account = account, password = password))
+                    val id = mModule.insertUserItem(SUserEntity(account = account, password = password))
                     println("insert id:$id")
                     it.onNext(id)
                     it.onComplete()
@@ -38,7 +38,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
     }
 
     fun getItem() {
-        Observable.create(ObservableOnSubscribe<SUserItem> {
+        Observable.create(ObservableOnSubscribe<SUserEntity> {
                     if (mInsertId == null) {
                         it.onError(Throwable("mInsertId is null"))
                     } else {
@@ -57,7 +57,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
     }
 
     fun queryAllListItem() {
-        Observable.create(ObservableOnSubscribe<List<SUserItem>> {
+        Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
                     it.onNext(mModule.queryAllItems())
                     it.onComplete()
                 })
@@ -70,9 +70,9 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
                 })
     }
 
-    override fun onClickItem(position: Int, item: SUserItem) {
-        Observable.create(ObservableOnSubscribe<List<SUserItem>> {
-                    mModule.deleteUserItem(item)
+    override fun onClickItem(position: Int, entity: SUserEntity) {
+        Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
+                    mModule.deleteUserItem(entity)
                     it.onNext(mModule.queryAllItems())
                     it.onComplete()
                 })
@@ -86,6 +86,6 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
     }
 
     interface ITestView : IBaseView {
-        fun showData(listItems: List<SUserItem>)
+        fun showData(listEntities: List<SUserEntity>)
     }
 }

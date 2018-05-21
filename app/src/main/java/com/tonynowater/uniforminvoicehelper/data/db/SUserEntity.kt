@@ -8,9 +8,9 @@ import android.support.annotation.NonNull
  * Created by tonyliao on 2018/3/6.
  */
 @Entity
-data class SUserItem(@PrimaryKey(autoGenerate = true)
-                     @NonNull
-                     var id: Long = 0,
-                     var account: String,
-                     var password: String) {
+data class SUserEntity(@PrimaryKey(autoGenerate = true)
+                       @NonNull
+                       var id: Long = 0,
+                       var account: String,
+                       var password: String) {
 }

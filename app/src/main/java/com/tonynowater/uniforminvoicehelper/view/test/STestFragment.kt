@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SApplication
 import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
-import com.tonynowater.uniforminvoicehelper.data.db.SUserItem
+import com.tonynowater.uniforminvoicehelper.data.db.SUserEntity
 import kotlinx.android.synthetic.main.fragment_test.*
 
 /**
@@ -49,9 +49,9 @@ class STestFragment : SBaseFragment<STestPresenter>(), View.OnClickListener, STe
         }
     }
 
-    override fun showData(listItems: List<SUserItem>) {
+    override fun showData(listEntities: List<SUserEntity>) {
         mAdapter.removeAllData()
-        mAdapter.addDatas(listItems)
+        mAdapter.addDatas(listEntities)
     }
 
     override fun onResume() {

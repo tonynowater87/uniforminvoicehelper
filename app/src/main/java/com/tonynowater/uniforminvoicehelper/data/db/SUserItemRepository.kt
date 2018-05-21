@@ -5,13 +5,13 @@ package com.tonynowater.uniforminvoicehelper.data.db
  */
 class SUserItemRepository(var userItemDao: SUserItemDao):SUserItemDao {
 
-    override fun queryAllItems(): List<SUserItem> = userItemDao.queryAllItems()
+    override fun queryAllItems(): List<SUserEntity> = userItemDao.queryAllItems()
 
-    override fun getUserItemById(id: Long): SUserItem = userItemDao.getUserItemById(id)
+    override fun getUserItemById(id: Long): SUserEntity = userItemDao.getUserItemById(id)
 
-    override fun insertUserItem(item: SUserItem): Long = userItemDao.insertUserItem(item)
+    override fun insertUserItem(entity: SUserEntity): Long = userItemDao.insertUserItem(entity)
 
-    override fun deleteUserItem(userItem: SUserItem) {
-        userItemDao.deleteUserItem(userItem)
+    override fun deleteUserItem(userEntity: SUserEntity) {
+        userItemDao.deleteUserItem(userEntity)
     }
 }

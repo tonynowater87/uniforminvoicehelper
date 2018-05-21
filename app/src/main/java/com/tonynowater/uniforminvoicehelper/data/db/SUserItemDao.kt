@@ -1,25 +1,22 @@
 package com.tonynowater.uniforminvoicehelper.data.db
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
+import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
-import android.arch.persistence.room.Query
 
 /**
  * Created by tonyliao on 2018/3/6.
  */
 @Dao
 interface SUserItemDao {
-    @Query("SELECT * FROM SUserItem WHERE id = :id")
-    fun getUserItemById(id: Long): SUserItem
+    @Query("SELECT * FROM SUserEntity WHERE id = :id")
+    fun getUserItemById(id: Long): SUserEntity
 
-    @Query("SELECT * FROM SUserItem")
-    fun queryAllItems():List<SUserItem>
+    @Query("SELECT * FROM SUserEntity")
+    fun queryAllItems():List<SUserEntity>
 
     @Insert(onConflict = REPLACE)
-    fun insertUserItem(item: SUserItem): Long
+    fun insertUserItem(entity: SUserEntity): Long
 
     @Delete
-    fun deleteUserItem(userItem: SUserItem)
+    fun deleteUserItem(userEntity: SUserEntity)
 }

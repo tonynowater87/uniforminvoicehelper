@@ -21,5 +21,5 @@ interface SUserItemDao {
     fun insertUserItem(item: SUserItem): Long
 
     @Delete
-    fun deleteAll(userItem: SUserItem)
+    fun deleteUserItem(userItem: SUserItem)
 }

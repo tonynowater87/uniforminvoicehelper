@@ -35,7 +35,7 @@ ext {
     espresso = '3.0.1'
     mockito = '2.13.0'
     robolectric = '3.8'
-    robolectricV4 = '3.+'
+    robolectricV4 = '3.3.2'
     testDeps = [
             junit        : "junit:junit:$junit",
             runner       : "com.android.support.test:runner:$runner",

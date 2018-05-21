@@ -72,7 +72,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     override fun onClickItem(position: Int, item: SUserItem) {
         Observable.create(ObservableOnSubscribe<List<SUserItem>> {
-                    mModule.deleteAll(item)
+                    mModule.deleteUserItem(item)
                     it.onNext(mModule.queryAllItems())
                     it.onComplete()
                 })

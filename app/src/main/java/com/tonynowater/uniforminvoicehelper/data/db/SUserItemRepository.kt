@@ -11,7 +11,7 @@ class SUserItemRepository(var userItemDao: SUserItemDao):SUserItemDao {
 
     override fun insertUserItem(item: SUserItem): Long = userItemDao.insertUserItem(item)
 
-    override fun deleteAll(userItem: SUserItem) {
-        userItemDao.deleteAll(userItem)
+    override fun deleteUserItem(userItem: SUserItem) {
+        userItemDao.deleteUserItem(userItem)
     }
 }

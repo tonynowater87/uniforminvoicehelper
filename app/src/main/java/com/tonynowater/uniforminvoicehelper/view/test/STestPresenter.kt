@@ -24,7 +24,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     fun clickTestButton(account: String, password: String) {
         Observable.create(ObservableOnSubscribe<Long> {
-            val id = mModule.insertUserItem(SUserEntity(account = account, password = password))
+            val id = mModule.insertUser(SUserEntity(account = account, password = password))
             println("insert id:$id")
             it.onNext(id)
             it.onComplete()
@@ -46,7 +46,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
             if (mInsertId == null) {
                 it.onError(Throwable("mInsertId is null"))
             } else {
-                val userItem = mModule.getUserItemById(mInsertId!!)
+                val userItem = mModule.queryUserById(mInsertId!!)
                 it.onNext(userItem)
                 it.onComplete()
             }
@@ -63,7 +63,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     fun queryAllListItem() {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
-            it.onNext(mModule.queryAllItems())
+            it.onNext(mModule.queryAll())
             it.onComplete()
         })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,8 +78,8 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     override fun onClickItem(position: Int, entity: SUserEntity) {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
-            mModule.deleteUserItem(entity)
-            it.onNext(mModule.queryAllItems())
+            mModule.deleteUser(entity)
+            it.onNext(mModule.queryAll())
             it.onComplete()
         })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,8 +94,8 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
 
     override fun onLongClickItem(position: Int, t: SUserEntity) {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
-            mModule.updateItem(t.id, "update_${t.account}")
-            it.onNext(mModule.queryAllItems())
+            mModule.updateUser(t.id, "update_${t.account}")
+            it.onNext(mModule.queryAll())
             it.onComplete()
         })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -111,7 +111,7 @@ class STestPresenter @Inject constructor(mModule: SUserItemRepository) : SBasePr
     fun deleteAll() {
         Observable.create(ObservableOnSubscribe<List<SUserEntity>> {
             mModule.deleteAll()
-            it.onNext(mModule.queryAllItems())
+            it.onNext(mModule.queryAll())
             it.onComplete()
         })
                 .observeOn(AndroidSchedulers.mainThread())

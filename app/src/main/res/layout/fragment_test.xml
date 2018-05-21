@@ -26,19 +26,19 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="送出"/>
+        android:text="新增"/>
 
     <Button
         android:id="@+id/btn_get"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="取得"/>
+        android:text="查詢"/>
 
     <Button
         android:id="@+id/btn_delete_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="全刪"/>
+        android:text="全部刪除"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

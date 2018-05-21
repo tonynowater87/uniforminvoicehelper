@@ -9,20 +9,20 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
 @Dao
 interface SUserItemDao {
     @Query("SELECT * FROM User WHERE id = :id")
-    fun getUserItemById(id: Long): SUserEntity
+    fun queryUserById(id: Long): SUserEntity
 
     @Query("SELECT * FROM User")
-    fun queryAllItems(): List<SUserEntity>
+    fun queryAll(): List<SUserEntity>
 
     @Insert(onConflict = REPLACE)
-    fun insertUserItem(entity: SUserEntity): Long
+    fun insertUser(entity: SUserEntity): Long
 
     @Delete
-    fun deleteUserItem(userEntity: SUserEntity)
+    fun deleteUser(userEntity: SUserEntity)
 
     @Query("DELETE FROM User")
     fun deleteAll()
 
     @Query("UPDATE User SET account = :account WHERE id = :id")
-    fun updateItem(id: Long, account: String)
+    fun updateUser(id: Long, account: String)
 }

@@ -170,4 +170,10 @@ class STimeUtilTest {
         assertEquals("2017/10/12", dateItem!!.startDate)
         assertEquals("2018/04/12", dateItem!!.endDate)
     }
+
+    @Test
+    fun getCurrentInvoiceTermShowFormat() {
+        val actual = STimeUtil.getCurrentInvoiceTermShowFormat("10704")
+        assertEquals("107年發票三、四月的中獎號碼", actual)
+    }
 }

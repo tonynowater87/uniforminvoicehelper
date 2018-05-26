@@ -37,6 +37,24 @@ object STimeUtil {
         return ""
     }
 
+    private fun transferNumberToChinese(day: Int): String {
+        when (day) {
+            1 -> return "一"
+            2 -> return "二"
+            3 -> return "三"
+            4 -> return "四"
+            5 -> return "五"
+            6 -> return "六"
+            7 -> return "七"
+            8 -> return "八"
+            9 -> return "九"
+            10-> return "十"
+            11-> return "十一"
+            12-> return "十二"
+        }
+        return ""
+    }
+
     /** 民國日期轉西元日期 yyyy/MM/dd */
     fun transferTaiwanYearToCommonEra(year: Int, month: Int, date: Int): String {
         calender.set(Calendar.YEAR, TAIWAN_YEAR_BEGINNING)
@@ -44,6 +62,14 @@ object STimeUtil {
         calender.set(Calendar.MONTH, month - 1)//1月是0，所以要減1
         calender.set(Calendar.DAY_OF_MONTH, date)
         return dateformat.format(calender.time)
+    }
+
+    fun getCurrentInvoiceTermShowFormat(term: String = getCurrentInvoiceTerm()): String {
+        val month = term.substring(term.length - 2, term.length)
+        val year = term.substring(0, 3)
+        val startMonth = transferNumberToChinese(month.toInt() - 1)
+        val endMonth = transferNumberToChinese(month.toInt())
+        return "${year}年發票${startMonth}、${endMonth}月的中獎號碼"
     }
 
     /**

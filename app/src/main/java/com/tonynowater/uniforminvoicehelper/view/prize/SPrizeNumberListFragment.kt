@@ -5,6 +5,7 @@ import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SApplication
 import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
+import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import kotlinx.android.synthetic.main.fragment_prize_number_list.*
 
 /**
@@ -23,6 +24,7 @@ class SPrizeNumberListFragment : SBaseFragment<SPrizeNumberListPresenter>(), SPr
     override fun initView() {
         mPresenter.attach(this)
         mPresenter.getPrizeNumberList()
+        tv_prize_number_term.text = STimeUtil.getCurrentInvoiceTermShowFormat()
     }
 
     override fun showData(dto: SInvAppPrizeNumListDTO) {

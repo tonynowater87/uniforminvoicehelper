@@ -1,6 +1,7 @@
 package com.tonynowater.uniforminvoicehelper.data.net.api
 
 import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SInvAppPrizeNumListEntity
+import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import io.reactivex.Observable
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -17,5 +18,5 @@ interface IInvAppApi {
     @POST("invapp/InvApp")
     fun getPrizeNumberList(@Query("version") version: String = SURLDefinition.INVAPP_VERSION,
                            @Query("action") action: String = SURLDefinition.ACTION_QRY_WINNING_LIST,
-                           @Query("invTerm") invTerm: String = "10612"): Observable<SInvAppPrizeNumListEntity>
+                           @Query("invTerm") invTerm: String = STimeUtil.getCurrentInvoiceTerm()): Observable<SInvAppPrizeNumListEntity>
 }

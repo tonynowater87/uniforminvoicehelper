@@ -8,9 +8,23 @@
     <string name="prize_record">中獎記錄</string>
     <string name="barcode_hint">若掃不到條碼可將螢幕調到最亮試看看</string>
     <string name="barcode_hint_no_login">請先點擊前往App登入載具</string>
-    <string name="bottom_item_title_prize_numbers">對獎號碼</string>
-    <string name="bottom_item_title_query_carrier_invoice">載具發票查詢</string>
+    <string name="bottom_item_title_prize_numbers">查詢對獎號碼</string>
+    <string name="bottom_item_title_query_carrier_invoice">查詢載具發票</string>
+    <string name="bottom_item_title_manual_input_numbers_">輸入號碼對獎</string>
     <string name="bottom_item_title_settings">設定</string>
+    <string name="number_input_hint">請輸入發票後三碼</string>
+    <string name="number_1">1</string>
+    <string name="number_2">2</string>
+    <string name="number_3">3</string>
+    <string name="number_4">4</string>
+    <string name="number_5">5</string>
+    <string name="number_6">6</string>
+    <string name="number_7">7</string>
+    <string name="number_8">8</string>
+    <string name="number_9">9</string>
+    <string name="button_clear">清除</string>
+    <string name="number0">0</string>
+    <string name="button_switch_month">月份</string>
     <string-array name="prize_name_array">
         <item>特別獎</item>
         <item>特獎</item>

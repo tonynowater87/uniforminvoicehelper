@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_item_invoice_prize_numbers"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_invoice_prize_numbers"
         android:checked="true"
-        android:title="@string/bottom_item_title_prize_numbers" />
+        android:title="@string/bottom_item_title_prize_numbers"
+        app:showAsAction="withText" />
 
-    <item android:id="@+id/menu_item_query_carrier_invoice"
-        android:title="@string/bottom_item_title_query_carrier_invoice" />
+    <item
+        android:id="@+id/menu_item_query_carrier_invoice"
+        android:title="@string/bottom_item_title_query_carrier_invoice"
+        app:showAsAction="withText" />
 
-    <item android:id="@+id/menu_item_setting"
-        android:title="@string/bottom_item_title_settings" />
+    <item
+        android:id="@+id/menu_item_manual_input_number"
+        android:title="@string/bottom_item_title_manual_input_numbers_"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/menu_item_setting"
+        android:title="@string/bottom_item_title_settings"
+        app:showAsAction="withText" />
 
 </menu>

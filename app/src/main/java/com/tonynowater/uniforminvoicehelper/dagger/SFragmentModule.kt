@@ -3,6 +3,7 @@ package com.tonynowater.uniforminvoicehelper.dagger
 import android.app.Application
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
+import com.tonynowater.uniforminvoicehelper.view.input.SManualInputNumberFragment
 import com.tonynowater.uniforminvoicehelper.view.login.SLoginFragment
 import com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberListFragment
 import com.tonynowater.uniforminvoicehelper.view.query.*
@@ -30,6 +31,9 @@ abstract class SFragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeSCarrierQueryListFragment(): SCarrierQueryListFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSManualInputNumberFragment(): SManualInputNumberFragment
 }
 
 @Module

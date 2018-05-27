@@ -60,16 +60,28 @@ data class SInvAppPrizeNumListDTO(val prizeAmtList: List<String>
         return substractLastNewLine(numbers)
     }
 
-    /** @return 所有六獎號碼 */
-    fun getSixthAndAdditionSixth(): String {
+    /** @return List<String> 所有六獎號碼 */
+    fun getSixthAndAdditionSixthList(): List<String> {
         var numbers = getSecondToSixthPrizeNumbers(PrizeType.SIXTH)
         numbers += "\n"
         for (number in sixPrizeNo) {
             numbers += "$number\n"
         }
 
-        return substractLastNewLine(numbers)
+        return substractLastNewLine(numbers).split("\n")
+    }
+
+    /** @return String 所有六獎號碼 */
+    fun getSixthAndAdditionSixthString(): String {
+        var numbers = getSixthAndAdditionSixthList()
+        var result = ""
+        for (number in numbers) {
+            result += "$number, "
+        }
+        return substractCommaAndSpace(result)
     }
 
     private fun substractLastNewLine(number: String) = if (number.isNotEmpty()) number.substring(0, number.length - 1) else number
+
+    private fun substractCommaAndSpace(number: String) = if (number.isNotEmpty()) number.substring(0, number.length - 2) else number
 }

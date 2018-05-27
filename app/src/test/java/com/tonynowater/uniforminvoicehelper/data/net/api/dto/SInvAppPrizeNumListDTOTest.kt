@@ -59,8 +59,14 @@ class SInvAppPrizeNumListDTOTest : SBaseMockJsonData() {
     }
 
     @Test
-    fun getSixthAndAdditionSixth() {
-        var numbers = "891\n491\n437\n055\n816\n292"
-        assertEquals(numbers, dto.getSixthAndAdditionSixth())
+    fun getSixthAndAdditionSixthList() {
+        var numbers = listOf("891", "491", "437", "055", "816", "292")
+        assertEquals(numbers, dto.getSixthAndAdditionSixthList())
+    }
+
+    @Test
+    fun getSixthAndAdditionSixthString() {
+        var numbers = "891, 491, 437, 055, 816, 292"
+        assertEquals(numbers, dto.getSixthAndAdditionSixthString())
     }
 }

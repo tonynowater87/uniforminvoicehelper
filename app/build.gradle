@@ -81,7 +81,7 @@ dependencies {
     //dagger2
     implementation rootProject.ext.dagger2Deps.dagger2
     kapt rootProject.ext.dagger2Deps.dagger2Compiler
-    testAnnotationProcessor rootProject.ext.dagger2Deps.dagger2Compiler
+    kaptTest rootProject.ext.dagger2Deps.dagger2Compiler
     compileOnly rootProject.ext.dagger2Deps.javaxAnnotation
 
     //dagger.android

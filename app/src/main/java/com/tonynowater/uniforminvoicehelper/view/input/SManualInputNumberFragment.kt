@@ -7,9 +7,15 @@ import android.widget.Button
 import android.widget.EditText
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
+import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
+import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import kotlinx.android.synthetic.main.fragment_manual_input.*
 
 class SManualInputNumberFragment : SBaseFragment<SManualInputNumberPresenter>(), SManualInputNumberPresenter.IManualInputNumberView, View.OnClickListener {
+
+    override fun showData(dto: SInvAppPrizeNumListDTO) {
+        tv_prize_number_term.text = "${STimeUtil.getCurrentInvoiceTermShowFormat()}[${dto.getSixthAndAdditionSixthString()}]"
+    }
 
     private val mTextWatcher = object : TextWatcher {
 
@@ -44,6 +50,7 @@ class SManualInputNumberFragment : SBaseFragment<SManualInputNumberPresenter>(),
 
     override fun initView() {
         mPresenter.attach(this)
+        mPresenter.queryPrizeList()
         button0.setOnClickListener(this)
         button1.setOnClickListener(this)
         button2.setOnClickListener(this)

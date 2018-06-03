@@ -2,6 +2,7 @@ package com.tonynowater.uniforminvoicehelper.util.sp
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.GsonBuilder
 import com.tonynowater.uniforminvoicehelper.SApplication
 
 /**
@@ -25,5 +26,20 @@ object SSharePrefUtil {
 
     fun getInt(key: String, defValue: Int = 0): Int = sharePref.getInt(key, defValue)
 
+    fun putJsonStringFromObj(key: String, obj: Any) {
+        putString(key, GsonBuilder().create().toJson(obj))
+    }
 
+    fun <T> getObjFromJson(key: String, clazz: Class<T>): T {
+        val gson = GsonBuilder().create()
+        val json = getString(key)
+        val obj = gson.fromJson<T>(json, clazz)
+        return if (obj == null) {
+            val initialObj = clazz.newInstance()
+            putJsonStringFromObj(key, initialObj!!)
+            initialObj
+        } else {
+            obj
+        }
+    }
 }

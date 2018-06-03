@@ -4,7 +4,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.base.SBaseFragment
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
@@ -12,10 +11,6 @@ import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import kotlinx.android.synthetic.main.fragment_manual_input.*
 
 class SManualInputNumberFragment : SBaseFragment<SManualInputNumberPresenter>(), SManualInputNumberPresenter.IManualInputNumberView, View.OnClickListener {
-
-    override fun showData(dto: SInvAppPrizeNumListDTO) {
-        tv_prize_number_term.text = "${STimeUtil.getCurrentInvoiceTermShowFormat()}[${dto.getSixthAndAdditionSixthString()}]"
-    }
 
     private val mTextWatcher = object : TextWatcher {
 
@@ -28,17 +23,35 @@ class SManualInputNumberFragment : SBaseFragment<SManualInputNumberPresenter>(),
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            et_input_field.removeTextChangedListener(this)
+            removeTextWatcher()
             mPresenter.afterTextChanged(beforeString, s.toString())
-            et_input_field.addTextChangedListener(this)
+            addTextWatcher()
         }
     }
 
-    override fun getInputView(): EditText = et_input_field
+    override fun addTextWatcher() {
+        et_input_field.addTextChangedListener(mTextWatcher)
+    }
+
+    override fun removeTextWatcher() {
+        et_input_field.removeTextChangedListener(mTextWatcher)
+    }
+
+    override fun setInput(input: String) {
+        et_input_field.setText(input)
+    }
+
+    override fun showWinningDetail(detail: String) {
+        tv_winning_rate.text = detail
+    }
+
+    override fun showData(dto: SInvAppPrizeNumListDTO) {
+        tv_prize_number_term.text = "${STimeUtil.getCurrentInvoiceTermShowFormat()}[${dto.getSixthAndAdditionSixthString()}]"
+    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.button_clear -> et_input_field.setText("")
+            R.id.button_clear -> mPresenter.clickClearButton()
             R.id.button_switch_month -> showToast("月份")
             else -> {
                 et_input_field.setText((v as Button).text)
@@ -63,6 +76,5 @@ class SManualInputNumberFragment : SBaseFragment<SManualInputNumberPresenter>(),
         button9.setOnClickListener(this)
         button_clear.setOnClickListener(this)
         button_switch_month.setOnClickListener(this)
-        et_input_field.addTextChangedListener(mTextWatcher)
     }
 }

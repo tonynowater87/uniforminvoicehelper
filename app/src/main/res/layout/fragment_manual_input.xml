@@ -190,4 +190,17 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_v2"
         app:layout_constraintTop_toTopOf="@+id/guideline_h3" />
 
+    <TextView
+        android:id="@+id/tv_winning_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_h0"
+        app:layout_constraintEnd_toEndOf="@+id/et_input_field"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_prize_number_term" />
+
 </android.support.constraint.ConstraintLayout>

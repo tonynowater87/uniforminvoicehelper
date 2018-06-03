@@ -8,6 +8,7 @@ const val SP_KEY_ACCOUNT = "SP_KEY_ACCOUNT"
 const val SP_KEY_PASSWORD = "SP_KEY_PASSWORD"
 const val SP_KEY_WIDGET_ID = "SP_KEY_WIDGET_ID"
 const val SP_KEY_UDID = "SP_KEY_UDID"
+const val SP_KEY_WINNING_OBJ_JSON = "SP_KEY_WINNING_OBJ_JSON"
 
 const val LOG_TAG = "tony"
 

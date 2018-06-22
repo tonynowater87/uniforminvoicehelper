@@ -3,6 +3,7 @@ package com.tonynowater.uniforminvoicehelper.view
 import android.support.design.widget.BottomNavigationView
 import com.tonynowater.uniforminvoicehelper.R
 import com.tonynowater.uniforminvoicehelper.SBaseRobolectricTestCase
+import com.tonynowater.uniforminvoicehelper.view.input.SManualInputNumberFragment
 import com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberListFragment
 import com.tonynowater.uniforminvoicehelper.view.query.SCarrierQueryFragment
 import org.junit.Assert.assertNotNull
@@ -35,14 +36,25 @@ class SMainActivityTest : SBaseRobolectricTestCase() {
      * 測試點擊 BottomNavigation，有切換正確的 Fragment
      */
     @Test
-    fun testNavigationBottom() {
+    fun testNavigationBottomToQueryCarrierInvoice() {
         mainActivity.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).selectedItemId = R.id.menu_item_query_carrier_invoice
-        var fragment = mainActivity.supportFragmentManager.findFragmentByTag(SCarrierQueryFragment::class.java.simpleName)
+        val fragment = mainActivity.supportFragmentManager.findFragmentByTag(SCarrierQueryFragment::class.java.simpleName)
         ShadowLog.d(tag, fragment?.toString())
         assertNotNull(fragment)
+    }
 
+    @Test
+    fun testNavigationBottomToInvoicePrizeNumbers() {
         mainActivity.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).selectedItemId = R.id.menu_item_invoice_prize_numbers
-        fragment = mainActivity.supportFragmentManager.findFragmentByTag(SPrizeNumberListFragment::class.java.simpleName)
+        val fragment = mainActivity.supportFragmentManager.findFragmentByTag(SPrizeNumberListFragment::class.java.simpleName)
+        ShadowLog.d(tag, fragment?.toString())
+        assertNotNull(fragment)
+    }
+
+    @Test
+    fun testNavigationBottomToManualInputNumber() {
+        mainActivity.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).selectedItemId = R.id.menu_item_manual_input_number
+        val fragment = mainActivity.supportFragmentManager.findFragmentByTag(SManualInputNumberFragment::class.java.simpleName)
         ShadowLog.d(tag, fragment?.toString())
         assertNotNull(fragment)
     }

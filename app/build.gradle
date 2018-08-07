@@ -69,6 +69,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.androidDeps.androidSupportLib
     implementation rootProject.ext.androidDeps.androidDesignLib
+    implementation rootProject.ext.androidDeps.cardView
     implementation rootProject.ext.androidDeps.constraintLayout
 
     //retrofit

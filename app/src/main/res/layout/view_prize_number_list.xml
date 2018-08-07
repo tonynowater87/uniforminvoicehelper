@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@android:color/darker_gray"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <TextView
+                    android:id="@+id/tv_prize_number_list_term"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    tools:text="107年5~6月" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/super_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/special_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/first_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/addition_sixth_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/second_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/third_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/fourth_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/fifth_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView style="@style/prize_list_info_card_view_style">
+
+                <com.tonynowater.uniforminvoicehelper.view.prize.SPrizeNumberInfoLinearView
+                    android:id="@+id/sixth_prize_info_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:text="領獎期間：8/6~11/6" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.v7.widget.CardView>
+

@@ -6,6 +6,7 @@ import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceDeta
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
 import com.tonynowater.uniforminvoicehelper.data.net.api.util.STransferEntityToDtoUtil
+import com.tonynowater.uniforminvoicehelper.util.SLog
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_PASSWORD
@@ -29,7 +30,7 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.is200()) {
-                        callbackNet.onSuccess(mTransferEntityToDtoUtil.transferInvPrizeNumEntityToDTO(it))
+                        callbackNet.onSuccess(mTransferEntityToDtoUtil.transferInvPrizeNumEntityToDTO(invTerm, it))
                     } else {
                         callbackNet.onFailure(Throwable(it.msgCode()))
                     }

@@ -6,22 +6,25 @@ import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumList
 import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceDetailEntity
 import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SCarrierInvoiceHeaderEntity
 import com.tonynowater.uniforminvoicehelper.data.net.api.entity.SInvAppPrizeNumListEntity
+import com.tonynowater.uniforminvoicehelper.util.SNumberFormatUtil
 import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 
 /**
  * Created by tonyliao on 2018/3/28.
  */
 class STransferEntityToDtoUtil {
-    fun transferInvPrizeNumEntityToDTO(entity: SInvAppPrizeNumListEntity): SInvAppPrizeNumListDTO {
+    fun transferInvPrizeNumEntityToDTO(reqInvTerm:String, entity: SInvAppPrizeNumListEntity): SInvAppPrizeNumListDTO {
         return SInvAppPrizeNumListDTO(
-                prizeAmtList = transferToNonEmptyList(listOf(entity.superPrizeAmt
-                        , entity.spcPrizeAmt
-                        , entity.firstPrizeAmt
-                        , entity.secondPrizeAmt
-                        , entity.thirdPrizeAmt
-                        , entity.fourthPrizeAmt
-                        , entity.fifthPrizeAmt
-                        , entity.sixthPrizeAmt))
+                invTerm = reqInvTerm
+                , prizeAmtList = mapOf(
+                        SInvAppPrizeNumListDTO.PrizeType.SUPER.name to SNumberFormatUtil.formatNumberWithThousand(entity.superPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.SPECIAL.name to SNumberFormatUtil.formatNumberWithThousand(entity.spcPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.FIRST.name to SNumberFormatUtil.formatNumberWithThousand(entity.firstPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.SECOND.name to SNumberFormatUtil.formatNumberWithThousand(entity.secondPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.THIRD.name to SNumberFormatUtil.formatNumberWithThousand(entity.thirdPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.FOURTH.name to SNumberFormatUtil.formatNumberWithThousand(entity.fourthPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.FIFTH.name to SNumberFormatUtil.formatNumberWithThousand(entity.fifthPrizeAmt)
+                        , SInvAppPrizeNumListDTO.PrizeType.SIXTH.name to SNumberFormatUtil.formatNumberWithThousand(entity.sixthPrizeAmt))
                 , superPrizeNo = entity.superPrizeNo
                 , spcPrizeNo = transferToNonEmptyList(listOf(entity.spcPrizeNo, entity.spcPrizeNo2, entity.spcPrizeNo3))
                 , firstPrizeNo = transferToNonEmptyList(listOf(entity.firstPrizeNo1

@@ -12,15 +12,17 @@ import org.junit.Test
  */
 class STransferEntityToDtoUtilTest {
 
-    val gson = Gson()
-    val sTransferEntityToDtoUtil = STransferEntityToDtoUtil()
+    private val gson = Gson()
+    private val sTransferEntityToDtoUtil = STransferEntityToDtoUtil()
 
     @Test
     fun transferInvPrizeNumEntityToDTO_1() {
+        val reqInvTerm = "10706"
         val json = "{\"fifthPrizeAmt\":\"0001000\",\"firstPrizeAmt\":\"0200000\",\"firstPrizeNo1\":\"03696891\",\"firstPrizeNo10\":\"\",\"firstPrizeNo2\":\"79882491\",\"firstPrizeNo3\":\"77486437\",\"firstPrizeNo4\":\"\",\"firstPrizeNo5\":\"\",\"firstPrizeNo6\":\"\",\"firstPrizeNo7\":\"\",\"firstPrizeNo8\":\"\",\"firstPrizeNo9\":\"\",\"fourthPrizeAmt\":\"0004000\",\"invoYm\":\"10612\",\"secondPrizeAmt\":\"0040000\",\"sixthPrizeAmt\":\"0000200\",\"sixthPrizeNo1\":\"055\",\"sixthPrizeNo2\":\"816\",\"sixthPrizeNo3\":\"292\",\"sixthPrizeNo4\":\"\",\"sixthPrizeNo5\":\"\",\"sixthPrizeNo6\":\"\",\"spcPrizeAmt\":\"2000000\",\"spcPrizeNo\":\"67035249\",\"spcPrizeNo2\":\"\",\"spcPrizeNo3\":\"\",\"superPrizeAmt\":\"10000000\",\"superPrizeNo\":\"75350343\",\"thirdPrizeAmt\":\"0010000\",\"timeStamp\":{\"date\":25,\"day\":4,\"hours\":14,\"minutes\":27,\"month\":0,\"seconds\":53,\"time\":1516861673000,\"timezoneOffset\":-480,\"year\":118},\"updateDate\":\"1070125\",\"v\":\"0.2\",\"code\":\"200\",\"msg\":\"查詢成功\"}"
         val entity = gson.fromJson(json, SInvAppPrizeNumListEntity::class.java)
 
-        val dto = sTransferEntityToDtoUtil.transferInvPrizeNumEntityToDTO(entity)
+        val dto = sTransferEntityToDtoUtil.transferInvPrizeNumEntityToDTO(reqInvTerm, entity)
+        assertEquals("10706", dto.invTerm)
         assertEquals(3, dto.firstPrizeNo.size)
         assertEquals(8, dto.prizeAmtList.size)
         assertEquals(3, dto.sixPrizeNo.size)

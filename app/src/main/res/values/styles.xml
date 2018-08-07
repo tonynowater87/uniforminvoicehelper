@@ -15,4 +15,10 @@
         <item name="android:layout_margin">8dp</item>
     </style>
 
+    <style name="prize_list_info_card_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
 </resources>

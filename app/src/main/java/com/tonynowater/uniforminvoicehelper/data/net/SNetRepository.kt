@@ -6,6 +6,7 @@ import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceDeta
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SCarrierInvoiceHeaderDTO
 import com.tonynowater.uniforminvoicehelper.data.net.api.dto.SInvAppPrizeNumListDTO
 import com.tonynowater.uniforminvoicehelper.data.net.api.util.STransferEntityToDtoUtil
+import com.tonynowater.uniforminvoicehelper.util.STimeUtil
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_ACCOUNT
 import com.tonynowater.uniforminvoicehelper.util.sp.SP_KEY_PASSWORD
 import com.tonynowater.uniforminvoicehelper.util.sp.SSharePrefUtil
@@ -22,8 +23,8 @@ class SNetRepository @Inject constructor(var invAppClient: IInvAppApi
     @Inject
     lateinit var mTransferEntityToDtoUtil: STransferEntityToDtoUtil
 
-    fun getPrizeNumberList(callbackNet: IOnNetQueryCallback<SInvAppPrizeNumListDTO>) {
-        invAppClient.getPrizeNumberList()
+    fun getPrizeNumberList(invTerm: String = STimeUtil.getCurrentInvoiceTerm(), callbackNet: IOnNetQueryCallback<SInvAppPrizeNumListDTO>) {
+        invAppClient.getPrizeNumberList(invTerm = invTerm)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

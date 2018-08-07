@@ -26,7 +26,7 @@ class SPrizeNumberListPresenter @Inject constructor(module: SNetRepository) : SB
 
     fun getPrizeNumberList() {
         mView?.showLoading()
-        mModule.getPrizeNumberList(callback)
+        mModule.getPrizeNumberList(callbackNet = callback)
     }
 
     interface IPrizeNumberListView : IBaseView {

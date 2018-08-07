@@ -51,7 +51,7 @@ class SManualInputNumberPresenterTest: SBaseRobolectricTestCase() {
     @Test
     fun queryPrizeList() {
         presenter.queryPrizeList()
-        Mockito.verify(module).getPrizeNumberList(presenter.callbackQueryPrizeList)
+        Mockito.verify(module).getPrizeNumberList(callbackNet = presenter.callbackQueryPrizeList)
     }
 
     @Test

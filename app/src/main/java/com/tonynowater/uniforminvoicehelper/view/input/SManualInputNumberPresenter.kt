@@ -34,7 +34,7 @@ class SManualInputNumberPresenter @Inject constructor(module: SNetRepository) : 
     }
 
     fun queryPrizeList() {
-        mModule.getPrizeNumberList(callbackQueryPrizeList)
+        mModule.getPrizeNumberList(callbackNet = callbackQueryPrizeList)
     }
 
     fun showDefaultWinningDetail() {

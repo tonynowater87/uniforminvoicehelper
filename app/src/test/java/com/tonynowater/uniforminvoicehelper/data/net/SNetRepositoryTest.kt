@@ -67,7 +67,7 @@ class SNetRepositoryTest {
     @Test
     fun getPrizeNumberList() {
 
-        Mockito.`when`(iInvAppApi.getPrizeNumberList())
+        Mockito.`when`(iInvAppApi.getPrizeNumberList(invTerm = "10706"))
                 .thenReturn(iInvAppApiObservable)
 
         Mockito.`when`(iInvAppApiObservable.subscribeOn(Schedulers.io()))
@@ -76,10 +76,10 @@ class SNetRepositoryTest {
         Mockito.`when`(iInvAppApiObservable.observeOn(AndroidSchedulers.mainThread()))
                 .thenReturn(iInvAppApiObservable)
 
-        repository.getPrizeNumberList(iInvAppApiCallback)
+        repository.getPrizeNumberList(callbackNet = iInvAppApiCallback)
 
         val inOrder = inOrder(iInvAppApi, iInvAppApiObservable)
-        inOrder.verify(iInvAppApi).getPrizeNumberList()
+        inOrder.verify(iInvAppApi).getPrizeNumberList(invTerm = "10706")
         inOrder.verify(iInvAppApiObservable).subscribeOn(Schedulers.io())
         inOrder.verify(iInvAppApiObservable).observeOn(AndroidSchedulers.mainThread())
         inOrder.verify(iInvAppApiObservable).subscribe(Mockito.any(), Mockito.any())

@@ -18,5 +18,5 @@ interface IInvAppApi {
     @POST("invapp/InvApp")
     fun getPrizeNumberList(@Query("version") version: String = SURLDefinition.INVAPP_VERSION,
                            @Query("action") action: String = SURLDefinition.ACTION_QRY_WINNING_LIST,
-                           @Query("invTerm") invTerm: String = STimeUtil.getCurrentInvoiceTerm()): Observable<SInvAppPrizeNumListEntity>
+                           @Query("invTerm") invTerm: String): Observable<SInvAppPrizeNumListEntity>
 }

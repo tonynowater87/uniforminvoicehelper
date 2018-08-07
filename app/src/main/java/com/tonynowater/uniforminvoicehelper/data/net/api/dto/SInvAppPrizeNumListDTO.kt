@@ -46,7 +46,7 @@ data class SInvAppPrizeNumListDTO(val prizeAmtList: List<String>
                     numbers += "${number.substring(number.length - 4, number.length)}\n"
                 }
                 PrizeType.SIXTH -> {
-                    numbers += "${number.substring(number.length - 3, number.length)}\n"
+                    numbers += "${getLastThreeNumbers(number)}\n"
                 }
             }
         }
@@ -60,6 +60,11 @@ data class SInvAppPrizeNumListDTO(val prizeAmtList: List<String>
         return substractLastNewLine(numbers)
     }
 
+    /**
+     * @return 傳入字串的後三碼
+     */
+    private fun getLastThreeNumbers(number: String) = number.substring(number.length - 3, number.length)
+
     /** @return List<String> 所有六獎號碼 */
     fun getSixthAndAdditionSixthList(): List<String> {
         var numbers = getSecondToSixthPrizeNumbers(PrizeType.SIXTH)
@@ -69,6 +74,18 @@ data class SInvAppPrizeNumListDTO(val prizeAmtList: List<String>
         }
 
         return substractLastNewLine(numbers).split("\n")
+    }
+
+    /**
+     * @return List<String> 所有Special&Super號碼的後三碼
+     */
+    fun getSpecialPrizeNumberList(): List<String> {
+        val numbers: MutableList<String> = arrayListOf()
+        for (number in spcPrizeNo) {
+            numbers.add(0, getLastThreeNumbers(number))
+        }
+        numbers.add(0, getLastThreeNumbers(superPrizeNo))
+        return numbers.toList()
     }
 
     /** @return String 所有六獎號碼 */

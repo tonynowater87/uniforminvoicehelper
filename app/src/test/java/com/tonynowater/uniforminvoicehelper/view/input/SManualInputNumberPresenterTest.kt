@@ -1,18 +1,22 @@
 package com.tonynowater.uniforminvoicehelper.view.input
 
+import com.tonynowater.uniforminvoicehelper.SBaseRobolectricTestCase
 import com.tonynowater.uniforminvoicehelper.data.net.SNetRepository
 import org.junit.After
 import org.junit.Test
 
 import org.junit.Before
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
 
 /**
  * Created by tonyliao on 2018/6/3.
  */
-class SManualInputNumberPresenterTest {
+@RunWith(RobolectricTestRunner::class)
+class SManualInputNumberPresenterTest: SBaseRobolectricTestCase() {
 
     @Mock
     private lateinit var view: SManualInputNumberPresenter.IManualInputNumberView
@@ -23,7 +27,7 @@ class SManualInputNumberPresenterTest {
     private lateinit var presenter: SManualInputNumberPresenter
 
     @Before
-    fun setUp() {
+    override fun setUp() {
         MockitoAnnotations.initMocks(this)
         presenter = SManualInputNumberPresenter(module)
         presenter.attach(view)
@@ -56,5 +60,23 @@ class SManualInputNumberPresenterTest {
         val before = "2"
         presenter.afterTextChanged(before, after)
         Mockito.verify(view).setInput(before + after)
+    }
+
+    @Test
+    fun afterTextChanged_02() {
+        val after = "3"
+        val before = "12"
+        presenter.afterTextChanged(before, after)
+        Mockito.verify(view).setInput("沒中獎:$before$after")
+        Mockito.verify(view).showWinningDetail("1張,中0張")
+    }
+
+    @Test
+    fun afterTextChanged_03() {
+        val after = "3"
+        val before = "12"
+        presenter.afterTextChanged(before, after)
+        Mockito.verify(view).setInput("沒中獎:$before$after")
+        Mockito.verify(view).showWinningDetail("2張,中0張")
     }
 }

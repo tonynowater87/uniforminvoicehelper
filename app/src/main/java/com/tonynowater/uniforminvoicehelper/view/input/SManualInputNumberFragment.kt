@@ -64,6 +64,7 @@ class SManualInputNumberFragment : SBaseFragment<SManualInputNumberPresenter>(),
     override fun initView() {
         mPresenter.attach(this)
         mPresenter.queryPrizeList()
+        mPresenter.showDefaultWinningDetail()
         button0.setOnClickListener(this)
         button1.setOnClickListener(this)
         button2.setOnClickListener(this)

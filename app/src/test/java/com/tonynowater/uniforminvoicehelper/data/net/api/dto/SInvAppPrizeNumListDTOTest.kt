@@ -20,6 +20,11 @@ class SInvAppPrizeNumListDTOTest : SBaseMockJsonData() {
     }
 
     @Test
+    fun testSuperNumber() {
+        assertEquals("75350343", dto.superPrizeNo)
+    }
+
+    @Test
     fun getSpcPrizeNumbers() {
         var numbers = "67035249"
         assertEquals(numbers, dto.getSpcPrizeNumbers())

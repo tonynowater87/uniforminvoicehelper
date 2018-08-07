@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 class SManualInputNumberPresenter @Inject constructor(module: SNetRepository) : SBasePresenter<SManualInputNumberPresenter.IManualInputNumberView, SNetRepository>(module) {
 
-    private var numberList: List<String>? = null
+    private var sixthNumberList: List<String>? = null
+    private var specialNumberList: List<String>? = null
 
     fun clickClearButton() {
         mView?.removeTextWatcher()
@@ -21,7 +22,8 @@ class SManualInputNumberPresenter @Inject constructor(module: SNetRepository) : 
 
     val callbackQueryPrizeList: IOnNetQueryCallback<SInvAppPrizeNumListDTO> = object : IOnNetQueryCallback<SInvAppPrizeNumListDTO> {
         override fun onSuccess(entity: SInvAppPrizeNumListDTO) {
-            numberList = entity.getSixthAndAdditionSixthList()
+            sixthNumberList = entity.getSixthAndAdditionSixthList()
+            specialNumberList = entity.getSpecialPrizeNumberList()
             mView?.showData(entity)
             mView?.addTextWatcher()
         }
@@ -35,17 +37,28 @@ class SManualInputNumberPresenter @Inject constructor(module: SNetRepository) : 
         mModule.getPrizeNumberList(callbackQueryPrizeList)
     }
 
+    fun showDefaultWinningDetail() {
+        mView?.showWinningDetail(getWinningObj().getWinningDetail())
+    }
+
     fun afterTextChanged(sBefore: String, sAfter: String) {
         when {
             sBefore.length + 1 < 3 -> mView?.setInput(sBefore + sAfter)
             sBefore.length + 1 == 3 -> mView?.let {
-                val winningObj = SSharePrefUtil.getObjFromJson(SP_KEY_WINNING_OBJ_JSON, InputWinningObj::class.java)
-                if (isWinning(sBefore + sAfter)) {
-                    it.setInput("中獎:$sBefore$sAfter")
-                    winningObj.winning()
-                } else {
-                    winningObj.notWinning()
-                    it.setInput("沒中:$sBefore$sAfter")
+                val winningObj = getWinningObj()
+                when {
+                    isWinningSpecial(sBefore + sAfter) -> {
+                        it.setInput("有機會中特獎:$sBefore$sAfter")
+                        winningObj.winning()
+                    }
+                    isWinningSixth(sBefore + sAfter) -> {
+                        it.setInput("中六獎:$sBefore$sAfter")
+                        winningObj.winning()
+                    }
+                    else -> {
+                        winningObj.notWinning()
+                        it.setInput("沒中獎:$sBefore$sAfter")
+                    }
                 }
                 it.showWinningDetail(winningObj.getWinningDetail())
             }
@@ -55,8 +68,20 @@ class SManualInputNumberPresenter @Inject constructor(module: SNetRepository) : 
         }
     }
 
-    private fun isWinning(input: String): Boolean {
-        numberList?.let {
+    private fun getWinningObj() = SSharePrefUtil.getObjFromJson(SP_KEY_WINNING_OBJ_JSON, InputWinningObj::class.java)
+
+    private fun isWinningSpecial(input: String): Boolean {
+        specialNumberList?.let {
+            for (number in it) {
+                if (number == input) return true
+            }
+        }
+
+        return false
+    }
+
+    private fun isWinningSixth(input: String): Boolean {
+        sixthNumberList?.let {
             for (number in it) {
                 if (number == input) return true
             }

@@ -142,16 +142,16 @@ abstract class SBaseRecyclerViewAdapter<T> : RecyclerView.Adapter<SBaseRecyclerV
         return m_data[position]
     }
 
-    class BaseViewHolder(val rootView: View) : RecyclerView.ViewHolder(rootView) {
+    class BaseViewHolder(private val rootView: View) : RecyclerView.ViewHolder(rootView) {
         private val viewCache = SparseArray<View>()
 
-        fun <R> getView(viewID: Int): R? {
+        fun <R> getView(viewID: Int): R {
             var cachedView: View? = viewCache.get(viewID)
             if (null == cachedView) {
                 cachedView = rootView.findViewById(viewID)
                 viewCache.put(viewID, cachedView)
             }
-            return cachedView as? R
+            return cachedView as R
         }
     }
 

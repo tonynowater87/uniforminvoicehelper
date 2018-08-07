@@ -23,21 +23,21 @@ class SPrizeNumberListAdapter(val mDto: SInvAppPrizeNumListDTO) : SBaseRecyclerV
     }
 
     override fun bindView(holder: BaseViewHolder, position: Int) {
-        holder.getView<TextView>(R.id.tv_prize_amt_name)?.text = m_data[position].name
-        holder.getView<TextView>(R.id.tv_prize_amount_descript)?.text = m_data[position].description
+        holder.getView<TextView>(R.id.tv_prize_amt_name).text = m_data[position].name
+        holder.getView<TextView>(R.id.tv_prize_amount_descript).text = m_data[position].description
 
         when (position) {
             0 -> {
-                holder.getView<TextView>(R.id.tv_prize_number)?.text = mDto.superPrizeNo
+                holder.getView<TextView>(R.id.tv_prize_number).text = mDto.superPrizeNo
             }
             1 -> {
-                holder.getView<TextView>(R.id.tv_prize_number)?.text = mDto.getSpcPrizeNumbers()
+                holder.getView<TextView>(R.id.tv_prize_number).text = mDto.getSpcPrizeNumbers()
             }
             2 -> {
-                holder.getView<TextView>(R.id.tv_prize_number)?.text = mDto.getFirstPrizeNumbers()
+                holder.getView<TextView>(R.id.tv_prize_number).text = mDto.getFirstPrizeNumbers()
             }
             8 -> {
-                holder.getView<TextView>(R.id.tv_prize_number)?.text = mDto.getSecondToSixthPrizeNumbers(SInvAppPrizeNumListDTO.PrizeType.ADDITION_SIXTH)
+                holder.getView<TextView>(R.id.tv_prize_number).text = mDto.getSecondToSixthPrizeNumbers(SInvAppPrizeNumListDTO.PrizeType.ADDITION_SIXTH)
             }
         }
     }

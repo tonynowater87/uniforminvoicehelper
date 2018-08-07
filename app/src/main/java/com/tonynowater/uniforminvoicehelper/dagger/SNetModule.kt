@@ -18,7 +18,9 @@ import javax.inject.Singleton
 @Module
 class SNetModule {
 
-    private val TIMEOUT = 5L
+    companion object {
+        private const val TIMEOUT = 5L
+    }
 
     @Singleton
     @Provides

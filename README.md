@@ -6,7 +6,7 @@
 
 - 使用**RxJava**搭配**retrofit2**處理**Restful** API的Request
 
-- 使用**TTD**開發模式
+- 使用**TDD**開發模式
 
 - 使用**JUnit**, **Robolectric** 單元測試框架 撰寫單元測試
 
